@@ -24,7 +24,7 @@ export default function Projects() {
     ]
 
     return (
-        <section id="projects" className="py-16">
+        <section id="projects" className="py-16 scroll-mt-24 md:scroll-mt-0">
             <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">03. Projects</h2>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
                 Some Things I&apos;ve Built

@@ -6,10 +6,10 @@ import Contact from '@/components/Contact'
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100">
+    <div className="flex min-h-screen flex-col md:flex-row bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100">
       <Navigation />
-      <main className="flex-1 ml-64">
-        <div className="max-w-4xl mx-auto px-8 py-16 pb-32">
+      <main className="flex-1 md:ml-64">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 py-12 md:py-16 pb-24 md:pb-32">
           <About />
           <Experience />
           <Projects />

@@ -24,7 +24,7 @@ export default function Experience() {
     ]
 
     return (
-        <section id="experience" className="py-16">
+        <section id="experience" className="py-16 scroll-mt-24 md:scroll-mt-0">
             <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">02. Experience</h2>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
                 Where I&apos;ve Worked
