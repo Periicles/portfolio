@@ -4,10 +4,11 @@ import { useTheme } from 'next-themes'
 import { useState, useEffect } from 'react'
 
 export default function ThemeToggle() {
-    const { theme, setTheme } = useTheme()
+    const { resolvedTheme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true)
     }, [])
 
@@ -25,25 +26,13 @@ export default function ThemeToggle() {
     return (
         <button
             onClick={() => {
-                console.log('Current theme:', theme)
-                console.log('Setting theme to:', theme === 'dark' ? 'light' : 'dark')
-                const newTheme = theme === 'dark' ? 'light' : 'dark'
-                setTheme(newTheme)
-                setTimeout(() => {
-                    console.log('HTML classes:', document.documentElement.className)
-                    // Force the correct class behavior
-                    if (newTheme === 'dark') {
-                        document.documentElement.classList.add('dark')
-                    } else {
-                        document.documentElement.classList.remove('dark')
-                    }
-                    console.log('Fixed HTML classes:', document.documentElement.className)
-                }, 100)
+                const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
+                setTheme(nextTheme)
             }}
             className="w-10 h-10 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
             aria-label="Toggle theme"
         >
-            {theme === 'dark' ? (
+            {resolvedTheme === 'dark' ? (
                 <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 18c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6zm0-10c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z" />
                     <path d="M12 4c.552 0 1-.448 1-1V1c0-.552-.448-1-1-1s-1 .448-1 1v2c0 .552.448 1 1 1zm0 16c-.552 0-1 .448-1 1v2c0 .552.448 1 1 1s1-.448 1-1v-2c0-.552-.448-1-1-1zm8-8c0 .552.448 1 1 1h2c.552 0 1-.448 1-1s-.448-1-1-1h-2c-.552 0-1 .448-1 1zM4 12c0-.552-.448-1-1-1H1c-.552 0-1 .448-1 1s.448 1 1 1h2c.552 0 1-.448 1-1zm12.364-6.364c.391-.391.391-1.024 0-1.414l-1.414-1.414c-.391-.391-1.024-.391-1.414 0s-.391 1.024 0 1.414l1.414 1.414c.391.391 1.024.391 1.414 0zm-8.485 8.485c-.391.391-.391 1.024 0 1.414l-1.414 1.414c-.391.391-1.024.391-1.414 0s-.391-1.024 0-1.414l1.414-1.414c.391-.391 1.024-.391 1.414 0zm8.485 0c-.391.391-1.024.391-1.414 0l-1.414-1.414c-.391-.391-.391-1.024 0-1.414s1.024-.391 1.414 0l1.414 1.414c.391.391.391 1.024 0 1.414zm-8.485-8.485c.391-.391 1.024-.391 1.414 0l1.414 1.414c.391.391.391 1.024 0 1.414s-1.024.391-1.414 0l-1.414-1.414c-.391-.391-.391-1.024 0-1.414z" />
