@@ -8,11 +8,11 @@ export default function Contact() {
 
             <div className="space-y-6">
                 <p className="text-gray-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-                    I'm currently open to new opportunities and would love to hear from you. Whether you have a question, a project proposal, or just want to connect, feel free to reach out!
+                    I&apos;m currently open to new opportunities and would love to hear from you. Whether you have a question, a project proposal, or just want to connect, feel free to reach out!
                 </p>
 
                 <p className="text-gray-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-                    I'm particularly interested in roles that involve building scalable web applications, microservices architecture, or innovative frontend solutions. Let's discuss how I can contribute to your team.
+                    I&apos;m particularly interested in roles that involve building scalable web applications, microservices architecture, or innovative frontend solutions. Let&apos;s discuss how I can contribute to your team.
                 </p>
 
                 <div className="pt-8">

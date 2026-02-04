@@ -3,12 +3,12 @@ export default function About() {
         <section id="about" className="py-16">
             <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">01. About</h2>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
-                Hi, I'm Paul. Nice to meet you.
+                Hi, I&apos;m Paul. Nice to meet you.
             </h1>
 
             <div className="space-y-6 text-gray-600 dark:text-slate-400 leading-relaxed">
                 <p>
-                    I'm a web developer passionate about crafting scalable microservices and creating exceptional digital experiences. My favorite work lies at the intersection of robust backend architecture and thoughtful frontend design, building applications that not only perform well but deliver outstanding user experiences.
+                    I&apos;m a web developer passionate about crafting scalable microservices and creating exceptional digital experiences. My favorite work lies at the intersection of robust backend architecture and thoughtful frontend design, building applications that not only perform well but deliver outstanding user experiences.
                 </p>
 
                 <p>
@@ -16,11 +16,11 @@ export default function About() {
                 </p>
 
                 <p>
-                    In the past, I've had the opportunity to develop software across various settings — from startups to established companies, working on everything from pet-friendly location platforms to multiplayer RPG games. I'm particularly passionate about microservices architecture, DevOps practices, and creating seamless CI/CD pipelines.
+                    In the past, I&apos;ve had the opportunity to develop software across various settings — from startups to established companies, working on everything from pet-friendly location platforms to multiplayer RPG games. I&apos;m particularly passionate about microservices architecture, DevOps practices, and creating seamless CI/CD pipelines.
                 </p>
 
                 <p>
-                    In my spare time, I'm usually exploring new technologies, contributing to open-source projects, or enjoying epic motorcycle adventures. I'm also constantly learning and staying up-to-date with the latest web development trends and best practices.
+                    In my spare time, I&apos;m usually exploring new technologies, contributing to open-source projects, or enjoying epic motorcycle adventures. I&apos;m also constantly learning and staying up-to-date with the latest web development trends and best practices.
                 </p>
             </div>
 

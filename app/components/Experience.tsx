@@ -27,7 +27,7 @@ export default function Experience() {
         <section id="experience" className="py-16">
             <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">02. Experience</h2>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
-                Where I've Worked
+                Where I&apos;ve Worked
             </h1>
 
             <div className="space-y-12">
