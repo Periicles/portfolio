@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import ThemeToggle from './ThemeToggle'
 
 const navItems = [
@@ -12,28 +12,59 @@ const navItems = [
 
 export default function Navigation() {
     const [activeSection, setActiveSection] = useState('')
+    const visibilityMapRef = useRef<Record<string, number>>({})
+    const navListRef = useRef<HTMLUListElement | null>(null)
+    const itemRefs = useRef<Array<HTMLLIElement | null>>([])
+    const [indicatorOffset, setIndicatorOffset] = useState(0)
+    const [indicatorHeight, setIndicatorHeight] = useState(0)
 
     useEffect(() => {
-        const handleScroll = () => {
-            const sections = navItems.map(item => item.href.slice(1))
-            const scrollPosition = window.scrollY + 100
+        const sectionElements = navItems
+            .map((item) => document.getElementById(item.href.slice(1)))
+            .filter((element): element is HTMLElement => Boolean(element))
 
-            for (const section of sections) {
-                const element = document.getElementById(section)
-                if (element) {
-                    const { offsetTop, offsetHeight } = element
-                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                        setActiveSection(section)
-                        break
-                    }
-                }
-            }
+        if (sectionElements.length === 0) {
+            return
         }
 
-        window.addEventListener('scroll', handleScroll)
-        handleScroll()
-        return () => window.removeEventListener('scroll', handleScroll)
+        const observer = new IntersectionObserver((entries) => {
+            for (const entry of entries) {
+                visibilityMapRef.current[entry.target.id] = entry.isIntersecting ? entry.intersectionRatio : 0
+            }
+
+            let nextSection = ''
+            let maxRatio = 0
+
+            for (const element of sectionElements) {
+                const ratio = visibilityMapRef.current[element.id] ?? 0
+                if (ratio > maxRatio) {
+                    maxRatio = ratio
+                    nextSection = element.id
+                }
+            }
+
+            if (nextSection && nextSection !== activeSection) {
+                setActiveSection(nextSection)
+            }
+        }, {
+            root: null,
+            rootMargin: '-35% 0px -35% 0px',
+            threshold: [0, 0.25, 0.5, 0.75, 1],
+        })
+
+        sectionElements.forEach((element) => observer.observe(element))
+
+        return () => observer.disconnect()
     }, [])
+
+    useEffect(() => {
+        const index = navItems.findIndex((item) => item.href.slice(1) === activeSection)
+        const activeItem = itemRefs.current[index]
+        if (activeItem) {
+            setIndicatorOffset(activeItem.offsetTop)
+            setIndicatorHeight(activeItem.offsetHeight)
+        }
+    }, [activeSection])
 
     return (
         <nav className="fixed left-0 top-0 h-screen w-64 p-8 flex flex-col justify-between bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-700 z-50">
@@ -43,9 +74,24 @@ export default function Navigation() {
                     <p className="text-sm text-gray-600 dark:text-slate-400 font-mono">Web Developer</p>
                 </div>
 
-                <ul className="space-y-4">
+                <div className="relative">
+                    <span
+                        aria-hidden
+                        className="absolute left-0 top-0 w-1 rounded-full bg-teal-500 transition-transform duration-300 ease-out"
+                        style={{
+                            height: indicatorHeight ? `${indicatorHeight}px` : undefined,
+                            transform: `translateY(${indicatorOffset}px)`,
+                            opacity: indicatorHeight ? 1 : 0,
+                        }}
+                    />
+                    <ul ref={navListRef} className="space-y-4 pl-3">
                     {navItems.map((item) => (
-                        <li key={item.href}>
+                        <li
+                            key={item.href}
+                            ref={(element) => {
+                                itemRefs.current[navItems.indexOf(item)] = element
+                            }}
+                        >
                             <a
                                 href={item.href}
                                 className={`block py-2 text-sm transition-colors ${activeSection === item.href.slice(1)
@@ -57,7 +103,8 @@ export default function Navigation() {
                             </a>
                         </li>
                     ))}
-                </ul>
+                    </ul>
+                </div>
             </div>
 
             <div className="space-y-4">
