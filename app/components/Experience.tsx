@@ -1,24 +1,24 @@
 export default function Experience() {
     const experiences = [
         {
-            title: "Senior Web Developer",
-            company: "Tech Company",
-            period: "2022 - Present",
-            description: "Leading development of scalable web applications using Next.js and microservices architecture. Implementing CI/CD pipelines and optimizing performance.",
+            title: "Developpeur Web Senior",
+            company: "Entreprise Tech",
+            period: "2022 - Aujourd'hui",
+            description: "Pilotage du developpement d'applications web evolutives avec Next.js et une architecture microservices. Mise en place de pipelines CI/CD et optimisation des performances.",
             technologies: ["Next.js", "TypeScript", "Docker", "PostgreSQL", "Kubernetes"]
         },
         {
-            title: "Full Stack Developer",
-            company: "Digital Agency",
+            title: "Developpeur Full Stack",
+            company: "Agence Digitale",
             period: "2020 - 2022",
-            description: "Developed custom web solutions for clients across various industries. Built RESTful APIs and responsive frontend applications.",
+            description: "Developpement de solutions web sur mesure pour des clients de secteurs varies. Creation d'API REST et d'interfaces frontend responsives.",
             technologies: ["React", "Node.js", "MongoDB", "TailwindCSS", "AWS"]
         },
         {
-            title: "Frontend Developer",
+            title: "Developpeur Frontend",
             company: "Startup Studio",
             period: "2018 - 2020",
-            description: "Created modern, accessible user interfaces for web applications. Collaborated with design teams to implement pixel-perfect designs.",
+            description: "Conception d'interfaces modernes et accessibles pour des applications web. Collaboration avec les equipes design pour une implementation fidele des maquettes.",
             technologies: ["JavaScript", "Vue.js", "SASS", "Git", "Agile"]
         }
     ]
@@ -27,7 +27,7 @@ export default function Experience() {
         <section id="experience" className="py-16 scroll-mt-24 md:scroll-mt-0">
             <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">02. Experience</h2>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
-                Where I&apos;ve Worked
+                Mon parcours
             </h1>
 
             <div className="space-y-12">

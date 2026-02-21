@@ -14,8 +14,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Paul Ragueneau - Web Developer",
-  description: "Web Developer crafting scalable microservices & digital experiences with modern web technologies",
+  title: "Paul Ragueneau - Developpeur Web",
+  description: "Developpeur web specialise dans les microservices evolutifs et les experiences digitales modernes",
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="fr" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >

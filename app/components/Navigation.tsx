@@ -4,9 +4,9 @@ import { useState, useEffect, useRef } from 'react'
 import ThemeToggle from './ThemeToggle'
 
 const navItems = [
-    { href: '#about', label: 'About' },
+    { href: '#about', label: 'A propos' },
     { href: '#experience', label: 'Experience' },
-    { href: '#projects', label: 'Projects' },
+    { href: '#projects', label: 'Projets' },
     { href: '#contact', label: 'Contact' }
 ]
 
@@ -77,7 +77,7 @@ export default function Navigation() {
                 <div className="flex items-center justify-between md:block">
                     <div className="mb-0 md:mb-16">
                         <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1 md:mb-2">Paul Ragueneau</h1>
-                        <p className="text-xs md:text-sm text-gray-600 dark:text-slate-400 font-mono">Web Developer</p>
+                        <p className="text-xs md:text-sm text-gray-600 dark:text-slate-400 font-mono">Developpeur Web</p>
                     </div>
 
                     <div className="flex items-center gap-4 md:hidden">
