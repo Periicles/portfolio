@@ -3,16 +3,16 @@ export default function Contact() {
         <section id="contact" className="py-16 scroll-mt-24 md:scroll-mt-0">
             <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">04. Contact</h2>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
-                Get In Touch
+                Entrons en contact
             </h1>
 
             <div className="space-y-6">
                 <p className="text-gray-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-                    I&apos;m currently open to new opportunities and would love to hear from you. Whether you have a question, a project proposal, or just want to connect, feel free to reach out!
+                    Je suis actuellement ouvert a de nouvelles opportunites et je serais ravi d&apos;echanger avec vous. Que vous ayez une question, une proposition de projet ou simplement envie de discuter, n&apos;hesitez pas a me contacter.
                 </p>
 
                 <p className="text-gray-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-                    I&apos;m particularly interested in roles that involve building scalable web applications, microservices architecture, or innovative frontend solutions. Let&apos;s discuss how I can contribute to your team.
+                    Je suis particulierement interesse par des missions autour d&apos;applications web evolutives, d&apos;architectures microservices ou de solutions frontend innovantes. Discutons de la facon dont je peux contribuer a votre equipe.
                 </p>
 
                 <div className="pt-8">
@@ -20,7 +20,7 @@ export default function Contact() {
                         href="mailto:paul.ragueneau40@gmail.com"
                         className="inline-flex items-center gap-2 px-8 py-4 border-2 border-green-600 text-green-600 dark:text-green-400 font-semibold rounded hover:bg-green-600 hover:text-white transition-all duration-300"
                     >
-                        Say Hello
+                        Ecrire un message
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
@@ -28,7 +28,7 @@ export default function Contact() {
                 </div>
 
                 <div className="pt-12 border-t border-gray-200 dark:border-slate-700">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">Other ways to connect:</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">Autres moyens de me contacter :</h3>
                     <div className="flex flex-wrap gap-6">
                         <a
                             href="https://github.com/Periicles"

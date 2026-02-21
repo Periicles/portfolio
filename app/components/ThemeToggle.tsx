@@ -16,7 +16,7 @@ export default function ThemeToggle() {
         return (
             <button
                 className="w-10 h-10 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center"
-                aria-label="Toggle theme"
+                aria-label="Changer de theme"
             >
                 <div className="w-4 h-4 bg-gray-400 dark:bg-slate-600 rounded-full" />
             </button>
@@ -30,7 +30,7 @@ export default function ThemeToggle() {
                 setTheme(nextTheme)
             }}
             className="w-10 h-10 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
-            aria-label="Toggle theme"
+            aria-label="Changer de theme"
         >
             {resolvedTheme === 'dark' ? (
                 <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">

@@ -1,31 +1,31 @@
 export default function About() {
     return (
         <section id="about" className="py-16 scroll-mt-24 md:scroll-mt-0">
-            <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">01. About</h2>
+            <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">01. A propos</h2>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
-                Hi, I&apos;m Paul. Nice to meet you.
+                Bonjour, je suis Paul. Ravi de vous rencontrer.
             </h1>
 
             <div className="space-y-6 text-gray-600 dark:text-slate-400 leading-relaxed">
                 <p>
-                    I&apos;m a web developer passionate about crafting scalable microservices and creating exceptional digital experiences. My favorite work lies at the intersection of robust backend architecture and thoughtful frontend design, building applications that not only perform well but deliver outstanding user experiences.
+                    Je suis developpeur web, passionne par la creation de microservices evolutifs et d&apos;experiences digitales de qualite. Ce que je prefere se situe a l&apos;intersection d&apos;une architecture backend robuste et d&apos;un frontend soigne, pour concevoir des applications performantes et agreables a utiliser.
                 </p>
 
                 <p>
-                    Currently, I specialize in building modern web applications using technologies like Next.js, React, and TypeScript. I contribute to the development and maintenance of scalable systems that power digital products, ensuring they meet high standards for performance, accessibility, and usability.
+                    Aujourd&apos;hui, je me specialise dans le developpement d&apos;applications web modernes avec des technologies comme Next.js, React et TypeScript. Je contribue a la conception et a la maintenance de systemes evolutifs qui alimentent des produits digitaux, avec un haut niveau d&apos;exigence sur la performance, l&apos;accessibilite et l&apos;ergonomie.
                 </p>
 
                 <p>
-                    In the past, I&apos;ve had the opportunity to develop software across various settings — from startups to established companies, working on everything from pet-friendly location platforms to multiplayer RPG games. I&apos;m particularly passionate about microservices architecture, DevOps practices, and creating seamless CI/CD pipelines.
+                    J&apos;ai eu l&apos;occasion de developper des logiciels dans des contextes varies, de la startup a l&apos;entreprise etablie, sur des projets allant de plateformes de geolocalisation pet-friendly a des jeux RPG multijoueurs. Je suis particulierement interesse par l&apos;architecture microservices, les pratiques DevOps et la mise en place de pipelines CI/CD fluides.
                 </p>
 
                 <p>
-                    In my spare time, I&apos;m usually exploring new technologies, contributing to open-source projects, or enjoying epic motorcycle adventures. I&apos;m also constantly learning and staying up-to-date with the latest web development trends and best practices.
+                    Pendant mon temps libre, j&apos;explore de nouvelles technologies, je contribue a des projets open source et je profite de grandes balades a moto. Je continue egalement a me former pour rester a jour sur les tendances et les bonnes pratiques du developpement web.
                 </p>
             </div>
 
             <div className="mt-12">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">Technologies I work with:</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">Technologies avec lesquelles je travaille :</h3>
                 <ul className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm text-gray-600 dark:text-slate-400">
                     <li>Next.js & React</li>
                     <li>TypeScript</li>
