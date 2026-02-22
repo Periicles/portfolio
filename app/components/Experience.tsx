@@ -1,25 +1,18 @@
 export default function Experience() {
     const experiences = [
         {
-            title: "Developpeur Web Senior",
-            company: "Entreprise Tech",
-            period: "2022 - Aujourd'hui",
-            description: "Pilotage du developpement d'applications web evolutives avec Next.js et une architecture microservices. Mise en place de pipelines CI/CD et optimisation des performances.",
-            technologies: ["Next.js", "TypeScript", "Docker", "PostgreSQL", "Kubernetes"]
-        },
-        {
-            title: "Developpeur Full Stack",
-            company: "Agence Digitale",
-            period: "2020 - 2022",
-            description: "Developpement de solutions web sur mesure pour des clients de secteurs varies. Creation d'API REST et d'interfaces frontend responsives.",
-            technologies: ["React", "Node.js", "MongoDB", "TailwindCSS", "AWS"]
-        },
-        {
             title: "Developpeur Frontend",
-            company: "Startup Studio",
-            period: "2018 - 2020",
-            description: "Conception d'interfaces modernes et accessibles pour des applications web. Collaboration avec les equipes design pour une implementation fidele des maquettes.",
-            technologies: ["JavaScript", "Vue.js", "SASS", "Git", "Agile"]
+            company: "H2V Solutions",
+            period: "oct. 2024 -> juil. 2025",
+            description: "Developpement et conception de la partie frontend d'une application de composition de newsletters en TypeScript et React. Mise en place de composants reutilisables et maintenables, dans une architecture modulaire, avec application des bonnes pratiques frontend (clean code, typage strict, separation des responsabilites) et usage de Git pour le travail collaboratif.",
+            technologies: ["TypeScript", "React", "Git", "Architecture modulaire"]
+        },
+        {
+            title: "Developpeur Backend",
+            company: "METAPOLIS",
+            period: "juil. 2023 -> dec. 2023",
+            description: "Developpement et conception du backend d'une application de monitoring avec Python et FastAPI, ainsi que de bases de donnees PostgreSQL et MongoDB. Creation d'API REST performantes et documentees (OpenAPI / Swagger), puis tests et validation des endpoints pour garantir la stabilite de l'application.",
+            technologies: ["Python", "FastAPI", "PostgreSQL", "MongoDB", "OpenAPI"]
         }
     ]
 
