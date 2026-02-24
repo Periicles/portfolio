@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import ThemeToggle from './ThemeToggle'
 
 const navItems = [
-    { href: '#about', label: 'A propos' },
-    { href: '#experience', label: 'Experience' },
+    { href: '#about', label: 'À propos' },
+    { href: '#experience', label: 'Expérience' },
     { href: '#projects', label: 'Projets' },
     { href: '#contact', label: 'Contact' }
 ]

@@ -27,7 +27,7 @@ export default function Projects() {
         <section id="projects" className="py-16 scroll-mt-24 md:scroll-mt-0">
             <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">03. Projets</h2>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
-                Quelques realisations
+                Quelques réalisations
             </h1>
 
             <div className="space-y-12">
@@ -90,9 +90,6 @@ export default function Projects() {
                             </div>
                         </div>
 
-                        {index < projects.length - 1 && (
-                            <div className="absolute left-0 top-0 w-full h-px bg-gray-200 dark:bg-slate-700 mt-12" />
-                        )}
                     </article>
                 ))}
             </div>
