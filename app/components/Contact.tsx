@@ -8,11 +8,11 @@ export default function Contact() {
 
             <div className="space-y-6">
                 <p className="text-gray-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-                    Je suis actuellement ouvert a de nouvelles opportunites et je serais ravi d&apos;echanger avec vous. Que vous ayez une question, une proposition de projet ou simplement envie de discuter, n&apos;hesitez pas a me contacter.
+                    Je suis actuellement ouvert à de nouvelles opportunités et je serais ravi d&apos;échanger avec vous. Que vous ayez une question, une proposition de projet ou simplement envie de discuter, n&apos;hésitez pas à me contacter.
                 </p>
 
                 <p className="text-gray-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-                    Je suis particulierement interesse par des missions autour d&apos;applications web evolutives, d&apos;architectures microservices ou de solutions frontend innovantes. Discutons de la facon dont je peux contribuer a votre equipe.
+                    Je suis particulièrement intéressé par des missions autour d&apos;applications web évolutives, d&apos;architectures microservices ou de solutions frontend innovantes. Discutons de la façon dont je peux contribuer à votre équipe.
                 </p>
 
                 <div className="pt-8">
@@ -20,7 +20,7 @@ export default function Contact() {
                         href="mailto:paul.ragueneau40@gmail.com"
                         className="inline-flex items-center gap-2 px-8 py-4 border-2 border-green-600 text-green-600 dark:text-green-400 font-semibold rounded hover:bg-green-600 hover:text-white transition-all duration-300"
                     >
-                        Ecrire un message
+                        Écrire un message
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>

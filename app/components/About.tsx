@@ -1,26 +1,26 @@
 export default function About() {
     return (
         <section id="about" className="py-16 scroll-mt-24 md:scroll-mt-0">
-            <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">01. A propos</h2>
+            <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">01. À propos</h2>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
                 Bonjour, je suis Paul. Ravi de vous rencontrer.
             </h1>
 
             <div className="space-y-6 text-gray-600 dark:text-slate-400 leading-relaxed">
                 <p>
-                    Je suis developpeur web fullstack, avec des experiences professionnelles sur des environnements TypeScript, React et Python. J&apos;aime concevoir des applications web complètes, de l&apos;interface utilisateur jusqu&apos;aux API REST.
+                    Je suis développeur web fullstack, avec des expériences professionnelles sur des environnements TypeScript, React et Python. J&apos;aime concevoir des applications web complètes, de l&apos;interface utilisateur jusqu&apos;aux API REST.
                 </p>
 
                 <p>
-                    Chez H2V Solutions (octobre 2024 - juillet 2025), j&apos;ai travaillé sur le developpement frontend d&apos;une application de composition de newsletters avec React et TypeScript, en mettant l&apos;accent sur l&apos;architecture modulaire, le typage strict et la maintenabilité.
+                    Chez H2V Solutions (octobre 2024 - juillet 2025), j&apos;ai travaillé sur le développement frontend d&apos;une application de composition de newsletters avec React et TypeScript, en mettant l&apos;accent sur l&apos;architecture modulaire, le typage strict et la maintenabilité.
                 </p>
 
                 <p>
-                    Lors de mon experience chez Metapolis (juillet 2023 - decembre 2023), j&apos;ai également contribué au backend d&apos;une application de monitoring avec Python, FastAPI, PostgreSQL et MongoDB, en construisant des API documentées et testées.
+                    Lors de mon expérience chez Metapolis (juillet 2023 - décembre 2023), j&apos;ai également contribué au backend d&apos;une application de monitoring avec Python, FastAPI, PostgreSQL et MongoDB, en construisant des API documentées et testées.
                 </p>
 
                 <p>
-                    Aujourd&apos;hui, je poursuis ma progression en mastère Dev. Manager Full Stack (EFREI, 2025 - 2027). Je reste motivé par la qualité logicielle, les bonnes pratiques d&apos;ingénierie et les projets qui ont un impact concret. Je dispose egalement d&apos;un niveau d&apos;anglais professionnel (TOEIC : 960/990).
+                    Aujourd&apos;hui, je poursuis ma progression en mastère Dev. Manager Full Stack (EFREI, 2025 - 2027). Je reste motivé par la qualité logicielle, les bonnes pratiques d&apos;ingénierie et les projets qui ont un impact concret. Je dispose également d&apos;un niveau d&apos;anglais professionnel (TOEIC : 960/990).
                 </p>
             </div>
 

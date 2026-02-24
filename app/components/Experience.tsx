@@ -15,7 +15,7 @@ export default function Experience() {
         {
             title: "Développeur Backend",
             company: "METAPOLIS",
-            period: "juil. 2023 -> dec. 2023",
+            period: "juil. 2023 -> déc. 2023",
             description: [
                 "Développement et conception du backend d'une application de monitoring avec Python et FastAPI ainsi que de bases de données PostgreSQL et MongoDB.",
                 "Création et exposition d'API REST performantes et documentées (OpenAPI / Swagger).",
