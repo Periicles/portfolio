@@ -27,13 +27,13 @@ export default function Experience() {
     ]
 
     return (
-        <section id="experience" className="py-16 scroll-mt-24 md:scroll-mt-0">
-            <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">
+        <section id="experience" aria-labelledby="experience-heading" className="py-16 scroll-mt-24 md:scroll-mt-0">
+            <p aria-hidden="true" className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">
                 02. Expérience
-            </h2>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
+            </p>
+            <h2 id="experience-heading" className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
                 Mon parcours
-            </h1>
+            </h2>
 
             <div className="space-y-12">
                 {experiences.map((exp, index) => (
@@ -43,12 +43,9 @@ export default function Experience() {
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100">
                                     {exp.title}
                                 </h3>
-                                <a
-                                    href="#"
-                                    className="text-teal-500 dark:text-teal-400 hover:text-teal-600 dark:hover:text-teal-300 transition-colors"
-                                >
+                                <p className="text-teal-500 dark:text-teal-400">
                                     {exp.company}
-                                </a>
+                                </p>
                                 <p className="text-sm text-gray-500 dark:text-slate-500 font-mono mt-1">
                                     {exp.period}
                                 </p>

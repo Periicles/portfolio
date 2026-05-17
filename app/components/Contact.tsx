@@ -1,10 +1,10 @@
 export default function Contact() {
     return (
-        <section id="contact" className="py-16 scroll-mt-24 md:scroll-mt-0">
-            <h2 className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">04. Contact</h2>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
+        <section id="contact" aria-labelledby="contact-heading" className="py-16 scroll-mt-24 md:scroll-mt-0">
+            <p aria-hidden="true" className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">04. Contact</p>
+            <h2 id="contact-heading" className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
                 Entrons en contact
-            </h1>
+            </h2>
 
             <div className="space-y-6">
                 <p className="text-gray-600 dark:text-slate-400 leading-relaxed max-w-2xl">

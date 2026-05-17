@@ -77,7 +77,7 @@ export default function Navigation() {
                 <div className="flex items-center justify-between md:block">
                     <div className="mb-0 md:mb-16">
                         <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1 md:mb-2">Paul Ragueneau</h1>
-                        <p className="text-xs md:text-sm text-gray-600 dark:text-slate-400 font-mono">Developpeur Web</p>
+                        <p className="text-xs md:text-sm text-gray-600 dark:text-slate-400 font-mono">Développeur Web Fullstack</p>
                     </div>
 
                     <div className="flex items-center gap-4 md:hidden">

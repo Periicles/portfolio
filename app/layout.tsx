@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
@@ -13,9 +13,66 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://www.paulragueneau.com";
+const siteName = "Paul Ragueneau";
+const siteTitle = "Paul Ragueneau — Développeur Web Fullstack";
+const siteDescription =
+  "Développeur web fullstack (TypeScript, React, Next.js, Python). Microservices, API REST et applications web modernes.";
+
 export const metadata: Metadata = {
-  title: "Paul Ragueneau - Developpeur Web",
-  description: "Developpeur web specialise dans les microservices evolutifs et les experiences digitales modernes",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteTitle,
+    template: "%s — Paul Ragueneau",
+  },
+  description: siteDescription,
+  applicationName: `${siteName} — Portfolio`,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  keywords: [
+    "Paul Ragueneau",
+    "développeur web",
+    "développeur fullstack",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Python",
+    "FastAPI",
+    "microservices",
+    "portfolio",
+    "freelance",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "/",
+    siteName,
+    title: siteTitle,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    creator: "@paulragueneau",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+  formatDetection: { email: false, address: false, telephone: false },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
 };
 
 export default function RootLayout({
