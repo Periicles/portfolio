@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 const siteUrl = "https://www.paulragueneau.com";
 const siteName = "Paul Ragueneau";
-const siteTitle = "Paul Ragueneau — Développeur Web Fullstack";
+const siteTitle = "Paul Ragueneau — Développeur Web Fullstack · React/Next.js";
 const siteDescription =
   "Développeur web fullstack (TypeScript, React, Next.js, Python). Microservices, API REST et applications web modernes.";
 
