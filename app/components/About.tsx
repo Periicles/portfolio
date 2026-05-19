@@ -20,6 +20,10 @@ export default function About() {
                 </p>
 
                 <p>
+                    Depuis mars 2026, je rejoins CEVA Santé Animale en tant que Développeur Full Stack – AI Assisted Development. J&apos;y construis des applications métier from scratch et migre des solutions existantes vers des technologies modernes, en tirant parti d&apos;outils IA comme Cursor et Claude Code pour accélérer le développement tout en maintenant un haut niveau de qualité et de sécurité.
+                </p>
+
+                <p>
                     Aujourd&apos;hui, je poursuis ma progression en mastère Dev. Manager Full Stack (EFREI, 2025 - 2027). Je reste motivé par la qualité logicielle, les bonnes pratiques d&apos;ingénierie et les projets qui ont un impact concret. Je dispose également d&apos;un niveau d&apos;anglais professionnel (TOEIC : 960/990).
                 </p>
             </div>
