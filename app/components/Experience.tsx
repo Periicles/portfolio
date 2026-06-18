@@ -2,7 +2,7 @@ import { experiences } from '@/content/experiences'
 
 export default function Experience() {
     return (
-        <section id="experience" aria-labelledby="experience-heading" className="py-16 scroll-mt-24 md:scroll-mt-0">
+        <section id="experience" aria-labelledby="experience-heading" className="py-16 scroll-mt-24 md:scroll-mt-16">
             <p aria-hidden="true" className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">
                 02. Expérience
             </p>

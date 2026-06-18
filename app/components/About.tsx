@@ -1,6 +1,6 @@
 export default function About() {
     return (
-        <section id="about" aria-labelledby="about-heading" className="py-16 scroll-mt-24 md:scroll-mt-0">
+        <section id="about" aria-labelledby="about-heading" className="py-16 scroll-mt-24 md:scroll-mt-16">
             <p aria-hidden="true" className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">01. À propos</p>
             <h2 id="about-heading" className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
                 Bonjour, je suis Paul. Ravi de vous rencontrer.

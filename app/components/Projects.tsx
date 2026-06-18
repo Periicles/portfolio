@@ -4,7 +4,7 @@ import { projects } from '@/content/projects'
 
 export default function Projects() {
     return (
-        <section id="projects" aria-labelledby="projects-heading" className="py-16 scroll-mt-24 md:scroll-mt-0">
+        <section id="projects" aria-labelledby="projects-heading" className="py-16 scroll-mt-24 md:scroll-mt-16">
             <p aria-hidden="true" className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">03. Projets</p>
             <h2 id="projects-heading" className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
                 Quelques réalisations
