@@ -5,7 +5,7 @@ import { site } from '@/content/site'
 
 export default function Contact() {
     return (
-        <section id="contact" aria-labelledby="contact-heading" className="py-16 scroll-mt-24 md:scroll-mt-0">
+        <section id="contact" aria-labelledby="contact-heading" className="py-16 scroll-mt-24 md:scroll-mt-16">
             <p aria-hidden="true" className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">04. Contact</p>
             <h2 id="contact-heading" className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
                 Entrons en contact
