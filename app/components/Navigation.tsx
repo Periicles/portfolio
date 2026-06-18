@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import ThemeToggle from './ThemeToggle'
 import { GitHubIcon } from './icons/GitHubIcon'
 import { LinkedInIcon } from './icons/LinkedInIcon'
+import { site } from '@/content/site'
 
 const navItems = [
     { href: '#about', label: 'À propos' },
@@ -84,14 +85,14 @@ export default function Navigation() {
 
                     <div className="flex items-center gap-4 md:hidden">
                         <a
-                            href="https://github.com/Periicles"
+                            href={site.socials.github}
                             className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
                             aria-label="GitHub"
                         >
                             <GitHubIcon />
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/paul-ragueneau/"
+                            href={site.socials.linkedin}
                             className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
                             aria-label="LinkedIn"
                         >
@@ -138,14 +139,14 @@ export default function Navigation() {
             <div className="hidden md:block space-y-4">
                 <div className="flex space-x-4">
                     <a
-                        href="https://github.com/Periicles"
+                        href={site.socials.github}
                         className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
                         aria-label="GitHub"
                     >
                         <GitHubIcon />
                     </a>
                     <a
-                        href="https://www.linkedin.com/in/paul-ragueneau/"
+                        href={site.socials.linkedin}
                         className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
                         aria-label="LinkedIn"
                     >
