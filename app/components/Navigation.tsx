@@ -46,6 +46,8 @@ export default function Navigation() {
                     <div className="flex items-center gap-4 md:hidden">
                         <a
                             href={site.socials.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
                             aria-label="GitHub"
                         >
@@ -53,6 +55,8 @@ export default function Navigation() {
                         </a>
                         <a
                             href={site.socials.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
                             aria-label="LinkedIn"
                         >
@@ -100,6 +104,8 @@ export default function Navigation() {
                 <div className="flex space-x-4">
                     <a
                         href={site.socials.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
                         aria-label="GitHub"
                     >
@@ -107,6 +113,8 @@ export default function Navigation() {
                     </a>
                     <a
                         href={site.socials.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
                         aria-label="LinkedIn"
                     >
