@@ -1,43 +1,6 @@
-export default function Experience() {
-    const experiences = [
-        {
-            title: "Développeur Full Stack – AI Assisted Development",
-            company: "CEVA Santé Animale",
-            period: "mars 2026 -> août 2026",
-            description: [
-                "Construction d'applications métier from scratch à l'aide d'outils IA (Cursor, Claude Code) sur une stack React/Next.js/TypeScript/Tailwind CSS.",
-                "Migration d'applications existantes vers des technologies modernes et open-source via le vibe coding.",
-                "Recueil des besoins métier et collaboration directe avec les parties prenantes pour traduire leurs besoins en solutions fonctionnelles.",
-                "Garantie de la qualité et sécurité du code selon les standards SonarQube et OWASP Top 10, et documentation des métriques pour construire le business case du vibe coding."
-            ],
-            technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Git", "Cursor", "Claude Code"]
-        },
-        {
-            title: "Développeur Frontend",
-            company: "H2V Solutions",
-            period: "oct. 2024 -> juil. 2025",
-            description: [
-                "Développement et conception de la partie frontend d'une application permettant la composition de newsletters avec TypeScript et React.",
-                "Implémentation de composants réutilisables et maintenables en suivant une architecture modulaire.",
-                "Application des bonnes pratiques frontend : clean code, typage strict, séparation des responsabilités.",
-                "Utilisation de Git pour le versioning et le travail collaboratif."
-            ],
-            technologies: ["TypeScript", "React", "Git", "Architecture modulaire"]
-        },
-        {
-            title: "Développeur Backend",
-            company: "METAPOLIS",
-            period: "juil. 2023 -> déc. 2023",
-            description: [
-                "Développement et conception du backend d'une application de monitoring avec Python et FastAPI ainsi que de bases de données PostgreSQL et MongoDB.",
-                "Création et exposition d'API REST performantes et documentées (OpenAPI / Swagger).",
-                "Tests et validation des endpoints pour garantir la stabilité de l'application.",
-                "Méthodologie de travail agile"
-            ],
-            technologies: ["Python", "FastAPI", "PostgreSQL", "MongoDB", "OpenAPI"]
-        }
-    ]
+import { experiences } from '@/content/experiences'
 
+export default function Experience() {
     return (
         <section id="experience" aria-labelledby="experience-heading" className="py-16 scroll-mt-24 md:scroll-mt-0">
             <p aria-hidden="true" className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">
@@ -48,8 +11,8 @@ export default function Experience() {
             </h2>
 
             <div className="space-y-12">
-                {experiences.map((exp, index) => (
-                    <div key={index} className="relative">
+                {experiences.map((exp) => (
+                    <div key={exp.company} className="relative">
                         <div className="flex flex-col md:flex-row md:items-start md:space-x-8">
                             <div className="md:w-48 mb-2 md:mb-0">
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100">
@@ -65,14 +28,14 @@ export default function Experience() {
 
                             <div className="flex-1">
                                 <ul className="list-disc pl-5 text-gray-600 dark:text-slate-400 leading-relaxed mb-4 space-y-1">
-                                    {exp.description.map((item, itemIndex) => (
-                                        <li key={itemIndex}>{item}</li>
+                                    {exp.description.map((item) => (
+                                        <li key={item}>{item}</li>
                                     ))}
                                 </ul>
                                 <div className="flex flex-wrap gap-2">
-                                    {exp.technologies.map((tech, techIndex) => (
+                                    {exp.technologies.map((tech) => (
                                         <span
-                                            key={techIndex}
+                                            key={tech}
                                             className="text-xs text-gray-500 dark:text-slate-500 font-mono bg-gray-100 dark:bg-slate-800 px-2 py-1 rounded"
                                         >
                                             {tech}

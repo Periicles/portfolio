@@ -1,6 +1,7 @@
 import { GitHubIcon } from './icons/GitHubIcon'
 import { LinkedInIcon } from './icons/LinkedInIcon'
 import { MailIcon } from './icons/MailIcon'
+import { site } from '@/content/site'
 
 export default function Contact() {
     return (
@@ -21,7 +22,7 @@ export default function Contact() {
 
                 <div className="pt-8">
                     <a
-                        href="mailto:paul.ragueneau40@gmail.com"
+                        href={`mailto:${site.email}`}
                         className="inline-flex items-center gap-2 px-8 py-4 border-2 border-green-600 text-green-600 dark:text-green-400 font-semibold rounded hover:bg-green-600 hover:text-white transition-all duration-300"
                     >
                         Écrire un message
@@ -33,7 +34,7 @@ export default function Contact() {
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">Autres moyens de me contacter :</h3>
                     <div className="flex flex-wrap gap-6">
                         <a
-                            href="https://github.com/Periicles"
+                            href={site.socials.github}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
@@ -43,7 +44,7 @@ export default function Contact() {
                         </a>
 
                         <a
-                            href="https://www.linkedin.com/in/paul-ragueneau/"
+                            href={site.socials.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
