@@ -12,7 +12,6 @@ export default function Projects() {
 
             <div className="space-y-12">
                 {projects.map((project) => {
-                    const isInProgress = project.status === "in-progress"
                     return (
                         <article key={project.title} className="relative">
                             <div className="grid grid-cols-12 gap-4 items-center">
@@ -29,11 +28,6 @@ export default function Projects() {
                                             </a>
                                         ) : (
                                             <span>{project.title}</span>
-                                        )}
-                                        {isInProgress && (
-                                            <span className="text-xs font-mono font-normal px-2 py-1 rounded bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/30">
-                                                En cours
-                                            </span>
                                         )}
                                     </h3>
                                     <p className="text-gray-600 dark:text-slate-400 mb-4">

@@ -4,28 +4,28 @@ export type Project = {
     technologies: string[]
     link?: string
     github?: string
-    status?: "in-progress"
 }
 
 export const projects: readonly Project[] = [
     {
         title: "Petfriendly Locator",
-        description: "Une plateforme de géolocalisation pour trouver des lieux pet-friendly avec recherche avancée et filtres intelligents. Développée avec des technologies web modernes pour offrir performance et confort d'utilisation.",
-        technologies: ["Next.js", "PostgreSQL", "TailwindCSS", "Leaflet Maps"],
-        link: "https://gitlab.com/Periicles/petfriendlylocator",
-        github: "https://gitlab.com/Periicles/petfriendlylocator",
+        description: "Application web communautaire pour découvrir et partager les lieux pet-friendly de la région bordelaise : carte interactive, ajout de lieux, profils utilisateurs, système d'avis et espace de modération. Conteneurisée avec Docker et déployée via une CI/CD GitHub Actions.",
+        technologies: ["Next.js 16", "TypeScript", "React 19", "Prisma", "PostgreSQL", "Mapbox GL JS", "Auth.js", "Tailwind CSS", "Docker"],
+        link: "https://github.com/Periicles/petfriendlylocator",
+        github: "https://github.com/Periicles/petfriendlylocator",
     },
     {
         title: "MY_RPG",
-        description: "Un jeu de rôle multijoueur avec système de combat en temps réel et progression persistante. Communication temps réel via sockets et architecture backend évolutive.",
-        technologies: ["React", "Node.js", "Socket.io", "MongoDB"],
+        description: "Jeu de rôle 2D inspiré de Link's Awakening, écrit en C avec la CSFML. Rendu en projection isométrique 3D, gestion des collisions au pixel près via le canal alpha des sprites, dialogues avec les PNJ et interactions avec le décor. Projet d'équipe réalisé à Epitech.",
+        technologies: ["C", "CSFML", "Make"],
         link: "https://github.com/Periicles/RPG",
         github: "https://github.com/Periicles/RPG",
     },
     {
-        title: "Tableau de bord Microservices",
-        description: "Un tableau de bord complet pour superviser et administrer une architecture microservices. Inclut métriques en temps réel, suivi de santé des services et contrôles de mise à l'échelle automatiques.",
-        technologies: ["TypeScript", "Docker", "Kubernetes", "FastAPI"],
-        status: "in-progress",
+        title: "NotchBar",
+        description: "Application macOS minimaliste qui exploite l'encoche physique du Mac pour afficher la progression de l'événement de calendrier en cours. Six états contextuels révélés au survol, accès au calendrier via EventKit, rendu SwiftUI sans aucune dépendance externe.",
+        technologies: ["Swift", "SwiftUI", "EventKit", "AppKit", "SPM"],
+        link: "https://github.com/Periicles/Notchapp",
+        github: "https://github.com/Periicles/Notchapp",
     },
 ] as const
