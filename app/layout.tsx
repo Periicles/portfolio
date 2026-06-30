@@ -17,7 +17,7 @@ const siteUrl = "https://www.paulragueneau.com";
 const siteName = "Paul Ragueneau";
 const siteTitle = "Paul Ragueneau — Développeur Web Fullstack · React/Next.js";
 const siteDescription =
-  "Développeur web fullstack (TypeScript, React, Next.js, Python). Microservices, API REST et applications web modernes.";
+  "Développeur web fullstack (TypeScript, React, Next.js, Python). API REST et applications web modernes.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -39,7 +39,6 @@ export const metadata: Metadata = {
     "Next.js",
     "Python",
     "FastAPI",
-    "microservices",
     "portfolio",
     "freelance",
   ],

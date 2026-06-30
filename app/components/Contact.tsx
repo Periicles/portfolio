@@ -17,7 +17,7 @@ export default function Contact() {
                 </p>
 
                 <p className="text-gray-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-                    Je suis particulièrement intéressé par des missions autour d&apos;applications web évolutives, d&apos;architectures microservices ou de solutions frontend innovantes. Discutons de la façon dont je peux contribuer à votre équipe.
+                    Je suis particulièrement intéressé par des missions autour d&apos;applications web évolutives, d&apos;API REST ou de solutions frontend innovantes. Discutons de la façon dont je peux contribuer à votre équipe.
                 </p>
 
                 <div className="pt-8">

@@ -69,7 +69,7 @@ export default function OpengraphImage() {
               marginTop: 16,
             }}
           >
-            TypeScript · React · Next.js · Python · Microservices
+            TypeScript · React · Next.js · Python · API REST
           </div>
         </div>
 
