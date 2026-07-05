@@ -25,7 +25,7 @@ export const projects: readonly Project[] = [
         title: "NotchBar",
         description: "Application macOS minimaliste qui exploite l'encoche physique du Mac pour afficher la progression de l'événement de calendrier en cours. Six états contextuels révélés au survol, accès au calendrier via EventKit, rendu SwiftUI sans aucune dépendance externe.",
         technologies: ["Swift", "SwiftUI", "EventKit", "AppKit", "SPM"],
-        link: "https://github.com/Periicles/Notchapp",
+        link: "https://periicles.github.io/Notchapp/",
         github: "https://github.com/Periicles/Notchapp",
     },
 ] as const
