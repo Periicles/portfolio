@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Brainstorming visual companion
 .superpowers/
+
+# Working docs (specs, plans, agent scratch) — kept local, never committed
+docs/
