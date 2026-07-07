@@ -1,4 +1,4 @@
-import { ExternalLinkIcon } from './icons/ExternalLinkIcon'
+import { ExternalLink } from 'lucide-react'
 import { GitHubIcon } from './icons/GitHubIcon'
 import { projects } from '@/content/projects'
 import SectionEyebrow from './SectionEyebrow'
@@ -66,7 +66,7 @@ export default function Projects() {
                                             className="text-muted hover:text-ink transition-colors"
                                             aria-label={`Démo du projet ${project.title}`}
                                         >
-                                            <ExternalLinkIcon />
+                                            <ExternalLink className="w-5 h-5" />
                                         </a>
                                     )}
                                 </div>

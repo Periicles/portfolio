@@ -1,6 +1,6 @@
 import { GitHubIcon } from './icons/GitHubIcon'
 import { LinkedInIcon } from './icons/LinkedInIcon'
-import { MailIcon } from './icons/MailIcon'
+import { Mail } from 'lucide-react'
 import { site } from '@/content/site'
 import SectionEyebrow from './SectionEyebrow'
 
@@ -27,7 +27,7 @@ export default function Contact() {
                         className="inline-flex items-center gap-2 px-8 py-4 border-2 border-accent text-accent-strong font-semibold rounded hover:bg-accent hover:text-ink transition-all duration-300"
                     >
                         Écrire un message
-                        <MailIcon />
+                        <Mail className="w-4 h-4" />
                     </a>
                 </div>
 
