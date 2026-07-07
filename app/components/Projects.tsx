@@ -1,12 +1,13 @@
-import { ExternalLinkIcon } from './icons/ExternalLinkIcon'
+import { ExternalLink } from 'lucide-react'
 import { GitHubIcon } from './icons/GitHubIcon'
 import { projects } from '@/content/projects'
+import SectionEyebrow from './SectionEyebrow'
 
 export default function Projects() {
     return (
-        <section id="projects" aria-labelledby="projects-heading" className="py-16 scroll-mt-24 md:scroll-mt-16">
-            <p aria-hidden="true" className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">03. Projets</p>
-            <h2 id="projects-heading" className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
+        <section id="projects" aria-labelledby="projects-heading" className="py-16 scroll-mt-24 md:scroll-mt-16 border-t border-hairline">
+            <SectionEyebrow index={3}>Projets</SectionEyebrow>
+            <h2 id="projects-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
                 Quelques réalisations
             </h2>
 
@@ -16,13 +17,13 @@ export default function Projects() {
                         <article key={project.title} className="relative">
                             <div className="grid grid-cols-12 gap-4 items-center">
                                 <div className="col-span-12 md:col-span-8">
-                                    <h3 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-2 flex flex-wrap items-center gap-3">
+                                    <h3 className="text-2xl font-semibold text-ink mb-2 flex flex-wrap items-center gap-3">
                                         {project.link ? (
                                             <a
                                                 href={project.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="transition-colors hover:text-teal-500 dark:hover:text-teal-400"
+                                                className="transition-colors hover:text-accent-strong"
                                             >
                                                 {project.title}
                                             </a>
@@ -30,14 +31,14 @@ export default function Projects() {
                                             <span>{project.title}</span>
                                         )}
                                     </h3>
-                                    <p className="text-gray-600 dark:text-slate-400 mb-4">
+                                    <p className="text-muted mb-4">
                                         {project.description}
                                     </p>
                                     <div className="flex flex-wrap gap-2 mb-6">
                                         {project.technologies.map((tech) => (
                                             <span
                                                 key={tech}
-                                                className="px-3 py-1 text-xs font-mono bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 rounded"
+                                                className="px-3 py-1 text-xs font-mono bg-surface text-muted rounded"
                                             >
                                                 {tech}
                                             </span>
@@ -51,7 +52,7 @@ export default function Projects() {
                                             href={project.github}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-400 hover:text-gray-600 dark:hover:text-slate-200 transition-colors"
+                                            className="text-muted hover:text-ink transition-colors"
                                             aria-label={`Dépôt du projet ${project.title}`}
                                         >
                                             <GitHubIcon />
@@ -62,10 +63,10 @@ export default function Projects() {
                                             href={project.link}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-400 hover:text-gray-600 dark:hover:text-slate-200 transition-colors"
+                                            className="text-muted hover:text-ink transition-colors"
                                             aria-label={`Démo du projet ${project.title}`}
                                         >
-                                            <ExternalLinkIcon />
+                                            <ExternalLink className="w-5 h-5" />
                                         </a>
                                     )}
                                 </div>

@@ -34,13 +34,20 @@ export default function Navigation() {
     return (
         <nav
             aria-label="Navigation principale"
-            className="sticky top-0 md:fixed left-0 md:top-0 h-auto md:h-screen w-full md:w-64 p-4 md:p-8 flex flex-col md:justify-between bg-white dark:bg-slate-900 border-b md:border-b-0 md:border-r border-gray-200 dark:border-slate-700 z-50"
+            className="sticky top-0 md:fixed left-0 md:top-0 h-auto md:h-screen w-full md:w-64 p-4 md:p-8 flex flex-col md:justify-between bg-paper border-b md:border-b-0 md:border-r border-hairline z-50"
         >
             <div className="flex flex-col gap-6 md:gap-0">
                 <div className="flex items-center justify-between md:block">
                     <div className="mb-0 md:mb-16">
-                        <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1 md:mb-2">Paul Ragueneau</h1>
-                        <p className="text-xs md:text-sm text-gray-600 dark:text-slate-400 font-mono">Développeur Web Fullstack</p>
+                        <a
+                            href="#about"
+                            aria-label="Paul Ragueneau — accueil"
+                            className="inline-block text-3xl md:text-4xl font-extrabold tracking-[-0.05em] leading-none text-ink"
+                        >
+                            pr<span className="text-accent">.</span>
+                        </a>
+                        <h1 className="mt-3 text-base md:text-lg font-bold text-ink">Paul Ragueneau</h1>
+                        <p className="text-xs md:text-sm text-muted font-mono">Développeur Web Fullstack</p>
                     </div>
 
                     <div className="flex items-center gap-4 md:hidden">
@@ -48,7 +55,7 @@ export default function Navigation() {
                             href={site.socials.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
+                            className="text-muted hover:text-ink transition-colors"
                             aria-label="GitHub"
                         >
                             <GitHubIcon />
@@ -57,7 +64,7 @@ export default function Navigation() {
                             href={site.socials.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
+                            className="text-muted hover:text-ink transition-colors"
                             aria-label="LinkedIn"
                         >
                             <LinkedInIcon />
@@ -69,7 +76,7 @@ export default function Navigation() {
                 <div className="relative">
                     <span
                         aria-hidden
-                        className="absolute left-0 top-0 w-1 rounded-full bg-teal-500 transition-transform duration-300 ease-out hidden md:block"
+                        className="absolute left-0 top-0 w-1 rounded-full bg-accent transition-transform duration-300 ease-out hidden md:block"
                         style={{
                             height: indicatorHeight ? `${indicatorHeight}px` : undefined,
                             transform: `translateY(${indicatorOffset}px)`,
@@ -88,11 +95,11 @@ export default function Navigation() {
                                 <a
                                     href={item.href}
                                     className={`block py-1 md:py-2 text-xs md:text-sm transition-colors ${activeSection === item.href.slice(1)
-                                        ? 'text-teal-500 dark:text-teal-400 font-semibold'
-                                        : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100'
+                                        ? 'text-ink font-semibold'
+                                        : 'text-muted hover:text-ink'
                                         }`}
                                 >
-                                    <span className="font-mono text-teal-500 dark:text-teal-400">0{index + 1}.</span> {item.label}
+                                    <span className="font-mono text-accent-strong">0{index + 1}.</span> {item.label}
                                 </a>
                             </li>
                         ))}
@@ -106,7 +113,7 @@ export default function Navigation() {
                         href={site.socials.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
+                        className="text-muted hover:text-ink transition-colors"
                         aria-label="GitHub"
                     >
                         <GitHubIcon />
@@ -115,7 +122,7 @@ export default function Navigation() {
                         href={site.socials.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-400 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-400 transition-colors"
+                        className="text-muted hover:text-ink transition-colors"
                         aria-label="LinkedIn"
                     >
                         <LinkedInIcon />
@@ -124,7 +131,7 @@ export default function Navigation() {
 
                 <ThemeToggle />
 
-                <p className="text-xs text-gray-500 dark:text-slate-500 font-mono">© 2026 Paul Ragueneau</p>
+                <p className="text-xs text-muted font-mono">© 2026 Paul Ragueneau</p>
             </div>
         </nav>
     )

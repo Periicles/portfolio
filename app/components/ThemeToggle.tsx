@@ -2,8 +2,7 @@
 
 import { useTheme } from 'next-themes'
 import { useState, useEffect } from 'react'
-import { SunIcon } from './icons/SunIcon'
-import { MoonIcon } from './icons/MoonIcon'
+import { Sun, Moon } from 'lucide-react'
 
 export default function ThemeToggle() {
     const { resolvedTheme, setTheme } = useTheme()
@@ -17,10 +16,10 @@ export default function ThemeToggle() {
     if (!mounted) {
         return (
             <button
-                className="w-10 h-10 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center"
+                className="w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center"
                 aria-label="Changer de thème"
             >
-                <div className="w-4 h-4 bg-gray-400 dark:bg-slate-600 rounded-full" />
+                <div className="w-4 h-4 bg-hairline rounded-full" />
             </button>
         )
     }
@@ -31,13 +30,13 @@ export default function ThemeToggle() {
                 const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
                 setTheme(nextTheme)
             }}
-            className="w-10 h-10 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
+            className="w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center hover:bg-surface transition-colors"
             aria-label="Changer de thème"
         >
             {resolvedTheme === 'dark' ? (
-                <SunIcon className="w-4 h-4 text-yellow-500" />
+                <Sun className="w-4 h-4 text-accent" />
             ) : (
-                <MoonIcon className="w-4 h-4 text-slate-600" />
+                <Moon className="w-4 h-4 text-muted" />
             )}
         </button>
     )

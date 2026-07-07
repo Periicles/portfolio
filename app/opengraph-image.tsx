@@ -14,59 +14,72 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#0f172a",
-          color: "#f1f5f9",
-          padding: "80px 96px",
-          fontFamily: "system-ui, sans-serif",
+          backgroundColor: "#f5f4ef",
+          color: "#12140f",
+          padding: "72px 88px",
+          fontFamily: "sans-serif",
         }}
       >
         <div
           style={{
             display: "flex",
-            color: "#2dd4bf",
-            fontSize: 28,
-            fontFamily: "monospace",
-            letterSpacing: "0.04em",
-          }}
-        >
-          paulragueneau.com
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: 16,
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <div
             style={{
               display: "flex",
-              fontSize: 96,
-              fontWeight: 700,
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
+              color: "#5f635a",
+              fontSize: 24,
+              fontFamily: "monospace",
+              letterSpacing: "0.06em",
             }}
           >
-            Paul Ragueneau
+            paulragueneau.com
           </div>
           <div
             style={{
               display: "flex",
-              fontSize: 44,
-              color: "#94a3b8",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 72,
+              height: 72,
+              border: "3px solid #12140f",
+              borderRadius: 18,
+              fontSize: 34,
+              fontWeight: 800,
+              letterSpacing: "-0.04em",
             }}
           >
+            <span style={{ display: "flex" }}>pr</span>
+            <span style={{ display: "flex", color: "#0bb98d" }}>.</span>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 104,
+              fontWeight: 800,
+              lineHeight: 1.02,
+              letterSpacing: "-0.03em",
+            }}
+          >
+            Paul Ragueneau
+          </div>
+          <div style={{ display: "flex", fontSize: 42, color: "#5f635a", marginTop: 12 }}>
             Développeur Web Fullstack
           </div>
           <div
             style={{
               display: "flex",
-              fontSize: 26,
-              color: "#cbd5e1",
+              fontSize: 24,
+              color: "#067a5e",
               fontFamily: "monospace",
-              marginTop: 16,
+              marginTop: 24,
+              letterSpacing: "0.02em",
             }}
           >
             TypeScript · React · Next.js · Python · API REST
@@ -77,13 +90,12 @@ export default function OpengraphImage() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 16,
             padding: "16px 28px",
-            backgroundColor: "#2dd4bf",
-            color: "#0f172a",
-            fontSize: 30,
-            fontWeight: 600,
-            borderRadius: 8,
+            backgroundColor: "#0bb98d",
+            color: "#12140f",
+            fontSize: 28,
+            fontWeight: 700,
+            borderRadius: 10,
             alignSelf: "flex-start",
           }}
         >

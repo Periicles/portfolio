@@ -1,12 +1,14 @@
+import SectionEyebrow from './SectionEyebrow'
+
 export default function About() {
     return (
         <section id="about" aria-labelledby="about-heading" className="py-16 scroll-mt-24 md:scroll-mt-16">
-            <p aria-hidden="true" className="text-xs font-mono text-teal-500 dark:text-teal-400 mb-2">01. À propos</p>
-            <h2 id="about-heading" className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-8">
+            <SectionEyebrow index={1}>À propos</SectionEyebrow>
+            <h2 id="about-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
                 Bonjour, je suis Paul. Ravi de vous rencontrer.
             </h2>
 
-            <div className="space-y-6 text-gray-600 dark:text-slate-400 leading-relaxed">
+            <div className="space-y-6 text-muted leading-relaxed">
                 <p>
                     Je suis développeur web fullstack, avec des expériences professionnelles sur des environnements TypeScript, React et Python. J&apos;aime concevoir des applications web complètes, de l&apos;interface utilisateur jusqu&apos;aux API REST.
                 </p>
@@ -29,8 +31,8 @@ export default function About() {
             </div>
 
             <div className="mt-12">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">Technologies avec lesquelles je travaille :</h3>
-                <ul className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm text-gray-600 dark:text-slate-400">
+                <h3 className="text-lg font-semibold text-ink mb-4">Technologies avec lesquelles je travaille :</h3>
+                <ul className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm text-muted">
                     <li>JavaScript</li>
                     <li>TypeScript</li>
                     <li>TailwindCSS</li>
