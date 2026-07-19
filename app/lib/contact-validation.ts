@@ -18,6 +18,25 @@ export function isHoneypotFilled(value: FormDataEntryValue | null): boolean {
     return asTrimmed(value).length > 0
 }
 
+const DISPLAY_NAME_FALLBACK = 'Portfolio'
+
+/**
+ * Neutralise une saisie utilisateur destinée au nom affiché d'un en-tête From.
+ * Retire les caractères de contrôle (retours ligne inclus) et ceux qui ont un
+ * sens syntaxique dans un en-tête d'email, afin qu'un nom hostile ne puisse pas
+ * altérer la structure du message.
+ */
+export function sanitizeDisplayName(name: string): string {
+    const cleaned = name
+        // eslint-disable-next-line no-control-regex
+        .replace(/[\x00-\x1F\x7F]/g, ' ')
+        .replace(/[<>"\\]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+
+    return cleaned.length > 0 ? cleaned : DISPLAY_NAME_FALLBACK
+}
+
 export function validateContactForm(raw: {
     name: FormDataEntryValue | null
     email: FormDataEntryValue | null

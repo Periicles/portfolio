@@ -3,10 +3,21 @@
 import { headers } from 'next/headers'
 import { Resend } from 'resend'
 import { site } from '@/content/site'
-import { validateContactForm, isHoneypotFilled } from '@/lib/contact-validation'
+import {
+    validateContactForm,
+    isHoneypotFilled,
+    sanitizeDisplayName,
+} from '@/lib/contact-validation'
 import { checkRateLimit, checkGlobalRateLimit } from '@/lib/rate-limit'
 
-const FROM = 'Portfolio <contact@paulragueneau.com>'
+const FROM_ADDRESS = 'contact@paulragueneau.com'
+
+// Le nom affiché reprend celui du visiteur pour identifier l'expéditeur d'un
+// coup d'œil en boîte de réception. Le suffixe « via portfolio » rend la
+// provenance explicite et coupe court à toute tentative d'usurpation.
+function buildFrom(name: string): string {
+    return `${sanitizeDisplayName(name)} (via portfolio) <${FROM_ADDRESS}>`
+}
 const GENERIC_ERROR =
     "L'envoi a échoué. Réessaie, ou écris-moi directement par email."
 const SUCCESS = 'Merci, ton message a bien été envoyé. Je te réponds vite.'
@@ -60,7 +71,7 @@ export async function sendContactMessage(
         const resend = new Resend(apiKey)
         const { name, email, message } = result.data
         const { error } = await resend.emails.send({
-            from: FROM,
+            from: buildFrom(name),
             to: site.email,
             replyTo: email,
             subject: `Nouveau message de ${name} — portfolio`,

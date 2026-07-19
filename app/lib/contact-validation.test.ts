@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { validateContactForm, isHoneypotFilled } from './contact-validation'
+import { validateContactForm, isHoneypotFilled, sanitizeDisplayName } from './contact-validation'
 
 const valid = { name: 'Jean Dupont', email: 'jean@example.com', message: 'Bonjour, je vous contacte au sujet de votre profil.' }
 
@@ -37,6 +37,34 @@ describe('validateContactForm', () => {
     it('rejette une valeur non-string (null)', () => {
         const res = validateContactForm({ name: null, email: null, message: null })
         expect(res.ok).toBe(false)
+    })
+})
+
+describe('sanitizeDisplayName', () => {
+    it('laisse passer un nom normal', () => {
+        expect(sanitizeDisplayName('Jean Dupont')).toBe('Jean Dupont')
+    })
+
+    it('conserve les accents et traits d’union', () => {
+        expect(sanitizeDisplayName('Anne-Sophie Périé')).toBe('Anne-Sophie Périé')
+    })
+
+    it('supprime les retours ligne (injection d’en-tête)', () => {
+        expect(sanitizeDisplayName('Jean\r\nBcc: victime@example.com')).toBe('Jean Bcc: victime@example.com')
+    })
+
+    it('supprime les chevrons et guillemets qui casseraient l’en-tête From', () => {
+        expect(sanitizeDisplayName('Jean <hack@evil.com>')).toBe('Jean hack@evil.com')
+        expect(sanitizeDisplayName('Jean "le hacker"')).toBe('Jean le hacker')
+    })
+
+    it('condense les espaces multiples', () => {
+        expect(sanitizeDisplayName('Jean    Dupont')).toBe('Jean Dupont')
+    })
+
+    it('renvoie un repli si le nom est vide après nettoyage', () => {
+        expect(sanitizeDisplayName('<<>>')).toBe('Portfolio')
+        expect(sanitizeDisplayName('   ')).toBe('Portfolio')
     })
 })
 

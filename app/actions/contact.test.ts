@@ -81,6 +81,20 @@ describe('sendContactMessage', () => {
         expect(res.status).toBe('error')
     })
 
+    it('compose un expéditeur portant le nom du visiteur, sur le domaine vérifié', async () => {
+        await sendContactMessage(idle, fd(validFields))
+        expect(send.mock.calls[0][0].from).toBe(
+            'Jean Dupont (via portfolio) <contact@paulragueneau.com>',
+        )
+    })
+
+    it('neutralise une injection d’en-tête via le nom', async () => {
+        await sendContactMessage(idle, fd({ ...validFields, name: 'Jean <evil@x.com>' }))
+        const from = send.mock.calls[0][0].from
+        expect(from).toBe('Jean evil@x.com (via portfolio) <contact@paulragueneau.com>')
+        expect(from.match(/</g)).toHaveLength(1)
+    })
+
     it('bloque une saisie valide quand le plafond global est atteint (sans appeler Resend)', async () => {
         for (let i = 0; i < 20; i++) checkGlobalRateLimit()
         const res = await sendContactMessage(idle, fd(validFields))
