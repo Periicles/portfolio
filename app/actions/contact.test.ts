@@ -1,0 +1,72 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { __resetRateLimit } from '@/lib/rate-limit'
+
+const send = vi.fn(async () => ({ data: { id: 'msg_1' }, error: null }))
+
+vi.mock('resend', () => ({
+    Resend: vi.fn(function () {
+        return { emails: { send } }
+    }),
+}))
+
+vi.mock('next/headers', () => ({
+    headers: vi.fn(async () => ({ get: () => '203.0.113.5' })),
+}))
+
+import { sendContactMessage, type ContactState } from './contact'
+
+const idle: ContactState = { status: 'idle', message: '' }
+
+function fd(fields: Record<string, string>): FormData {
+    const f = new FormData()
+    for (const [k, v] of Object.entries(fields)) f.set(k, v)
+    return f
+}
+
+const validFields = {
+    name: 'Jean Dupont',
+    email: 'jean@example.com',
+    message: 'Bonjour, je vous contacte au sujet de votre profil.',
+}
+
+beforeEach(() => {
+    __resetRateLimit()
+    send.mockClear()
+    process.env.RESEND_API_KEY = 'test-key'
+})
+
+describe('sendContactMessage', () => {
+    it('renvoie un succès sans appeler Resend quand le honeypot est rempli', async () => {
+        const res = await sendContactMessage(idle, fd({ ...validFields, company: 'bot' }))
+        expect(res.status).toBe('success')
+        expect(send).not.toHaveBeenCalled()
+    })
+
+    it('renvoie une erreur de validation sans appeler Resend', async () => {
+        const res = await sendContactMessage(idle, fd({ ...validFields, email: 'invalide' }))
+        expect(res.status).toBe('error')
+        expect(send).not.toHaveBeenCalled()
+    })
+
+    it('envoie via Resend et renvoie un succès pour une saisie valide', async () => {
+        const res = await sendContactMessage(idle, fd(validFields))
+        expect(res.status).toBe('success')
+        expect(send).toHaveBeenCalledTimes(1)
+        const arg = send.mock.calls[0][0]
+        expect(arg.to).toBeDefined()
+        expect(arg.replyTo).toBe('jean@example.com')
+    })
+
+    it('renvoie une erreur si la clé API est absente', async () => {
+        delete process.env.RESEND_API_KEY
+        const res = await sendContactMessage(idle, fd(validFields))
+        expect(res.status).toBe('error')
+        expect(send).not.toHaveBeenCalled()
+    })
+
+    it('renvoie une erreur si Resend renvoie une erreur', async () => {
+        send.mockResolvedValueOnce({ data: null, error: { message: 'boom' } })
+        const res = await sendContactMessage(idle, fd(validFields))
+        expect(res.status).toBe('error')
+    })
+})
