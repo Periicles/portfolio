@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  secrets:
+    name: Détection de secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Historique complet : un secret retiré du HEAD mais présent dans un
+          # commit antérieur reste exploitable, donc il doit être détecté.
+          fetch-depth: 0
+
+      # Les règles natives de gitleaks couvrent déjà les fournisseurs utilisés
+      # ici (dont Resend) : pas de config custom à maintenir.
+      - name: Gitleaks
+        run: |
+          docker run --rm \
+            -v "$PWD:/repo" \
+            zricethezav/gitleaks:latest \
+            detect \
+              --source /repo \
+              --redact \
+              --no-banner \
+              --verbose
+
+  quality:
+    name: Tests, lint et build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Tests
+        run: npm test
+
+      - name: Lint
+        run: npx eslint app
+
+      - name: Build
+        run: npm run build

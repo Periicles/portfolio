@@ -28,7 +28,6 @@ const DISPLAY_NAME_FALLBACK = 'Portfolio'
  */
 export function sanitizeDisplayName(name: string): string {
     const cleaned = name
-        // eslint-disable-next-line no-control-regex
         .replace(/[\x00-\x1F\x7F]/g, ' ')
         .replace(/[<>"\\]/g, '')
         .replace(/\s+/g, ' ')
