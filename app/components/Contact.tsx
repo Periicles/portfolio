@@ -3,6 +3,7 @@ import { LinkedInIcon } from './icons/LinkedInIcon'
 import { Mail } from 'lucide-react'
 import { site } from '@/content/site'
 import SectionEyebrow from './SectionEyebrow'
+import ContactForm from './ContactForm'
 
 export default function Contact() {
     return (
@@ -22,13 +23,14 @@ export default function Contact() {
                 </p>
 
                 <div className="pt-8">
-                    <a
-                        href={`mailto:${site.email}`}
-                        className="inline-flex items-center gap-2 px-8 py-4 border-2 border-accent text-accent-strong font-semibold rounded hover:bg-accent hover:text-ink transition-all duration-300"
-                    >
-                        Écrire un message
-                        <Mail className="w-4 h-4" />
-                    </a>
+                    <ContactForm />
+                    <p className="mt-4 text-sm text-muted">
+                        Tu préfères ton client mail ?{' '}
+                        <a href={`mailto:${site.email}`} className="inline-flex items-center gap-1 text-accent-strong hover:underline">
+                            Écris-moi directement
+                            <Mail className="w-3.5 h-3.5" />
+                        </a>
+                    </p>
                 </div>
 
                 <div className="pt-12 border-t border-hairline">

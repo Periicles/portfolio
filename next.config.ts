@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV !== "production";
+
+// `unsafe-inline` sur script-src/style-src est un résidu assumé : le retirer
+// impose une CSP à nonce via middleware, ce qui forcerait le rendu dynamique
+// et ferait perdre le prérendu statique du site. La surface XSS est nulle
+// (aucun paramètre réfléchi, aucun contenu utilisateur rendu, pas de
+// dangerouslySetInnerHTML), donc le gain réel serait marginal.
+// `unsafe-eval` reste limité au dev : Turbopack en a besoin pour le HMR.
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
@@ -12,8 +19,28 @@ const contentSecurityPolicy = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
+  "frame-src 'none'",
+  "worker-src 'self'",
+  "media-src 'none'",
+  "manifest-src 'self'",
   "upgrade-insecure-requests",
 ].join("; ");
+
+const permissionsPolicy = [
+  "accelerometer=()",
+  "autoplay=()",
+  "camera=()",
+  "display-capture=()",
+  "encrypted-media=()",
+  "geolocation=()",
+  "gyroscope=()",
+  "magnetometer=()",
+  "microphone=()",
+  "midi=()",
+  "payment=()",
+  "usb=()",
+  "xr-spatial-tracking=()",
+].join(", ");
 
 const nextConfig: NextConfig = {
   async headers() {
@@ -47,7 +74,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
+            value: permissionsPolicy,
           },
           {
             key: "Cross-Origin-Opener-Policy",
