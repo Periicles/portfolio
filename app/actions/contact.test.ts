@@ -1,7 +1,18 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { __resetRateLimit } from '@/lib/rate-limit'
 
-const send = vi.fn(async () => ({ data: { id: 'msg_1' }, error: null }))
+type SendOptions = {
+    from: string
+    to: string
+    replyTo: string
+    subject: string
+    text: string
+}
+type SendResult = { data: { id: string } | null; error: { message: string } | null }
+
+const send = vi.fn(
+    async (_opts: SendOptions): Promise<SendResult> => ({ data: { id: 'msg_1' }, error: null }),
+)
 
 vi.mock('resend', () => ({
     Resend: vi.fn(function () {
