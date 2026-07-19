@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { __resetRateLimit } from '@/lib/rate-limit'
+import { __resetRateLimit, checkGlobalRateLimit } from '@/lib/rate-limit'
 
 type SendOptions = {
     from: string
@@ -79,5 +79,12 @@ describe('sendContactMessage', () => {
         send.mockResolvedValueOnce({ data: null, error: { message: 'boom' } })
         const res = await sendContactMessage(idle, fd(validFields))
         expect(res.status).toBe('error')
+    })
+
+    it('bloque une saisie valide quand le plafond global est atteint (sans appeler Resend)', async () => {
+        for (let i = 0; i < 20; i++) checkGlobalRateLimit()
+        const res = await sendContactMessage(idle, fd(validFields))
+        expect(res.status).toBe('error')
+        expect(send).not.toHaveBeenCalled()
     })
 })

@@ -4,7 +4,7 @@ import { headers } from 'next/headers'
 import { Resend } from 'resend'
 import { site } from '@/content/site'
 import { validateContactForm, isHoneypotFilled } from '@/lib/contact-validation'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { checkRateLimit, checkGlobalRateLimit } from '@/lib/rate-limit'
 
 const FROM = 'Portfolio <contact@paulragueneau.com>'
 const GENERIC_ERROR =
@@ -40,6 +40,15 @@ export async function sendContactMessage(
     })
     if (!result.ok) {
         return { status: 'error', message: result.error }
+    }
+
+    // Plafond global (toutes IP confondues) : borne le coût même si la limite
+    // par IP est esquivée par spoofing d'en-tête.
+    if (!checkGlobalRateLimit()) {
+        return {
+            status: 'error',
+            message: 'Trop de messages en ce moment. Réessaie dans quelques minutes.',
+        }
     }
 
     const apiKey = process.env.RESEND_API_KEY
