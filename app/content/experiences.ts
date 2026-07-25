@@ -9,7 +9,7 @@ export type Experience = {
 export const experiences: readonly Experience[] = [
     {
         title: "Développeur Full Stack – AI Assisted Development",
-        company: "CEVA Santé Animale",
+        company: "Ceva Santé Animale",
         period: "mars 2026 -> août 2026",
         description: [
             "Construction d'applications métier from scratch à l'aide d'outils IA (Cursor, Claude Code) sur une stack React/Next.js/TypeScript/Tailwind CSS.",
