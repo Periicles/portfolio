@@ -22,7 +22,7 @@ export default function About() {
                 </p>
 
                 <p>
-                    Depuis mars 2026, je rejoins CEVA Santé Animale en tant que Développeur Full Stack – AI Assisted Development. J&apos;y construis des applications métier from scratch et migre des solutions existantes vers des technologies modernes, en tirant parti d&apos;outils IA comme Cursor et Claude Code pour accélérer le développement tout en maintenant un haut niveau de qualité et de sécurité.
+                    Depuis mars 2026, je rejoins Ceva Santé Animale en tant que Développeur Full Stack – AI Assisted Development. J&apos;y construis des applications métier from scratch et migre des solutions existantes vers des technologies modernes, en tirant parti d&apos;outils IA comme Cursor et Claude Code pour accélérer le développement tout en maintenant un haut niveau de qualité et de sécurité.
                 </p>
 
                 <p>
