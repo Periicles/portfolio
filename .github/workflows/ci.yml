@@ -10,7 +10,7 @@ jobs:
     name: Détection de secrets
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # Historique complet : un secret retiré du HEAD mais présent dans un
           # commit antérieur reste exploitable, donc il doit être détecté.
@@ -33,7 +33,7 @@ jobs:
     name: Tests, lint et build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v7
         with:
