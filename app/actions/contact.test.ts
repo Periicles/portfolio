@@ -10,9 +10,10 @@ type SendOptions = {
 }
 type SendResult = { data: { id: string } | null; error: { message: string } | null }
 
-const send = vi.fn(
-    async (_opts: SendOptions): Promise<SendResult> => ({ data: { id: 'msg_1' }, error: null }),
-)
+const send = vi.fn<(opts: SendOptions) => Promise<SendResult>>(async () => ({
+    data: { id: 'msg_1' },
+    error: null,
+}))
 
 vi.mock('resend', () => ({
     Resend: vi.fn(function () {
