@@ -10,6 +10,16 @@ updates:
         dependency-type: "development"
       production-dependencies:
         dependency-type: "production"
+    ignore:
+      # typescript-eslint ne supporte pas encore TypeScript 7
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      # eslint-plugin-react (via eslint-config-next) plante sous ESLint 10
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      # Les types doivent suivre la version de Node utilisée en CI et sur Vercel
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
