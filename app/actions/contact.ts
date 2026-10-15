@@ -19,8 +19,8 @@ function buildFrom(name: string): string {
     return `${sanitizeDisplayName(name)} (via portfolio) <${FROM_ADDRESS}>`
 }
 const GENERIC_ERROR =
-    "L'envoi a échoué. Réessaie, ou écris-moi directement par email."
-const SUCCESS = 'Merci, ton message a bien été envoyé. Je te réponds vite.'
+    "L'envoi a échoué. Réessayez, ou écrivez-moi directement par email."
+const SUCCESS = 'Merci, votre message a bien été envoyé. Je vous réponds rapidement.'
 
 export type ContactState = {
     status: 'idle' | 'success' | 'error'
@@ -40,7 +40,7 @@ export async function sendContactMessage(
     if (!checkRateLimit(ip)) {
         return {
             status: 'error',
-            message: 'Trop de tentatives. Réessaie dans quelques minutes.',
+            message: 'Trop de tentatives. Réessayez dans quelques minutes.',
         }
     }
 
@@ -58,7 +58,7 @@ export async function sendContactMessage(
     if (!checkGlobalRateLimit()) {
         return {
             status: 'error',
-            message: 'Trop de messages en ce moment. Réessaie dans quelques minutes.',
+            message: 'Trop de messages en ce moment. Réessayez dans quelques minutes.',
         }
     }
 
