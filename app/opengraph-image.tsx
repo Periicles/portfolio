@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
+import { site } from "@/content/site";
 
-export const alt = "Paul Ragueneau — Développeur Web Fullstack · React/Next.js";
+export const alt = site.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -36,7 +37,7 @@ export default function OpengraphImage() {
               letterSpacing: "0.06em",
             }}
           >
-            paulragueneau.com
+            {site.domain}
           </div>
           <div
             style={{
@@ -67,10 +68,10 @@ export default function OpengraphImage() {
               letterSpacing: "-0.03em",
             }}
           >
-            Paul Ragueneau
+            {site.name}
           </div>
           <div style={{ display: "flex", fontSize: 42, color: "#5f635a", marginTop: 12 }}>
-            Développeur Web Fullstack
+            {site.role}
           </div>
           <div
             style={{

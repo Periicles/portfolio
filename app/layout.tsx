@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { site } from "@/content/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,25 +16,19 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://www.paulragueneau.com";
-const siteName = "Paul Ragueneau";
-const siteTitle = "Paul Ragueneau — Développeur Web Fullstack · React/Next.js";
-const siteDescription =
-  "Développeur web fullstack (TypeScript, React, Next.js, Python). API REST et applications web modernes.";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(site.url),
   title: {
-    default: siteTitle,
-    template: "%s — Paul Ragueneau",
+    default: site.title,
+    template: `%s — ${site.name}`,
   },
-  description: siteDescription,
-  applicationName: `${siteName} — Portfolio`,
-  authors: [{ name: siteName, url: siteUrl }],
-  creator: siteName,
-  publisher: siteName,
+  description: site.description,
+  applicationName: `${site.name} — Portfolio`,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
   keywords: [
-    "Paul Ragueneau",
+    site.name,
     "développeur web",
     "développeur fullstack",
     "TypeScript",
@@ -49,14 +44,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: "/",
-    siteName,
-    title: siteTitle,
-    description: siteDescription,
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: siteTitle,
-    description: siteDescription,
+    title: site.title,
+    description: site.description,
   },
   robots: {
     index: true,

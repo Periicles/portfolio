@@ -41,13 +41,13 @@ export default function Navigation() {
                     <div className="mb-0 md:mb-16">
                         <a
                             href="#about"
-                            aria-label="Paul Ragueneau — accueil"
+                            aria-label={`${site.name} — accueil`}
                             className="inline-block text-3xl md:text-4xl font-extrabold tracking-[-0.05em] leading-none text-ink"
                         >
                             pr<span className="text-accent">.</span>
                         </a>
-                        <h1 className="mt-3 text-base md:text-lg font-bold text-ink">Paul Ragueneau</h1>
-                        <p className="text-xs md:text-sm text-muted font-mono">Développeur Web Fullstack</p>
+                        <h1 className="mt-3 text-base md:text-lg font-bold text-ink">{site.name}</h1>
+                        <p className="text-xs md:text-sm text-muted font-mono">{site.role}</p>
                     </div>
 
                     <div className="flex items-center gap-4 md:hidden">
