@@ -17,7 +17,7 @@ export const education: Record<Locale, readonly Education[]> = {
     fr: [
         {
             school: "EFREI Paris",
-            degree: "Mastère Dev Manager Full Stack",
+            degree: "Mastère Dev. Manager Full Stack",
             period: "2025 – 2027",
             detail: "4e et 5e année · en cours, en alternance chez Ceva Santé Animale",
             url: "https://www.efrei.fr/formation/mastere-dev-manager-full-stack/",
@@ -40,7 +40,7 @@ export const education: Record<Locale, readonly Education[]> = {
     en: [
         {
             school: "EFREI Paris",
-            degree: "Master's degree – Dev Manager Full Stack",
+            degree: "Master's degree – Dev. Manager Full Stack",
             period: "2025 – 2027",
             detail: "4th and 5th year · in progress, work-study at Ceva Santé Animale",
             url: "https://www.efrei.fr/formation/mastere-dev-manager-full-stack/",
