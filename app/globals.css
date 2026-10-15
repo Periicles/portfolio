@@ -93,9 +93,32 @@
   }
 }
 
+/* Lettres du sélecteur de langue : en thème sombre, elles s'éclairent
+   comme un petit tube néon à la couleur d'accent, avec un grésillement
+   décalé de celui de la pastille pour ne pas clignoter à l'unisson. */
+.dark .neon-text {
+  --neon: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--accent);
+  text-shadow: 0 0 2px var(--accent), 0 0 8px var(--neon);
+  animation: neon-buzz-text 7.5s linear infinite;
+}
+
+@keyframes neon-buzz-text {
+  0%, 41%, 43.5%, 46%, 88%, 89.5%, 100% {
+    opacity: 1;
+  }
+  42%, 45% {
+    opacity: 0.45;
+  }
+  44.5%, 88.8% {
+    opacity: 0.75;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .neon-badge,
-  .neon-dot {
+  .neon-dot,
+  .dark .neon-text {
     animation: none;
   }
 }
