@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import ThemeToggle from './ThemeToggle'
+import LanguageSwitcher from './LanguageSwitcher'
 import CvDownload from './CvDownload'
 import { GitHubIcon } from './icons/GitHubIcon'
 import { LinkedInIcon } from './icons/LinkedInIcon'
@@ -15,6 +16,7 @@ export type NavigationLabels = {
     role: string
     nav: Dictionary['nav']
     theme: Dictionary['theme']
+    language: Dictionary['language']
     cv: Dictionary['cv']
 }
 
@@ -74,6 +76,7 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
                             <LinkedInIcon />
                         </a>
                         <ThemeToggle label={t.theme.toggle} />
+                        <LanguageSwitcher t={t.language} />
                     </div>
                 </div>
 
@@ -135,7 +138,10 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
                     </a>
                 </div>
 
-                <ThemeToggle label={t.theme.toggle} />
+                <div className="flex gap-2">
+                    <ThemeToggle label={t.theme.toggle} />
+                    <LanguageSwitcher t={t.language} />
+                </div>
 
                 <p className="text-xs text-muted font-mono">© {year} {site.name}</p>
             </div>

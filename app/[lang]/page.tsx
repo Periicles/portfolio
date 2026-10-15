@@ -26,7 +26,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </a>
       <Navigation
         year={year}
-        t={{ role: t.meta.role, nav: t.nav, theme: t.theme, cv: t.cv }}
+        t={{ role: t.meta.role, nav: t.nav, theme: t.theme, language: t.language, cv: t.cv }}
       />
       <main id="main" className="flex-1 md:ml-64">
         <div className="max-w-4xl mx-auto px-6 md:px-8 pt-12 md:pt-16 pb-24 md:pb-32">
