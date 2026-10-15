@@ -23,6 +23,11 @@ export default function Experience() {
                                 <p className="text-sm text-muted font-mono mt-1">
                                     {exp.period}
                                 </p>
+                                {exp.contract && (
+                                    <p className="text-xs text-muted mt-1">
+                                        {exp.contract}
+                                    </p>
+                                )}
                             </div>
 
                             <div className="flex-1">

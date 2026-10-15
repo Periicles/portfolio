@@ -1,6 +1,7 @@
 import Navigation from '@/components/Navigation'
 import About from '@/components/About'
 import Experience from '@/components/Experience'
+import Education from '@/components/Education'
 import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
 
@@ -21,6 +22,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 md:px-8 pt-12 md:pt-16 pb-24 md:pb-32">
           <About />
           <Experience />
+          <Education />
           <Projects />
           <Contact />
           <div aria-hidden className="h-24" />

@@ -8,26 +8,26 @@ import ContactForm from './ContactForm'
 export default function Contact() {
     return (
         <section id="contact" aria-labelledby="contact-heading" className="py-16 scroll-mt-24 md:scroll-mt-16 border-t border-hairline">
-            <SectionEyebrow index={4}>Contact</SectionEyebrow>
+            <SectionEyebrow index={5}>Contact</SectionEyebrow>
             <h2 id="contact-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
                 Entrons en contact
             </h2>
 
             <div className="space-y-6">
                 <p className="text-muted leading-relaxed max-w-2xl">
-                    Je suis actuellement ouvert à de nouvelles opportunités et je serais ravi d&apos;échanger avec vous. Que vous ayez une question, une proposition de projet ou simplement envie de discuter, n&apos;hésitez pas à me contacter.
+                    En alternance chez Ceva Santé Animale jusqu&apos;en septembre 2027, je reste ouvert aux échanges et aux opportunités pour la suite de mon parcours. Que vous ayez une question, une proposition ou simplement envie de discuter, n&apos;hésitez pas à me contacter.
                 </p>
 
                 <p className="text-muted leading-relaxed max-w-2xl">
-                    Je suis particulièrement intéressé par des missions autour d&apos;applications web évolutives, d&apos;API REST ou de solutions frontend innovantes. Discutons de la façon dont je peux contribuer à votre équipe.
+                    Je suis particulièrement intéressé par les applications web évolutives, les API REST et le développement assisté par IA. Discutons de la façon dont je peux contribuer à votre équipe.
                 </p>
 
                 <div className="pt-8">
                     <ContactForm />
                     <p className="mt-4 text-sm text-muted">
-                        Tu préfères ton client mail ?{' '}
+                        Vous préférez votre client mail ?{' '}
                         <a href={`mailto:${site.email}`} className="inline-flex items-center gap-1 text-accent-strong hover:underline">
-                            Écris-moi directement
+                            Écrivez-moi directement
                             <Mail className="w-3.5 h-3.5" />
                         </a>
                     </p>

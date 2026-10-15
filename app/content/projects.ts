@@ -22,10 +22,10 @@ export const projects: readonly Project[] = [
         github: "https://github.com/Periicles/petfriendlylocator",
     },
     {
-        title: "MY_RPG",
-        description: "Jeu de rôle 2D inspiré de Link's Awakening, écrit en C avec la CSFML. Rendu en projection isométrique 3D, gestion des collisions au pixel près via le canal alpha des sprites, dialogues avec les PNJ et interactions avec le décor. Projet d'équipe réalisé à Epitech.",
-        technologies: ["C", "CSFML", "Make"],
-        link: "https://github.com/Periicles/RPG",
-        github: "https://github.com/Periicles/RPG",
+        title: "Ce portfolio",
+        description: "Site Next.js prérendu, pensé comme un projet de production : formulaire de contact via une Server Action et Resend avec validation, honeypot et limitation de débit, en-têtes de sécurité durcis (CSP, HSTS, COOP), SEO complet et accessibilité WCAG 2.1 AA. Tests Vitest, détection de secrets et build vérifiés en CI à chaque PR.",
+        technologies: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Resend", "Vitest", "GitHub Actions", "Vercel"],
+        link: "https://www.paulragueneau.com",
+        github: "https://github.com/Periicles/portfolio",
     },
 ] as const

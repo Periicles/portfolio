@@ -36,8 +36,9 @@ export const metadata: Metadata = {
     "Next.js",
     "Python",
     "FastAPI",
+    "développement assisté par IA",
+    "alternance",
     "portfolio",
-    "freelance",
   ],
   alternates: { canonical: "/" },
   openGraph: {

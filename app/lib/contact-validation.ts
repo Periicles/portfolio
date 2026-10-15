@@ -46,7 +46,7 @@ export function validateContactForm(raw: {
     const message = asTrimmed(raw.message)
 
     if (name.length < 2 || name.length > 100) {
-        return { ok: false, error: "Merci d'indiquer ton nom (2 à 100 caractères)." }
+        return { ok: false, error: "Merci d'indiquer votre nom (2 à 100 caractères)." }
     }
     if (email.length > 254 || !EMAIL_RE.test(email)) {
         return { ok: false, error: "Merci d'indiquer une adresse email valide." }

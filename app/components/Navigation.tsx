@@ -10,6 +10,7 @@ import { useActiveSection } from '@/hooks/useActiveSection'
 const navItems = [
     { href: '#about', label: 'À propos' },
     { href: '#experience', label: 'Expérience' },
+    { href: '#education', label: 'Formation' },
     { href: '#projects', label: 'Projets' },
     { href: '#contact', label: 'Contact' },
 ] as const

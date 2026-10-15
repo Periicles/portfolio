@@ -5,7 +5,7 @@ export const site = {
     role: "Développeur Web Fullstack",
     title: "Paul Ragueneau — Développeur Web Fullstack · React/Next.js",
     description:
-        "Développeur web fullstack (TypeScript, React, Next.js, Python). API REST et applications web modernes.",
+        "Développeur web fullstack en alternance (TypeScript, React, Next.js, Python), spécialisé dans le développement assisté par IA.",
     email: "paul.ragueneau40@gmail.com",
     socials: {
         github: "https://github.com/Periicles",

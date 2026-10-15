@@ -83,7 +83,7 @@ export default function OpengraphImage() {
               letterSpacing: "0.02em",
             }}
           >
-            TypeScript · React · Next.js · Python · API REST
+            TypeScript · React · Next.js · Python · IA
           </div>
         </div>
 
@@ -100,7 +100,7 @@ export default function OpengraphImage() {
             alignSelf: "flex-start",
           }}
         >
-          Ouvert aux nouvelles missions →
+          En alternance chez Ceva Santé Animale
         </div>
       </div>
     ),
