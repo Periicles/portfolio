@@ -12,7 +12,6 @@ export const site = {
         url: "https://www.ceva.com",
     },
     status: {
-        label: "On air",
         text: "En alternance chez Ceva Santé Animale",
         detail: "jusqu'en septembre 2027",
     },

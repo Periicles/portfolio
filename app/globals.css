@@ -9,8 +9,6 @@
   --hairline: #dedcd2;
   --accent: #0bb98d;
   --accent-strong: #067a5e;
-  --on-air: #d1242f;
-  --on-air-glow: rgb(209 36 47 / 0.45);
 }
 
 .dark {
@@ -21,8 +19,6 @@
   --hairline: #2a2e28;
   --accent: #19c79b;
   --accent-strong: #19c79b;
-  --on-air: #dc2f37;
-  --on-air-glow: rgb(229 72 77 / 0.6);
 }
 
 @theme inline {
@@ -36,7 +32,6 @@
   --color-hairline: var(--hairline);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
-  --color-on-air: var(--on-air);
 }
 
 @layer base {
@@ -47,30 +42,60 @@
   }
 }
 
-/* Voyant « ON AIR » : halo qui respire et point qui clignote comme une
-   lampe de studio. Figé pour les visiteurs qui limitent les animations. */
-.on-air-sign {
-  box-shadow: 0 0 12px var(--on-air-glow);
-  animation: on-air-glow 2.4s ease-in-out infinite;
+/* Pastille de statut façon tube néon : halo à la couleur d'accent et
+   grésillement irrégulier, avec des chutes d'intensité plus ou moins
+   marquées. Le texte reste stable pour la lisibilité ; seuls le tube
+   (bordure + halo) et le point vacillent. Figé si l'utilisateur limite
+   les animations. */
+.neon-badge {
+  --neon: color-mix(in srgb, var(--accent) 55%, transparent);
+  --neon-soft: color-mix(in srgb, var(--accent) 25%, transparent);
+  box-shadow: 0 0 6px var(--neon), inset 0 0 6px var(--neon-soft);
+  animation: neon-buzz 6s linear infinite;
 }
 
-.on-air-dot {
-  animation: on-air-blink 1.2s steps(2, jump-none) infinite;
+.neon-dot {
+  box-shadow: 0 0 4px var(--accent), 0 0 10px var(--neon);
+  animation: neon-buzz-dot 6s linear infinite;
 }
 
-@keyframes on-air-glow {
-  0%, 100% { box-shadow: 0 0 8px var(--on-air-glow); }
-  50% { box-shadow: 0 0 20px var(--on-air-glow), 0 0 4px var(--on-air-glow); }
+@keyframes neon-buzz {
+  0%, 17%, 19.5%, 22%, 61%, 63.5%, 100% {
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--neon), 0 0 18px var(--neon-soft), inset 0 0 6px var(--neon-soft);
+  }
+  18%, 21% {
+    border-color: var(--neon-soft);
+    box-shadow: none;
+  }
+  20.5% {
+    border-color: var(--neon);
+    box-shadow: 0 0 3px var(--neon-soft);
+  }
+  62%, 63% {
+    border-color: var(--neon);
+    box-shadow: 0 0 4px var(--neon-soft);
+  }
 }
 
-@keyframes on-air-blink {
-  0% { opacity: 1; }
-  100% { opacity: 0.35; }
+@keyframes neon-buzz-dot {
+  0%, 17%, 19.5%, 22%, 61%, 63.5%, 85%, 86.5%, 100% {
+    opacity: 1;
+  }
+  18%, 21% {
+    opacity: 0.25;
+  }
+  20.5%, 62% {
+    opacity: 0.6;
+  }
+  85.8% {
+    opacity: 0.75;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .on-air-sign,
-  .on-air-dot {
+  .neon-badge,
+  .neon-dot {
     animation: none;
   }
 }
