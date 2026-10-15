@@ -57,7 +57,7 @@ const fr = {
         paragraphs: [
             "Je suis développeur web fullstack, actuellement en alternance chez Ceva Santé Animale en tant que Développeur Full Stack – AI Assisted Development. J'y conçois des applications métier de bout en bout, de l'interface jusqu'aux API, et je modernise des outils existants.",
             "Ma spécificité : tirer parti des outils d'IA comme Cursor et Claude Code pour livrer plus vite, sans transiger sur la qualité. Le code que je produis est contrôlé selon les standards SonarQube et OWASP Top 10, et je mesure l'impact de cette approche pour en démontrer la valeur.",
-            "Auparavant, j'ai développé le frontend React/TypeScript d'un éditeur de newsletters chez H2V Solutions, et le backend Python/FastAPI d'une application de monitoring chez Metapolis. Je termine aujourd'hui mon mastère Dev Manager Full Stack à l'EFREI (2027).",
+            "Auparavant, j'ai développé le frontend React/TypeScript d'un éditeur de newsletters chez H2V Solutions, et le backend Python/FastAPI d'une application de monitoring chez Metapolis. Je termine aujourd'hui mon mastère Dev. Manager Full Stack à l'EFREI (2027).",
         ],
         skillsHeading: 'Technologies avec lesquelles je travaille',
     },
@@ -165,7 +165,7 @@ const en: Dictionary = {
         paragraphs: [
             "I'm a full-stack web developer, currently on a work-study apprenticeship at Ceva Santé Animale as a Full Stack Developer – AI Assisted Development. I build business applications end to end, from the interface to the APIs, and modernize existing tools.",
             'What sets me apart: using AI tools such as Cursor and Claude Code to ship faster without compromising on quality. The code I write is checked against SonarQube and OWASP Top 10 standards, and I measure the impact of this approach to demonstrate its value.',
-            "Previously, I built the React/TypeScript frontend of a newsletter editor at H2V Solutions, and the Python/FastAPI backend of a monitoring application at Metapolis. I'm now completing my Master's degree (Dev Manager Full Stack) at EFREI, graduating in 2027.",
+            "Previously, I built the React/TypeScript frontend of a newsletter editor at H2V Solutions, and the Python/FastAPI backend of a monitoring application at Metapolis. I'm now completing my Master's degree (Dev. Manager Full Stack) at EFREI, graduating in 2027.",
         ],
         skillsHeading: 'Technologies I work with',
     },
