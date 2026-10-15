@@ -21,7 +21,7 @@ export default function About() {
                 </p>
 
                 <p>
-                    Auparavant, j&apos;ai développé le frontend React/TypeScript d&apos;un éditeur de newsletters chez H2V Solutions, et le backend Python/FastAPI d&apos;une application de monitoring chez Metapolis. Je termine aujourd&apos;hui mon mastère Dev. Manager Full Stack à l&apos;EFREI (2027).
+                    Auparavant, j&apos;ai développé le frontend React/TypeScript d&apos;un éditeur de newsletters chez H2V Solutions, et le backend Python/FastAPI d&apos;une application de monitoring chez Metapolis. Je termine aujourd&apos;hui mon mastère Dev Manager Full Stack à l&apos;EFREI (2027).
                 </p>
             </div>
 

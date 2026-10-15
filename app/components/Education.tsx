@@ -17,7 +17,18 @@ export default function Education() {
                         </p>
                         <div>
                             <h3 className="text-lg font-semibold text-ink">
-                                {item.degree}
+                                {item.url ? (
+                                    <a
+                                        href={item.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="transition-colors hover:text-accent-strong"
+                                    >
+                                        {item.degree}
+                                    </a>
+                                ) : (
+                                    item.degree
+                                )}
                             </h3>
                             <p className="text-accent-strong">{item.school}</p>
                             {item.detail && (
