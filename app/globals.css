@@ -146,9 +146,46 @@
   100% { opacity: 0; }
 }
 
+/* Démarrage façon machine : après la coupure, chaque bloc visible se
+   rallume à son tour, dans un ordre aléatoire (délai posé en JS dans
+   --boot-delay). Certains blocs démarrent mal : amorces ratées avant de
+   tenir (variante `neon-boot-hard`). */
+.neon-boot {
+  animation: neon-boot 0.45s linear var(--boot-delay, 0ms) both;
+}
+
+.neon-boot.neon-boot-hard {
+  animation-name: neon-boot-hard;
+  animation-duration: 0.8s;
+}
+
+@keyframes neon-boot {
+  0% { opacity: 0; }
+  25% { opacity: 0.8; }
+  35% { opacity: 0.1; }
+  55% { opacity: 1; }
+  70% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes neon-boot-hard {
+  0%, 15% { opacity: 0; }
+  20% { opacity: 0.6; }
+  26%, 48% { opacity: 0; }
+  54% { opacity: 0.9; }
+  60% { opacity: 0.15; }
+  70% { opacity: 1; }
+  80% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .neon-ignite {
     display: none;
+  }
+
+  .neon-boot {
+    animation: none;
   }
 }
 
