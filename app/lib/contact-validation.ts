@@ -4,9 +4,13 @@ export type ContactInput = {
     message: string
 }
 
+export type ContactField = 'name' | 'email' | 'message'
+
+// Le champ fautif est renvoyé plutôt qu'un message : la traduction se fait
+// côté action, selon la langue de la page.
 export type ValidationResult =
     | { ok: true; data: ContactInput }
-    | { ok: false; error: string }
+    | { ok: false; error: ContactField }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -46,13 +50,13 @@ export function validateContactForm(raw: {
     const message = asTrimmed(raw.message)
 
     if (name.length < 2 || name.length > 100) {
-        return { ok: false, error: "Merci d'indiquer votre nom (2 à 100 caractères)." }
+        return { ok: false, error: 'name' }
     }
     if (email.length > 254 || !EMAIL_RE.test(email)) {
-        return { ok: false, error: "Merci d'indiquer une adresse email valide." }
+        return { ok: false, error: 'email' }
     }
     if (message.length < 10 || message.length > 5000) {
-        return { ok: false, error: 'Le message doit faire entre 10 et 5000 caractères.' }
+        return { ok: false, error: 'message' }
     }
     return { ok: true, data: { name, email, message } }
 }

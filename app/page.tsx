@@ -24,7 +24,7 @@ export default function Home() {
           <Experience locale="fr" />
           <Education locale="fr" />
           <Projects locale="fr" />
-          <Contact />
+          <Contact locale="fr" />
           <div aria-hidden className="h-24" />
         </div>
       </main>

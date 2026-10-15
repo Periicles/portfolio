@@ -60,6 +60,18 @@ describe('sendContactMessage', () => {
         expect(send).not.toHaveBeenCalled()
     })
 
+    it('traduit les messages selon la langue transmise par le formulaire', async () => {
+        const fr = await sendContactMessage(idle, fd({ ...validFields, email: 'invalide' }))
+        const en = await sendContactMessage(idle, fd({ ...validFields, email: 'invalide', locale: 'en' }))
+        expect(fr.message).toBe("Merci d'indiquer une adresse email valide.")
+        expect(en.message).toBe('Please enter a valid email address.')
+    })
+
+    it('retombe sur le français pour une langue inconnue', async () => {
+        const res = await sendContactMessage(idle, fd({ ...validFields, email: 'invalide', locale: 'de' }))
+        expect(res.message).toBe("Merci d'indiquer une adresse email valide.")
+    })
+
     it('envoie via Resend et renvoie un succès pour une saisie valide', async () => {
         const res = await sendContactMessage(idle, fd(validFields))
         expect(res.status).toBe('success')
