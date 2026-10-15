@@ -117,12 +117,14 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
             <div className="hidden md:block space-y-4">
                 <CvDownload {...t.cv} />
 
-                <div className="flex space-x-4">
+                {/* Mêmes cases de 40 px que les boutons thème et langue : les icônes
+                    tombent pile au-dessus d'eux. */}
+                <div className="flex gap-2">
                     <a
                         href={site.socials.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-muted hover:text-ink transition-colors"
+                        className="w-10 h-10 flex items-center justify-center rounded-lg text-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                         aria-label="GitHub"
                     >
                         <GitHubIcon />
@@ -131,7 +133,7 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
                         href={site.socials.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-muted hover:text-ink transition-colors"
+                        className="w-10 h-10 flex items-center justify-center rounded-lg text-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                         aria-label="LinkedIn"
                     >
                         <LinkedInIcon />
