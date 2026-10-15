@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/content/site";
+import { buildStructuredData, serializeJsonLd } from "@/lib/structured-data";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -81,6 +82,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          // Bloc de données (non exécuté) : compatible avec la CSP actuelle.
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildStructuredData()) }}
+        />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>

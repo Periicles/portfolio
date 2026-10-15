@@ -5,8 +5,9 @@ const isDev = process.env.NODE_ENV !== "production";
 // `unsafe-inline` sur script-src/style-src est un résidu assumé : le retirer
 // impose une CSP à nonce via middleware, ce qui forcerait le rendu dynamique
 // et ferait perdre le prérendu statique du site. La surface XSS est nulle
-// (aucun paramètre réfléchi, aucun contenu utilisateur rendu, pas de
-// dangerouslySetInnerHTML), donc le gain réel serait marginal.
+// (aucun paramètre réfléchi, aucun contenu utilisateur rendu ; le seul
+// dangerouslySetInnerHTML sert le JSON-LD, construit depuis le contenu
+// statique et échappé), donc le gain réel serait marginal.
 // `unsafe-eval` reste limité au dev : Turbopack en a besoin pour le HMR.
 const contentSecurityPolicy = [
   "default-src 'self'",
