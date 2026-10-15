@@ -1,43 +1,25 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useState, useEffect } from 'react'
 import { Sun, Moon } from 'lucide-react'
+import type { Dictionary } from '@/i18n/dictionaries'
 
-export default function ThemeToggle({ label }: { label: string }) {
+// L'icône et le libellé suivent la classe `.dark` posée par next-themes avant
+// le premier rendu : pas d'état « non monté », donc pas de flash au chargement.
+export default function ThemeToggle({ t }: { t: Dictionary['theme'] }) {
     const { resolvedTheme, setTheme } = useTheme()
-    const [mounted, setMounted] = useState(false)
-
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setMounted(true)
-    }, [])
-
-    if (!mounted) {
-        return (
-            <button
-                className="w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center"
-                aria-label={label}
-            >
-                <div className="w-4 h-4 bg-hairline rounded-full" />
-            </button>
-        )
-    }
 
     return (
         <button
-            onClick={() => {
-                const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
-                setTheme(nextTheme)
-            }}
-            className="w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center hover:bg-surface transition-colors"
-            aria-label={label}
+            type="button"
+            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+            title={t.toggle}
+            className="relative w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center hover:bg-surface transition-colors"
         >
-            {resolvedTheme === 'dark' ? (
-                <Sun className="w-4 h-4 text-accent" />
-            ) : (
-                <Moon className="w-4 h-4 text-muted" />
-            )}
+            <Moon aria-hidden className="w-4 h-4 text-muted dark:hidden" />
+            <Sun aria-hidden className="hidden w-4 h-4 text-accent dark:block" />
+            <span className="sr-only dark:hidden">{t.toDark}</span>
+            <span className="sr-only hidden dark:inline">{t.toLight}</span>
         </button>
     )
 }
