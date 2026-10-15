@@ -146,6 +146,24 @@
   100% { opacity: 0; }
 }
 
+/* Au chargement, la page reste dans le noir jusqu'à ce que la séquence
+   d'allumage prenne le relais, une fois React hydraté (attribut posé par
+   le script inline du layout). Si JavaScript n'aboutit pas, le voile
+   s'efface seul. */
+html[data-neon-power]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: #000;
+  animation: neon-power-fallback 0.3s ease-out 3s forwards;
+}
+
+@keyframes neon-power-fallback {
+  to { opacity: 0; }
+}
+
 /* Démarrage façon machine : après la coupure, chaque bloc visible se
    rallume à son tour, dans un ordre aléatoire (délai posé en JS dans
    --boot-delay). Certains blocs démarrent mal : amorces ratées avant de
@@ -180,7 +198,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .neon-ignite {
+  .neon-ignite,
+  html[data-neon-power]::after {
     display: none;
   }
 
