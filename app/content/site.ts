@@ -7,6 +7,10 @@ export const site = {
     description:
         "Développeur web fullstack en alternance (TypeScript, React, Next.js, Python), spécialisé dans le développement assisté par IA.",
     email: "paul.ragueneau40@gmail.com",
+    employer: {
+        name: "Ceva Santé Animale",
+        url: "https://www.ceva.com",
+    },
     status: {
         text: "En alternance chez Ceva Santé Animale",
         detail: "jusqu'en septembre 2027",
