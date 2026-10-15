@@ -1,6 +1,6 @@
 import { GitHubIcon } from './icons/GitHubIcon'
 import { LinkedInIcon } from './icons/LinkedInIcon'
-import { Mail } from 'lucide-react'
+import { Download, Mail } from 'lucide-react'
 import { site } from '@/content/site'
 import SectionEyebrow from './SectionEyebrow'
 import ContactForm from './ContactForm'
@@ -54,6 +54,15 @@ export default function Contact() {
                         >
                             <LinkedInIcon />
                             LinkedIn
+                        </a>
+
+                        <a
+                            href={site.cv.href}
+                            download={site.cv.fileName}
+                            className="flex items-center gap-2 text-muted hover:text-accent-strong transition-colors"
+                        >
+                            <Download className="w-5 h-5" />
+                            CV (PDF)
                         </a>
                     </div>
                 </div>
