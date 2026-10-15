@@ -9,6 +9,8 @@
   --hairline: #dedcd2;
   --accent: #0bb98d;
   --accent-strong: #067a5e;
+  --on-air: #d1242f;
+  --on-air-glow: rgb(209 36 47 / 0.45);
 }
 
 .dark {
@@ -19,6 +21,8 @@
   --hairline: #2a2e28;
   --accent: #19c79b;
   --accent-strong: #19c79b;
+  --on-air: #dc2f37;
+  --on-air-glow: rgb(229 72 77 / 0.6);
 }
 
 @theme inline {
@@ -32,6 +36,7 @@
   --color-hairline: var(--hairline);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
+  --color-on-air: var(--on-air);
 }
 
 @layer base {
@@ -39,5 +44,33 @@
     font-family: var(--font-sans);
     background-color: var(--paper);
     color: var(--ink);
+  }
+}
+
+/* Voyant « ON AIR » : halo qui respire et point qui clignote comme une
+   lampe de studio. Figé pour les visiteurs qui limitent les animations. */
+.on-air-sign {
+  box-shadow: 0 0 12px var(--on-air-glow);
+  animation: on-air-glow 2.4s ease-in-out infinite;
+}
+
+.on-air-dot {
+  animation: on-air-blink 1.2s steps(2, jump-none) infinite;
+}
+
+@keyframes on-air-glow {
+  0%, 100% { box-shadow: 0 0 8px var(--on-air-glow); }
+  50% { box-shadow: 0 0 20px var(--on-air-glow), 0 0 4px var(--on-air-glow); }
+}
+
+@keyframes on-air-blink {
+  0% { opacity: 1; }
+  100% { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .on-air-sign,
+  .on-air-dot {
+    animation: none;
   }
 }
