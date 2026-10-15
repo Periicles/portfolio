@@ -10,7 +10,7 @@ import {
 } from '@/lib/contact-validation'
 import { checkRateLimit, checkGlobalRateLimit } from '@/lib/rate-limit'
 
-const FROM_ADDRESS = 'contact@paulragueneau.com'
+const FROM_ADDRESS = `contact@${site.domain}`
 
 // Le nom affiché reprend celui du visiteur pour identifier l'expéditeur d'un
 // coup d'œil en boîte de réception. Le suffixe « via portfolio » rend la
