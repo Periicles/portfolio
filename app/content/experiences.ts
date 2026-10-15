@@ -2,6 +2,7 @@ export type Experience = {
     title: string
     company: string
     period: string
+    contract?: string
     description: string[]
     technologies: string[]
 }
@@ -10,7 +11,8 @@ export const experiences: readonly Experience[] = [
     {
         title: "Développeur Full Stack – AI Assisted Development",
         company: "Ceva Santé Animale",
-        period: "mars 2026 -> août 2026",
+        period: "mars 2026 – aujourd'hui",
+        contract: "Stage (mars – août 2026), puis alternance jusqu'en septembre 2027",
         description: [
             "Construction d'applications métier from scratch à l'aide d'outils IA (Cursor, Claude Code) sur une stack React/Next.js/TypeScript/Tailwind CSS.",
             "Migration d'applications existantes vers des technologies modernes et open-source via le vibe coding.",
@@ -22,7 +24,7 @@ export const experiences: readonly Experience[] = [
     {
         title: "Développeur Frontend",
         company: "H2V Solutions",
-        period: "oct. 2024 -> juil. 2025",
+        period: "oct. 2024 – juil. 2025",
         description: [
             "Développement et conception de la partie frontend d'une application permettant la composition de newsletters avec TypeScript et React.",
             "Implémentation de composants réutilisables et maintenables en suivant une architecture modulaire.",
@@ -34,7 +36,7 @@ export const experiences: readonly Experience[] = [
     {
         title: "Développeur Backend",
         company: "METAPOLIS",
-        period: "juil. 2023 -> déc. 2023",
+        period: "juil. 2023 – déc. 2023",
         description: [
             "Développement et conception du backend d'une application de monitoring avec Python et FastAPI ainsi que de bases de données PostgreSQL et MongoDB.",
             "Création et exposition d'API REST performantes et documentées (OpenAPI / Swagger).",
