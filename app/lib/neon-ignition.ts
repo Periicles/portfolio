@@ -59,3 +59,9 @@ export function igniteNeon(trigger?: Element | null) {
     bootBlocks(trigger)
     cleanupTimer = setTimeout(clearBoot, CLEANUP_MS)
 }
+
+// Script inline du layout, exécuté avant l'affichage du contenu : il plonge
+// la page dans le noir (`data-neon-power`) jusqu'à ce que `NeonBootOnLoad`
+// lance l'allumage, une fois React hydraté.
+export const neonPowerOffScript =
+    "if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.setAttribute('data-neon-power', '')"

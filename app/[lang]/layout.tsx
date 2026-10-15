@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "next-themes";
+import { neonPowerOffScript } from "@/lib/neon-ignition";
+import NeonBootOnLoad from "@/components/NeonBootOnLoad";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/content/site";
@@ -98,6 +100,11 @@ export default async function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <script
+          // Allumage néon au chargement : doit précéder le contenu pour le
+          // masquer avant le premier affichage (autorisé par la CSP actuelle).
+          dangerouslySetInnerHTML={{ __html: neonPowerOffScript }}
+        />
+        <script
           type="application/ld+json"
           // Bloc de données (non exécuté) : compatible avec la CSP actuelle.
           dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildStructuredData(lang)) }}
@@ -105,6 +112,7 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
+        <NeonBootOnLoad />
         <Analytics />
         <SpeedInsights />
       </body>
