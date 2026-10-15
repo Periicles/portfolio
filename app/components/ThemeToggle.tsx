@@ -3,33 +3,19 @@
 import { useTheme } from 'next-themes'
 import { Sun, Moon } from 'lucide-react'
 import type { Dictionary } from '@/i18n/dictionaries'
+import { igniteNeon } from '@/lib/neon-ignition'
 
 // L'icône et le libellé suivent la classe `.dark` posée par next-themes avant
 // le premier rendu : pas d'état « non monté », donc pas de flash au chargement.
 // Au clic, la lune pivote et s'efface pendant que le soleil apparaît (et
-// inversement) ; animation coupée si l'utilisateur limite les mouvements.
-// Au passage en sombre, la page s'allume comme un néon : un voile animé
-// (`.neon-ignite`, défini dans globals.css) est posé puis retiré en fin
-// d'animation. Rien n'est ajouté si l'utilisateur limite les mouvements.
-function igniteNeon() {
-    document.querySelector('.neon-ignite')?.remove()
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    const veil = document.createElement('div')
-    veil.className = 'neon-ignite'
-    veil.setAttribute('aria-hidden', 'true')
-    veil.addEventListener('animationend', () => veil.remove(), { once: true })
-    document.body.appendChild(veil)
-}
-
+// inversement) et la page se rallume comme un néon (voir `igniteNeon`).
+// Animations coupées si l'utilisateur limite les mouvements.
 export default function ThemeToggle({ t }: { t: Dictionary['theme'] }) {
     const { resolvedTheme, setTheme } = useTheme()
 
     function toggle() {
-        const next = resolvedTheme === 'dark' ? 'light' : 'dark'
-        if (next === 'dark') igniteNeon()
-        else document.querySelector('.neon-ignite')?.remove()
-        setTheme(next)
+        igniteNeon()
+        setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
     }
 
     return (

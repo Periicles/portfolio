@@ -124,18 +124,18 @@
   }
 }
 
-/* Allumage néon au passage en thème sombre : un voile noir recouvre la
-   page puis s'efface par à-coups, comme un tube qui peine à démarrer
-   (amorces ratées, grésillement, puis stabilisation). Un halo d'accent
-   s'épanouit brièvement au moment où le tube « prend ». Le voile ne
-   capte aucun clic et se retire à la fin de l'animation. */
+/* Allumage néon à chaque changement de thème : une brève coupure de
+   courant (voile noir) puis le fond revient par à-coups, comme un tube
+   qui peine à démarrer. Un halo d'accent s'épanouit quand le courant
+   « prend ». Le voile ne capte aucun clic et se retire en fin
+   d'animation. */
 .neon-ignite {
   position: fixed;
   inset: 0;
   z-index: 100;
   pointer-events: none;
   background: #000;
-  animation: neon-ignite 1.6s linear forwards;
+  animation: neon-ignite 0.75s linear forwards;
 }
 
 .neon-ignite::after {
@@ -148,27 +148,23 @@
     transparent 65%
   );
   opacity: 0;
-  animation: neon-bloom 1.6s ease-out forwards;
+  animation: neon-bloom 0.75s ease-out forwards;
 }
 
 @keyframes neon-ignite {
-  0%, 12% { background-color: rgb(0 0 0 / 1); }
-  13% { background-color: rgb(0 0 0 / 0.1); }
-  16%, 30% { background-color: rgb(0 0 0 / 1); }
-  31% { background-color: rgb(0 0 0 / 0.25); }
-  33% { background-color: rgb(0 0 0 / 0.9); }
-  35% { background-color: rgb(0 0 0 / 0.05); }
-  38%, 47% { background-color: rgb(0 0 0 / 0.85); }
-  48% { background-color: rgb(0 0 0 / 0.3); }
-  52% { background-color: rgb(0 0 0 / 0.6); }
-  56% { background-color: rgb(0 0 0 / 0); }
-  60% { background-color: rgb(0 0 0 / 0.45); }
-  62%, 100% { background-color: rgb(0 0 0 / 0); }
+  0%, 20% { background-color: rgb(0 0 0 / 1); }
+  22% { background-color: rgb(0 0 0 / 0.15); }
+  28%, 42% { background-color: rgb(0 0 0 / 1); }
+  44% { background-color: rgb(0 0 0 / 0.3); }
+  48% { background-color: rgb(0 0 0 / 0.85); }
+  54% { background-color: rgb(0 0 0 / 0.1); }
+  60% { background-color: rgb(0 0 0 / 0.5); }
+  66%, 100% { background-color: rgb(0 0 0 / 0); }
 }
 
 @keyframes neon-bloom {
   0%, 55% { opacity: 0; }
-  62% { opacity: 1; }
+  70% { opacity: 1; }
   100% { opacity: 0; }
 }
 
