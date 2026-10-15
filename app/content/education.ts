@@ -9,7 +9,7 @@ export type Education = {
 export const education: readonly Education[] = [
     {
         school: "EFREI Paris",
-        degree: "Mastère Dev Manager Full Stack",
+        degree: "Mastère Dev. Manager Full Stack",
         period: "2025 – 2027",
         detail: "4e et 5e année · en cours, en alternance chez Ceva Santé Animale",
         url: "https://www.efrei.fr/formation/mastere-dev-manager-full-stack/",
