@@ -35,6 +35,15 @@
 }
 
 @layer base {
+  /* Tailwind 4 laisse le curseur par défaut sur les boutons : on rétablit
+     la main sur tout ce qui est cliquable. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+
   body {
     font-family: var(--font-sans);
     background-color: var(--paper);
