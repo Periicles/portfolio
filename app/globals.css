@@ -41,3 +41,61 @@
     color: var(--ink);
   }
 }
+
+/* Pastille de statut façon tube néon : halo à la couleur d'accent et
+   grésillement irrégulier, avec des chutes d'intensité plus ou moins
+   marquées. Le texte reste stable pour la lisibilité ; seuls le tube
+   (bordure + halo) et le point vacillent. Figé si l'utilisateur limite
+   les animations. */
+.neon-badge {
+  --neon: color-mix(in srgb, var(--accent) 55%, transparent);
+  --neon-soft: color-mix(in srgb, var(--accent) 25%, transparent);
+  box-shadow: 0 0 6px var(--neon), inset 0 0 6px var(--neon-soft);
+  animation: neon-buzz 6s linear infinite;
+}
+
+.neon-dot {
+  box-shadow: 0 0 4px var(--accent), 0 0 10px var(--neon);
+  animation: neon-buzz-dot 6s linear infinite;
+}
+
+@keyframes neon-buzz {
+  0%, 17%, 19.5%, 22%, 61%, 63.5%, 100% {
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--neon), 0 0 18px var(--neon-soft), inset 0 0 6px var(--neon-soft);
+  }
+  18%, 21% {
+    border-color: var(--neon-soft);
+    box-shadow: none;
+  }
+  20.5% {
+    border-color: var(--neon);
+    box-shadow: 0 0 3px var(--neon-soft);
+  }
+  62%, 63% {
+    border-color: var(--neon);
+    box-shadow: 0 0 4px var(--neon-soft);
+  }
+}
+
+@keyframes neon-buzz-dot {
+  0%, 17%, 19.5%, 22%, 61%, 63.5%, 85%, 86.5%, 100% {
+    opacity: 1;
+  }
+  18%, 21% {
+    opacity: 0.25;
+  }
+  20.5%, 62% {
+    opacity: 0.6;
+  }
+  85.8% {
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-badge,
+  .neon-dot {
+    animation: none;
+  }
+}
