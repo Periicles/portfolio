@@ -81,7 +81,7 @@ Portfolio personnel moderne et responsive, présentant mon parcours, mes projets
 
 ### Prérequis
 
-- Node.js 18+
+- Node.js 24 (version utilisée en CI)
 
 ### Installation & développement
 
@@ -91,27 +91,24 @@ Portfolio personnel moderne et responsive, présentant mon parcours, mes projets
    npm install
    ```
 
-2. Lancer le serveur de développement :
+2. Pour tester l'envoi du formulaire de contact en local, définir la clé Resend dans `.env.local` (sans elle, le formulaire renvoie une erreur générique) :
+
+   ```bash
+   RESEND_API_KEY=re_xxx
+   ```
+
+3. Lancer le serveur de développement :
 
    ```bash
    npm run dev
    ```
 
-3. Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur.
-
-La page se met à jour automatiquement lors de vos modifications.
+4. Ouvrir [http://localhost:3000](http://localhost:3000) (français) ou [http://localhost:3000/en](http://localhost:3000/en) (anglais).
 
 ## 📦 Build & production
 
-Construire pour la production :
-
 ```bash
 npm run build
-```
-
-Lancer le serveur de production :
-
-```bash
 npm start
 ```
 
@@ -120,6 +117,8 @@ npm start
 - `npm run dev` — Serveur de développement
 - `npm run build` — Build de production
 - `npm start` — Serveur de production
+- `npm test` — Tests Vitest
+- `npm run test:watch` — Tests en mode watch
 - `npm run lint` — ESLint
 
 ## 📐 Structure du projet
@@ -127,29 +126,36 @@ npm start
 ```text
 /
 ├── app/
-│   ├── components/         # Composants React
-│   ├── layout.tsx          # Layout racine + metadata SEO
-│   ├── page.tsx            # Page d'accueil
-│   ├── opengraph-image.tsx # OG image dynamique 1200×630
-│   ├── robots.ts           # Génère /robots.txt
-│   ├── sitemap.ts          # Génère /sitemap.xml
-│   ├── globals.css         # Styles globaux + Tailwind v4
-│   └── favicon.ico
-├── public/                 # Ressources statiques
-├── types/                  # Déclarations TypeScript
-├── next.config.ts          # Config Next.js + security headers
-├── tailwind.config.ts      # Config Tailwind
-├── tsconfig.json           # Config TypeScript
-└── eslint.config.mjs       # Config ESLint
+│   ├── [lang]/
+│   │   ├── layout.tsx            # Layout racine par langue + metadata SEO + JSON-LD
+│   │   ├── page.tsx              # Page d'accueil
+│   │   └── opengraph-image.tsx   # Image OG 1200×630 par langue
+│   ├── actions/contact.ts        # Server Action du formulaire (Resend)
+│   ├── components/               # Composants React
+│   ├── content/                  # Contenu : site, expériences, formation, compétences, projets
+│   ├── hooks/                    # Hooks client (scroll-spy)
+│   ├── i18n/                     # Langues et dictionnaires FR/EN
+│   ├── lib/                      # Validation, limitation de débit, données structurées
+│   ├── global-not-found.tsx      # Page 404 bilingue
+│   ├── robots.ts                 # Génère /robots.txt
+│   ├── sitemap.ts                # Génère /sitemap.xml
+│   ├── icon.svg                  # Favicon
+│   └── globals.css               # Styles globaux + Tailwind v4
+├── public/                       # CV en PDF (FR et EN)
+├── types/                        # Déclarations TypeScript
+├── next.config.ts                # Config Next.js : rewrites i18n + en-têtes de sécurité
+├── vitest.config.ts              # Config Vitest
+├── tsconfig.json                 # Config TypeScript
+└── eslint.config.mjs             # Config ESLint
 ```
 
 ## 🎨 Design
 
-Le portfolio mise sur un design sobre et lisible, avec navigation fixe, typographies contrastées et version mobile optimisée. Inspiration : design minimaliste de type "developer portfolio", accent teal sur fond slate en mode sombre.
+Design sobre et lisible : navigation fixe, typographies contrastées (Inter et JetBrains Mono) et version mobile optimisée. Palette « papier » claire ou sombre avec un accent vert (`--accent`), définie par des variables CSS dans `app/globals.css`.
 
 ## 📧 Contact
 
 - 🌐 **Site** : [paulragueneau.com](https://www.paulragueneau.com)
 - 💼 **LinkedIn** : [paul-ragueneau](https://www.linkedin.com/in/paul-ragueneau/)
 - 🐙 **GitHub** : [@Periicles](https://github.com/Periicles)
-- ✉️ **Email** : via le bouton **Écrire un message** sur la [section Contact du site](https://www.paulragueneau.com/#contact)
+- ✉️ **Email** : via le formulaire de la [section Contact du site](https://www.paulragueneau.com/#contact)
