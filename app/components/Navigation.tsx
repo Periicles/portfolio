@@ -7,25 +7,26 @@ import { GitHubIcon } from './icons/GitHubIcon'
 import { LinkedInIcon } from './icons/LinkedInIcon'
 import { site } from '@/content/site'
 import { useActiveSection } from '@/hooks/useActiveSection'
+import type { Dictionary } from '@/i18n/dictionaries'
 
-const navItems = [
-    { href: '#about', label: 'À propos' },
-    { href: '#experience', label: 'Expérience' },
-    { href: '#education', label: 'Formation' },
-    { href: '#projects', label: 'Projets' },
-    { href: '#contact', label: 'Contact' },
-] as const
+const sectionIds = ['about', 'experience', 'education', 'projects', 'contact'] as const
 
-const sectionIds = navItems.map((item) => item.href.slice(1))
+export type NavigationLabels = {
+    role: string
+    nav: Dictionary['nav']
+    theme: Dictionary['theme']
+    cv: Dictionary['cv']
+}
 
-export default function Navigation({ year }: { year: number }) {
+export default function Navigation({ year, t }: { year: number; t: NavigationLabels }) {
+    const navItems = sectionIds.map((id) => ({ href: `#${id}`, label: t.nav.items[id] }))
     const activeSection = useActiveSection(sectionIds)
     const itemRefs = useRef<Array<HTMLLIElement | null>>([])
     const [indicatorOffset, setIndicatorOffset] = useState(0)
     const [indicatorHeight, setIndicatorHeight] = useState(0)
 
     useEffect(() => {
-        const index = navItems.findIndex((item) => item.href.slice(1) === activeSection)
+        const index = sectionIds.findIndex((id) => id === activeSection)
         const activeItem = itemRefs.current[index]
         if (activeItem) {
             setIndicatorOffset(activeItem.offsetTop)
@@ -35,7 +36,7 @@ export default function Navigation({ year }: { year: number }) {
 
     return (
         <nav
-            aria-label="Navigation principale"
+            aria-label={t.nav.ariaLabel}
             className="sticky top-0 md:fixed left-0 md:top-0 h-auto md:h-screen w-full md:w-64 p-4 md:p-8 flex flex-col md:justify-between bg-paper border-b md:border-b-0 md:border-r border-hairline z-50"
         >
             <div className="flex flex-col gap-6 md:gap-0">
@@ -43,17 +44,17 @@ export default function Navigation({ year }: { year: number }) {
                     <div className="mb-0 md:mb-16">
                         <a
                             href="#about"
-                            aria-label={`${site.name} — accueil`}
+                            aria-label={`${site.name} — ${t.nav.homeSuffix}`}
                             className="inline-block text-3xl md:text-4xl font-extrabold tracking-[-0.05em] leading-none text-ink"
                         >
                             pr<span className="text-accent">.</span>
                         </a>
                         <h1 className="mt-3 text-base md:text-lg font-bold text-ink">{site.name}</h1>
-                        <p className="text-xs md:text-sm text-muted font-mono">{site.role}</p>
+                        <p className="text-xs md:text-sm text-muted font-mono">{t.role}</p>
                     </div>
 
                     <div className="flex items-center gap-4 md:hidden">
-                        <CvDownload compact />
+                        <CvDownload compact {...t.cv} />
                         <a
                             href={site.socials.github}
                             target="_blank"
@@ -72,7 +73,7 @@ export default function Navigation({ year }: { year: number }) {
                         >
                             <LinkedInIcon />
                         </a>
-                        <ThemeToggle />
+                        <ThemeToggle label={t.theme.toggle} />
                     </div>
                 </div>
 
@@ -111,7 +112,7 @@ export default function Navigation({ year }: { year: number }) {
             </div>
 
             <div className="hidden md:block space-y-4">
-                <CvDownload />
+                <CvDownload {...t.cv} />
 
                 <div className="flex space-x-4">
                     <a
@@ -134,7 +135,7 @@ export default function Navigation({ year }: { year: number }) {
                     </a>
                 </div>
 
-                <ThemeToggle />
+                <ThemeToggle label={t.theme.toggle} />
 
                 <p className="text-xs text-muted font-mono">© {year} {site.name}</p>
             </div>

@@ -1,14 +1,18 @@
 import { Download } from 'lucide-react'
-import { site } from '@/content/site'
 
-const label = 'Télécharger le CV'
+type CvDownloadProps = {
+    label: string
+    href: string
+    fileName: string
+    compact?: boolean
+}
 
-export default function CvDownload({ compact = false }: { compact?: boolean }) {
+export default function CvDownload({ label, href, fileName, compact = false }: CvDownloadProps) {
     if (compact) {
         return (
             <a
-                href={site.cv.href}
-                download={site.cv.fileName}
+                href={href}
+                download={fileName}
                 className="text-muted hover:text-ink transition-colors"
                 aria-label={`${label} (PDF)`}
             >
@@ -19,8 +23,8 @@ export default function CvDownload({ compact = false }: { compact?: boolean }) {
 
     return (
         <a
-            href={site.cv.href}
-            download={site.cv.fileName}
+            href={href}
+            download={fileName}
             className="inline-flex items-center gap-2 px-4 py-2 border border-accent text-accent-strong text-sm font-semibold rounded hover:bg-accent hover:text-ink transition-colors"
         >
             <Download className="w-4 h-4" />

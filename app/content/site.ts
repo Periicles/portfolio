@@ -11,10 +11,6 @@ export const site = {
         name: "Ceva Santé Animale",
         url: "https://www.ceva.com",
     },
-    cv: {
-        href: "/cv-paul-ragueneau.pdf",
-        fileName: "CV-Paul-Ragueneau.pdf",
-    },
     socials: {
         github: "https://github.com/Periicles",
         linkedin: "https://www.linkedin.com/in/paul-ragueneau/",
