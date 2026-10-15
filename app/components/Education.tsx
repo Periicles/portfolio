@@ -34,6 +34,9 @@ export default function Education() {
                             {item.detail && (
                                 <p className="text-sm text-muted mt-1">{item.detail}</p>
                             )}
+                            {item.diploma && (
+                                <p className="text-xs text-muted font-mono mt-1">{item.diploma}</p>
+                            )}
                         </div>
                     </li>
                 ))}
