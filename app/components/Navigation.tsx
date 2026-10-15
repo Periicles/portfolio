@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import ThemeToggle from './ThemeToggle'
+import CvDownload from './CvDownload'
 import { GitHubIcon } from './icons/GitHubIcon'
 import { LinkedInIcon } from './icons/LinkedInIcon'
 import { site } from '@/content/site'
@@ -52,6 +53,7 @@ export default function Navigation({ year }: { year: number }) {
                     </div>
 
                     <div className="flex items-center gap-4 md:hidden">
+                        <CvDownload compact />
                         <a
                             href={site.socials.github}
                             target="_blank"
@@ -109,6 +111,8 @@ export default function Navigation({ year }: { year: number }) {
             </div>
 
             <div className="hidden md:block space-y-4">
+                <CvDownload />
+
                 <div className="flex space-x-4">
                     <a
                         href={site.socials.github}

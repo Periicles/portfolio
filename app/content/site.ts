@@ -15,6 +15,10 @@ export const site = {
         text: "En alternance chez Ceva Santé Animale",
         detail: "jusqu'en septembre 2027",
     },
+    cv: {
+        href: "/cv-paul-ragueneau.pdf",
+        fileName: "CV-Paul-Ragueneau.pdf",
+    },
     socials: {
         github: "https://github.com/Periicles",
         linkedin: "https://www.linkedin.com/in/paul-ragueneau/",
