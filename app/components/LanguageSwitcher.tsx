@@ -12,7 +12,7 @@ export default function LanguageSwitcher({ t }: { t: Dictionary['language'] }) {
             lang={t.target}
             aria-label={t.label}
             title={t.label}
-            className="w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center font-mono text-xs font-semibold text-muted hover:text-ink hover:bg-surface transition-colors"
+            className="w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center font-mono text-xs font-semibold text-muted hover:text-ink hover:bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
         >
             {t.short}
         </Link>

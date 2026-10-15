@@ -16,7 +16,7 @@ export default function ThemeToggle({ t }: { t: Dictionary['theme'] }) {
             type="button"
             onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
             title={t.toggle}
-            className="relative overflow-hidden w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center hover:bg-surface transition-colors"
+            className="relative overflow-hidden w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center hover:bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
         >
             <Moon
                 aria-hidden
