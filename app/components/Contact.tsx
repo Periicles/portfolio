@@ -8,7 +8,7 @@ import ContactForm from './ContactForm'
 export default function Contact() {
     return (
         <section id="contact" aria-labelledby="contact-heading" className="py-16 scroll-mt-24 md:scroll-mt-16 border-t border-hairline">
-            <SectionEyebrow index={4}>Contact</SectionEyebrow>
+            <SectionEyebrow index={5}>Contact</SectionEyebrow>
             <h2 id="contact-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
                 Entrons en contact
             </h2>

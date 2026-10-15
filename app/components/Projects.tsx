@@ -6,7 +6,7 @@ import SectionEyebrow from './SectionEyebrow'
 export default function Projects() {
     return (
         <section id="projects" aria-labelledby="projects-heading" className="py-16 scroll-mt-24 md:scroll-mt-16 border-t border-hairline">
-            <SectionEyebrow index={3}>Projets</SectionEyebrow>
+            <SectionEyebrow index={4}>Projets</SectionEyebrow>
             <h2 id="projects-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
                 Quelques réalisations
             </h2>
