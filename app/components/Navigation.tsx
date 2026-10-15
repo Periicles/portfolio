@@ -16,7 +16,7 @@ const navItems = [
 
 const sectionIds = navItems.map((item) => item.href.slice(1))
 
-export default function Navigation() {
+export default function Navigation({ year }: { year: number }) {
     const activeSection = useActiveSection(sectionIds)
     const itemRefs = useRef<Array<HTMLLIElement | null>>([])
     const [indicatorOffset, setIndicatorOffset] = useState(0)
@@ -131,7 +131,7 @@ export default function Navigation() {
 
                 <ThemeToggle />
 
-                <p className="text-xs text-muted font-mono">© 2026 Paul Ragueneau</p>
+                <p className="text-xs text-muted font-mono">© {year} {site.name}</p>
             </div>
         </nav>
     )
