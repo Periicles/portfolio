@@ -4,12 +4,17 @@ import Experience from '@/components/Experience'
 import Education from '@/components/Education'
 import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
+import { notFound } from 'next/navigation'
+import { isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+  if (!isLocale(lang)) notFound()
+
   // Calculée au rendu serveur (build) : le pied de page suit chaque redéploiement.
   const year = new Date().getFullYear()
-  const t = getDictionary("fr")
+  const t = getDictionary(lang)
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row bg-paper text-ink">
@@ -25,11 +30,11 @@ export default function Home() {
       />
       <main id="main" className="flex-1 md:ml-64">
         <div className="max-w-4xl mx-auto px-6 md:px-8 pt-12 md:pt-16 pb-24 md:pb-32">
-          <About locale="fr" />
-          <Experience locale="fr" />
-          <Education locale="fr" />
-          <Projects locale="fr" />
-          <Contact locale="fr" />
+          <About locale={lang} />
+          <Experience locale={lang} />
+          <Education locale={lang} />
+          <Projects locale={lang} />
+          <Contact locale={lang} />
           <div aria-hidden className="h-24" />
         </div>
       </main>

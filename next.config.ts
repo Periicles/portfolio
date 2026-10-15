@@ -44,6 +44,15 @@ const permissionsPolicy = [
 ].join(", ");
 
 const nextConfig: NextConfig = {
+  // Le français est la langue par défaut et reste servi à la racine : « / »
+  // affiche la page prérendue /fr, et /fr redirige vers « / » pour ne pas
+  // exposer deux URL pour le même contenu.
+  async rewrites() {
+    return [{ source: "/", destination: "/fr" }];
+  },
+  async redirects() {
+    return [{ source: "/fr", destination: "/", permanent: true }];
+  },
   async headers() {
     return [
       {
