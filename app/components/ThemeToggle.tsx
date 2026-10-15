@@ -8,13 +8,34 @@ import type { Dictionary } from '@/i18n/dictionaries'
 // le premier rendu : pas d'état « non monté », donc pas de flash au chargement.
 // Au clic, la lune pivote et s'efface pendant que le soleil apparaît (et
 // inversement) ; animation coupée si l'utilisateur limite les mouvements.
+// Au passage en sombre, la page s'allume comme un néon : un voile animé
+// (`.neon-ignite`, défini dans globals.css) est posé puis retiré en fin
+// d'animation. Rien n'est ajouté si l'utilisateur limite les mouvements.
+function igniteNeon() {
+    document.querySelector('.neon-ignite')?.remove()
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const veil = document.createElement('div')
+    veil.className = 'neon-ignite'
+    veil.setAttribute('aria-hidden', 'true')
+    veil.addEventListener('animationend', () => veil.remove(), { once: true })
+    document.body.appendChild(veil)
+}
+
 export default function ThemeToggle({ t }: { t: Dictionary['theme'] }) {
     const { resolvedTheme, setTheme } = useTheme()
+
+    function toggle() {
+        const next = resolvedTheme === 'dark' ? 'light' : 'dark'
+        if (next === 'dark') igniteNeon()
+        else document.querySelector('.neon-ignite')?.remove()
+        setTheme(next)
+    }
 
     return (
         <button
             type="button"
-            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+            onClick={toggle}
             title={t.toggle}
             className="relative overflow-hidden w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center hover:bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
         >
