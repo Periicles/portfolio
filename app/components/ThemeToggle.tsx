@@ -1,5 +1,6 @@
 'use client'
 
+import type { MouseEvent } from 'react'
 import { useTheme } from 'next-themes'
 import { Sun, Moon } from 'lucide-react'
 import type { Dictionary } from '@/i18n/dictionaries'
@@ -13,8 +14,8 @@ import { igniteNeon } from '@/lib/neon-ignition'
 export default function ThemeToggle({ t }: { t: Dictionary['theme'] }) {
     const { resolvedTheme, setTheme } = useTheme()
 
-    function toggle() {
-        igniteNeon()
+    function toggle(event: MouseEvent<HTMLButtonElement>) {
+        igniteNeon(event.currentTarget)
         setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
     }
 
