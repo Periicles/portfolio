@@ -8,13 +8,13 @@ export type Education = {
 export const education: readonly Education[] = [
     {
         school: "EFREI Paris",
-        degree: "Mastère Dev. Manager Full Stack",
+        degree: "Mastère Dev Manager Full Stack",
         period: "2025 – 2027",
         detail: "4e et 5e année · en cours, en alternance chez Ceva Santé Animale",
     },
     {
         school: "EFREI Paris",
-        degree: "Bachelor",
+        degree: "Bachelor Développeur Web & IA",
         period: "2024 – 2025",
         detail: "3e année",
     },
