@@ -1,14 +1,17 @@
 import { site } from '@/content/site'
 import { education } from '@/content/education'
 import { skillGroups } from '@/content/skills'
+import { homePath, type Locale } from '@/i18n/config'
+import { getDictionary } from '@/i18n/dictionaries'
 
 /**
  * Graphe schema.org (Person + WebSite) décrivant le propriétaire du site,
  * exploité par les moteurs de recherche pour enrichir les résultats.
  */
-export function buildStructuredData() {
+export function buildStructuredData(locale: Locale) {
+    const t = getDictionary(locale).meta
     const personId = `${site.url}/#person`
-    const schools = [...new Set(education.map((item) => item.school))]
+    const schools = [...new Set(education[locale].map((item) => item.school))]
 
     return {
         '@context': 'https://schema.org',
@@ -18,8 +21,8 @@ export function buildStructuredData() {
                 '@id': personId,
                 name: site.name,
                 url: site.url,
-                jobTitle: site.role,
-                description: site.description,
+                jobTitle: t.role,
+                description: t.description,
                 worksFor: {
                     '@type': 'Organization',
                     name: site.employer.name,
@@ -29,16 +32,16 @@ export function buildStructuredData() {
                     '@type': 'EducationalOrganization',
                     name,
                 })),
-                knowsAbout: skillGroups.flatMap((group) => group.items),
+                knowsAbout: skillGroups[locale].flatMap((group) => group.items),
                 knowsLanguage: ['fr', 'en'],
                 sameAs: Object.values(site.socials),
             },
             {
                 '@type': 'WebSite',
                 '@id': `${site.url}/#website`,
-                url: site.url,
+                url: new URL(homePath(locale), site.url).href,
                 name: site.name,
-                inLanguage: 'fr-FR',
+                inLanguage: locale,
                 publisher: { '@id': personId },
             },
         ],

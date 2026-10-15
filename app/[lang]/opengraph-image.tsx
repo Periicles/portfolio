@@ -1,11 +1,26 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/content/site";
+import { defaultLocale, isLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
 
-export const alt = site.title;
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+const size = { width: 1200, height: 630 };
 
-export default function OpengraphImage() {
+type ImageParams = { params: Promise<{ lang: string }> };
+
+async function getMeta({ params }: ImageParams) {
+  const { lang } = await params;
+  return getDictionary(isLocale(lang) ? lang : defaultLocale).meta;
+}
+
+// Une image par langue, avec un texte alternatif traduit.
+export async function generateImageMetadata(props: ImageParams) {
+  const t = await getMeta(props);
+  return [{ id: "default", alt: t.title, size, contentType: "image/png" }];
+}
+
+export default async function OpengraphImage(props: ImageParams) {
+  const t = await getMeta(props);
+
   return new ImageResponse(
     (
       <div
@@ -71,7 +86,7 @@ export default function OpengraphImage() {
             {site.name}
           </div>
           <div style={{ display: "flex", fontSize: 42, color: "#5f635a", marginTop: 12 }}>
-            {site.role}
+            {t.role}
           </div>
           <div
             style={{
@@ -83,7 +98,7 @@ export default function OpengraphImage() {
               letterSpacing: "0.02em",
             }}
           >
-            TypeScript · React · Next.js · Python · IA
+            {t.ogTagline}
           </div>
         </div>
 
@@ -100,7 +115,7 @@ export default function OpengraphImage() {
             alignSelf: "flex-start",
           }}
         >
-          En alternance chez Ceva Santé Animale
+          {t.ogBadge}
         </div>
       </div>
     ),

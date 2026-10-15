@@ -44,6 +44,20 @@ const permissionsPolicy = [
 ].join(", ");
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Le layout racine vit sous app/[lang] : une 404 globale est nécessaire
+    // pour habiller les URL qui ne correspondent à aucune langue.
+    globalNotFound: true,
+  },
+  // Le français est la langue par défaut et reste servi à la racine : « / »
+  // affiche la page prérendue /fr, et /fr redirige vers « / » pour ne pas
+  // exposer deux URL pour le même contenu.
+  async rewrites() {
+    return [{ source: "/", destination: "/fr" }];
+  },
+  async redirects() {
+    return [{ source: "/fr", destination: "/", permanent: true }];
+  },
   async headers() {
     return [
       {

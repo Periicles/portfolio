@@ -11,27 +11,27 @@ describe('validateContactForm', () => {
 
     it('rejette un nom trop court', () => {
         const res = validateContactForm({ ...valid, name: 'J' })
-        expect(res.ok).toBe(false)
+        expect(res).toEqual({ ok: false, error: 'name' })
     })
 
     it('rejette un nom trop long', () => {
         const res = validateContactForm({ ...valid, name: 'x'.repeat(101) })
-        expect(res.ok).toBe(false)
+        expect(res).toEqual({ ok: false, error: 'name' })
     })
 
     it('rejette un email invalide', () => {
         const res = validateContactForm({ ...valid, email: 'pas-un-email' })
-        expect(res.ok).toBe(false)
+        expect(res).toEqual({ ok: false, error: 'email' })
     })
 
     it('rejette un message trop court', () => {
         const res = validateContactForm({ ...valid, message: 'court' })
-        expect(res.ok).toBe(false)
+        expect(res).toEqual({ ok: false, error: 'message' })
     })
 
     it('rejette un message trop long', () => {
         const res = validateContactForm({ ...valid, message: 'x'.repeat(5001) })
-        expect(res.ok).toBe(false)
+        expect(res).toEqual({ ok: false, error: 'message' })
     })
 
     it('rejette une valeur non-string (null)', () => {
