@@ -8,7 +8,7 @@ export default function About({ locale }: { locale: Locale }) {
     const t = getDictionary(locale).about
 
     return (
-        <section id="about" aria-labelledby="about-heading" className="pt-0 pb-16 md:pt-16 scroll-mt-24 md:scroll-mt-16">
+        <section id="about" aria-labelledby="about-heading" className="@container pt-0 pb-16 md:pt-16 scroll-mt-24 md:scroll-mt-16">
             <StatusBadge locale={locale} />
             <SectionEyebrow index={1}>{t.eyebrow}</SectionEyebrow>
             <h2 id="about-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
