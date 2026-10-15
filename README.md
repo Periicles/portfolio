@@ -47,27 +47,35 @@ Portfolio personnel moderne et responsive, présentant mon parcours, mes projets
 - `CvDownload.tsx` — Lien de téléchargement du CV
 - `ThemeToggle.tsx` / `LanguageSwitcher.tsx` — Bascules thème et langue
 
+## 🌍 Internationalisation
+
+- Routes `app/[lang]` prérendues pour `fr` et `en` (`generateStaticParams`, `dynamicParams = false`), sans middleware
+- `/` est réécrit vers `/fr` et `/fr` redirige vers `/` (`next.config.ts`) : une seule URL par contenu
+- Textes d'interface dans `app/i18n/dictionaries.ts` (un test garantit que FR et EN gardent la même structure)
+- Contenu (expériences, formation, compétences, projets) dans `app/content/`, une entrée par langue
+- Page 404 globale bilingue (`app/global-not-found.tsx`)
+
+**Ajouter ou modifier un texte** : éditer le dictionnaire ou le fichier de contenu concerné dans les deux langues.
+
 ## 🔍 SEO & Accessibilité
 
-Le portfolio applique les bonnes pratiques attendues d'un site public en 2026 :
-
 **SEO**
-- `metadata` complète avec `openGraph`, `twitter`, `canonical`, `robots`, `themeColor` (`app/layout.tsx`)
-- `/robots.txt` généré dynamiquement (`app/robots.ts`)
-- `/sitemap.xml` généré dynamiquement (`app/sitemap.ts`)
-- `/opengraph-image` (1200×630) généré au build via `next/og` `ImageResponse` (`app/opengraph-image.tsx`) — Next 16 injecte automatiquement `og:image` et `twitter:image`
+- `metadata` localisée par langue : `openGraph`, `twitter`, `canonical`, alternates `hreflang` (`fr`, `en`, `x-default`) (`app/[lang]/layout.tsx`)
+- Données structurées JSON-LD `Person` + `WebSite` dérivées du contenu (`app/lib/structured-data.ts`)
+- `/robots.txt` (`app/robots.ts`) et `/sitemap.xml` avec alternates de langue (`app/sitemap.ts`)
+- Une image Open Graph 1200×630 par langue, générée au build via `next/og` (`app/[lang]/opengraph-image.tsx`)
 
 **Accessibilité (WCAG 2.1 AA)**
-- Un seul `<h1>` global, sections en `<h2 id="..."` référencées via `aria-labelledby`
+- Un seul `<h1>` global, sections en `<h2 id="...">` référencées via `aria-labelledby`
 - `aria-label` explicites sur les icônes et boutons
-- Préfixes décoratifs ("01.", "02.", …) en `<p aria-hidden="true">` pour ne pas polluer la navigation lecteur d'écran
-- `<html lang="fr">`, `prefers-color-scheme` respecté
+- Préfixes décoratifs (« 01 — », …) en `aria-hidden` pour ne pas polluer la lecture d'écran
+- `<html lang>` selon la langue, `hrefLang` sur le sélecteur de langue
+- `prefers-color-scheme` et `prefers-reduced-motion` respectés
 
-**Sécurité (headers HTTP via `next.config.ts`)**
-- Content-Security-Policy stricte (pas de script externe en prod)
-- HSTS `max-age=2y; includeSubDomains; preload`
-- COOP `same-origin`, CORP `same-origin`, X-Frame-Options `DENY`
-- Permissions-Policy verrouillant caméra / micro / géoloc
+**Sécurité**
+- En-têtes HTTP via `next.config.ts` : CSP stricte (aucun script externe en prod), HSTS `max-age=2y; includeSubDomains; preload`, COOP et CORP `same-origin`, `X-Frame-Options: DENY`, Permissions-Policy verrouillée
+- Formulaire : honeypot, limitation de débit par IP et globale, nettoyage du nom affiché contre l'injection d'en-têtes email
+- CI : détection de secrets (Gitleaks) sur tout l'historique
 
 ## 🏃 Démarrage rapide
 
