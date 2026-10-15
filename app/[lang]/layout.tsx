@@ -100,7 +100,7 @@ export default async function RootLayout({
         <script
           type="application/ld+json"
           // Bloc de données (non exécuté) : compatible avec la CSP actuelle.
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildStructuredData()) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildStructuredData(lang)) }}
         />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}

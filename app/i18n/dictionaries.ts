@@ -18,6 +18,7 @@ const fr = {
             'alternance',
             'portfolio',
         ],
+        ogTagline: 'TypeScript · React · Next.js · Python · IA',
         ogBadge: 'En alternance chez Ceva Santé Animale',
     },
     status: {
@@ -125,6 +126,7 @@ const en: Dictionary = {
             'apprenticeship',
             'portfolio',
         ],
+        ogTagline: 'TypeScript · React · Next.js · Python · AI',
         ogBadge: 'Apprentice at Ceva Santé Animale',
     },
     status: {
