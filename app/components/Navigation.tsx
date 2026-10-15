@@ -55,7 +55,7 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
                         <p className="text-xs md:text-sm text-muted font-mono">{t.role}</p>
                     </div>
 
-                    <div className="flex items-center gap-4 md:hidden">
+                    <div className="flex items-center gap-3 md:hidden">
                         <CvDownload compact {...t.cv} />
                         <a
                             href={site.socials.github}
