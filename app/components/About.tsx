@@ -1,9 +1,11 @@
 import { skillGroups } from '@/content/skills'
+import OnAirBadge from './OnAirBadge'
 import SectionEyebrow from './SectionEyebrow'
 
 export default function About() {
     return (
         <section id="about" aria-labelledby="about-heading" className="py-16 scroll-mt-24 md:scroll-mt-16">
+            <OnAirBadge />
             <SectionEyebrow index={1}>À propos</SectionEyebrow>
             <h2 id="about-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
                 Bonjour, je suis Paul. Ravi de vous rencontrer.
