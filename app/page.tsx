@@ -20,10 +20,10 @@ export default function Home() {
       <Navigation year={year} />
       <main id="main" className="flex-1 md:ml-64">
         <div className="max-w-4xl mx-auto px-6 md:px-8 pt-12 md:pt-16 pb-24 md:pb-32">
-          <About />
-          <Experience />
-          <Education />
-          <Projects />
+          <About locale="fr" />
+          <Experience locale="fr" />
+          <Education locale="fr" />
+          <Projects locale="fr" />
           <Contact />
           <div aria-hidden className="h-24" />
         </div>

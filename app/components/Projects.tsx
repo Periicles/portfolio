@@ -1,18 +1,22 @@
 import { ExternalLink } from 'lucide-react'
 import { GitHubIcon } from './icons/GitHubIcon'
 import { projects } from '@/content/projects'
+import type { Locale } from '@/i18n/config'
+import { getDictionary } from '@/i18n/dictionaries'
 import SectionEyebrow from './SectionEyebrow'
 
-export default function Projects() {
+export default function Projects({ locale }: { locale: Locale }) {
+    const t = getDictionary(locale).projects
+
     return (
         <section id="projects" aria-labelledby="projects-heading" className="py-16 scroll-mt-24 md:scroll-mt-16 border-t border-hairline">
-            <SectionEyebrow index={4}>Projets</SectionEyebrow>
+            <SectionEyebrow index={4}>{t.eyebrow}</SectionEyebrow>
             <h2 id="projects-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
-                Quelques réalisations
+                {t.heading}
             </h2>
 
             <div className="space-y-12">
-                {projects.map((project) => {
+                {projects[locale].map((project) => {
                     return (
                         <article key={project.title} className="relative">
                             <div className="grid grid-cols-12 gap-4 items-center">
@@ -53,7 +57,7 @@ export default function Projects() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-muted hover:text-ink transition-colors"
-                                            aria-label={`Dépôt du projet ${project.title}`}
+                                            aria-label={`${t.repoLabel} ${project.title}`}
                                         >
                                             <GitHubIcon />
                                         </a>
@@ -64,7 +68,7 @@ export default function Projects() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-muted hover:text-ink transition-colors"
-                                            aria-label={`Démo du projet ${project.title}`}
+                                            aria-label={`${t.demoLabel} ${project.title}`}
                                         >
                                             <ExternalLink className="w-5 h-5" />
                                         </a>

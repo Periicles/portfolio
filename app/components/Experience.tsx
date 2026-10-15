@@ -1,16 +1,20 @@
 import { experiences } from '@/content/experiences'
+import type { Locale } from '@/i18n/config'
+import { getDictionary } from '@/i18n/dictionaries'
 import SectionEyebrow from './SectionEyebrow'
 
-export default function Experience() {
+export default function Experience({ locale }: { locale: Locale }) {
+    const t = getDictionary(locale).experience
+
     return (
         <section id="experience" aria-labelledby="experience-heading" className="py-16 scroll-mt-24 md:scroll-mt-16 border-t border-hairline">
-            <SectionEyebrow index={2}>Expérience</SectionEyebrow>
+            <SectionEyebrow index={2}>{t.eyebrow}</SectionEyebrow>
             <h2 id="experience-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
-                Mon parcours
+                {t.heading}
             </h2>
 
             <div className="space-y-12">
-                {experiences.map((exp) => (
+                {experiences[locale].map((exp) => (
                     <div key={exp.company} className="relative">
                         <div className="flex flex-col md:flex-row md:items-start md:space-x-8">
                             <div className="md:w-48 mb-2 md:mb-0">

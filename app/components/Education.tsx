@@ -1,16 +1,20 @@
 import { certifications, education } from '@/content/education'
+import type { Locale } from '@/i18n/config'
+import { getDictionary } from '@/i18n/dictionaries'
 import SectionEyebrow from './SectionEyebrow'
 
-export default function Education() {
+export default function Education({ locale }: { locale: Locale }) {
+    const t = getDictionary(locale).education
+
     return (
         <section id="education" aria-labelledby="education-heading" className="py-16 scroll-mt-24 md:scroll-mt-16 border-t border-hairline">
-            <SectionEyebrow index={3}>Formation</SectionEyebrow>
+            <SectionEyebrow index={3}>{t.eyebrow}</SectionEyebrow>
             <h2 id="education-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
-                Mon cursus
+                {t.heading}
             </h2>
 
             <ol className="space-y-8">
-                {education.map((item) => (
+                {education[locale].map((item) => (
                     <li key={`${item.school}-${item.degree}`} className="flex flex-col md:flex-row md:items-baseline md:space-x-8">
                         <p className="md:w-48 shrink-0 text-sm text-muted font-mono mb-1 md:mb-0">
                             {item.period}
@@ -29,9 +33,9 @@ export default function Education() {
             </ol>
 
             <div className="mt-10">
-                <h3 className="text-lg font-semibold text-ink mb-3">Certifications</h3>
+                <h3 className="text-lg font-semibold text-ink mb-3">{t.certificationsHeading}</h3>
                 <ul className="flex flex-wrap gap-2">
-                    {certifications.map((cert) => (
+                    {certifications[locale].map((cert) => (
                         <li
                             key={cert.name}
                             className="text-xs text-muted font-mono bg-surface px-3 py-1 rounded"

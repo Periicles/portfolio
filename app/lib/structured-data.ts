@@ -8,7 +8,7 @@ import { skillGroups } from '@/content/skills'
  */
 export function buildStructuredData() {
     const personId = `${site.url}/#person`
-    const schools = [...new Set(education.map((item) => item.school))]
+    const schools = [...new Set(education.fr.map((item) => item.school))]
 
     return {
         '@context': 'https://schema.org',
@@ -29,7 +29,7 @@ export function buildStructuredData() {
                     '@type': 'EducationalOrganization',
                     name,
                 })),
-                knowsAbout: skillGroups.flatMap((group) => group.items),
+                knowsAbout: skillGroups.fr.flatMap((group) => group.items),
                 knowsLanguage: ['fr', 'en'],
                 sameAs: Object.values(site.socials),
             },
