@@ -46,7 +46,6 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
                     <div className="mb-0 md:mb-16">
                         <a
                             href="#about"
-                            aria-label={`${site.name} — ${t.nav.homeSuffix}`}
                             className="inline-block text-3xl md:text-4xl font-extrabold tracking-[-0.05em] leading-none text-ink"
                         >
                             pr<span className="text-accent">.</span>
