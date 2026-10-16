@@ -55,11 +55,28 @@
    grésillement irrégulier, avec des chutes d'intensité plus ou moins
    marquées. Le texte reste stable pour la lisibilité ; seuls le tube
    (bordure + halo) et le point vacillent. Figé si l'utilisateur limite
-   les animations. */
+   les animations.
+   Le tube allumé (bordure pleine + halo) est dessiné sur un pseudo-élément
+   dont seule l'opacité varie : l'animation reste sur le compositeur, sans
+   repeindre la pastille à chaque image. Éteint, il laisse voir la bordure
+   atténuée de la pastille elle-même. */
 .neon-badge {
   --neon: color-mix(in srgb, var(--accent) 55%, transparent);
   --neon-soft: color-mix(in srgb, var(--accent) 25%, transparent);
-  box-shadow: 0 0 6px var(--neon), inset 0 0 6px var(--neon-soft);
+  position: relative;
+  isolation: isolate;
+  border-color: var(--neon-soft);
+}
+
+.neon-badge::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border: 1px solid var(--accent);
+  border-radius: inherit;
+  box-shadow: 0 0 8px var(--neon), 0 0 18px var(--neon-soft), inset 0 0 6px var(--neon-soft);
+  pointer-events: none;
   animation: neon-buzz 6s linear infinite;
 }
 
@@ -70,20 +87,16 @@
 
 @keyframes neon-buzz {
   0%, 17%, 19.5%, 22%, 61%, 63.5%, 100% {
-    border-color: var(--accent);
-    box-shadow: 0 0 8px var(--neon), 0 0 18px var(--neon-soft), inset 0 0 6px var(--neon-soft);
+    opacity: 1;
   }
   18%, 21% {
-    border-color: var(--neon-soft);
-    box-shadow: none;
+    opacity: 0;
   }
   20.5% {
-    border-color: var(--neon);
-    box-shadow: 0 0 3px var(--neon-soft);
+    opacity: 0.3;
   }
   62%, 63% {
-    border-color: var(--neon);
-    box-shadow: 0 0 4px var(--neon-soft);
+    opacity: 0.4;
   }
 }
 
@@ -112,6 +125,15 @@
   inset: 0;
   z-index: 100;
   pointer-events: none;
+}
+
+/* Coupure de courant : un fond noir dont seule l'opacité varie, pour
+   rester sur le compositeur. Le halo est un calque frère, et non un
+   enfant, pour ne pas s'éteindre avec le noir. */
+.neon-ignite::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: #000;
   animation: neon-ignite 0.75s linear forwards;
 }
@@ -130,14 +152,14 @@
 }
 
 @keyframes neon-ignite {
-  0%, 20% { background-color: rgb(0 0 0 / 1); }
-  22% { background-color: rgb(0 0 0 / 0.15); }
-  28%, 42% { background-color: rgb(0 0 0 / 1); }
-  44% { background-color: rgb(0 0 0 / 0.3); }
-  48% { background-color: rgb(0 0 0 / 0.85); }
-  54% { background-color: rgb(0 0 0 / 0.1); }
-  60% { background-color: rgb(0 0 0 / 0.5); }
-  66%, 100% { background-color: rgb(0 0 0 / 0); }
+  0%, 20% { opacity: 1; }
+  22% { opacity: 0.15; }
+  28%, 42% { opacity: 1; }
+  44% { opacity: 0.3; }
+  48% { opacity: 0.85; }
+  54% { opacity: 0.1; }
+  60% { opacity: 0.5; }
+  66%, 100% { opacity: 0; }
 }
 
 @keyframes neon-bloom {
@@ -209,7 +231,7 @@ html[data-neon-power]::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .neon-badge,
+  .neon-badge::before,
   .neon-dot {
     animation: none;
   }
