@@ -125,6 +125,15 @@
   inset: 0;
   z-index: 100;
   pointer-events: none;
+}
+
+/* Coupure de courant : un fond noir dont seule l'opacité varie, pour
+   rester sur le compositeur. Le halo est un calque frère, et non un
+   enfant, pour ne pas s'éteindre avec le noir. */
+.neon-ignite::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: #000;
   animation: neon-ignite 0.75s linear forwards;
 }
@@ -143,14 +152,14 @@
 }
 
 @keyframes neon-ignite {
-  0%, 20% { background-color: rgb(0 0 0 / 1); }
-  22% { background-color: rgb(0 0 0 / 0.15); }
-  28%, 42% { background-color: rgb(0 0 0 / 1); }
-  44% { background-color: rgb(0 0 0 / 0.3); }
-  48% { background-color: rgb(0 0 0 / 0.85); }
-  54% { background-color: rgb(0 0 0 / 0.1); }
-  60% { background-color: rgb(0 0 0 / 0.5); }
-  66%, 100% { background-color: rgb(0 0 0 / 0); }
+  0%, 20% { opacity: 1; }
+  22% { opacity: 0.15; }
+  28%, 42% { opacity: 1; }
+  44% { opacity: 0.3; }
+  48% { opacity: 0.85; }
+  54% { opacity: 0.1; }
+  60% { opacity: 0.5; }
+  66%, 100% { opacity: 0; }
 }
 
 @keyframes neon-bloom {
