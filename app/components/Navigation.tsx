@@ -44,11 +44,14 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
             <div className="flex flex-col gap-6 md:gap-0">
                 <div className="flex items-center justify-between md:block">
                     <div className="mb-0 md:mb-16">
+                        {/* Le nom accessible commence par le texte visible « pr. » (WCAG 2.5.3) : le complément
+                            n'est lu que par les lecteurs d'écran. */}
                         <a
                             href="#about"
                             className="inline-block text-3xl md:text-4xl font-extrabold tracking-[-0.05em] leading-none text-ink"
                         >
                             pr<span className="text-accent">.</span>
+                            <span className="sr-only">{` — ${site.name}, ${t.nav.homeSuffix}`}</span>
                         </a>
                         <h1 className="mt-3 text-base md:text-lg font-bold text-ink">{site.name}</h1>
                         <p className="text-xs md:text-sm text-muted font-mono">{t.role}</p>
