@@ -35,6 +35,15 @@
 }
 
 @layer base {
+  /* Tailwind 4 laisse le curseur par défaut sur les boutons : on rétablit
+     la main sur tout ce qui est cliquable. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+
   body {
     font-family: var(--font-sans);
     background-color: var(--paper);
@@ -90,6 +99,112 @@
   }
   85.8% {
     opacity: 0.75;
+  }
+}
+
+/* Allumage néon à chaque changement de thème : une brève coupure de
+   courant (voile noir) puis le fond revient par à-coups, comme un tube
+   qui peine à démarrer. Un halo d'accent s'épanouit quand le courant
+   « prend ». Le voile ne capte aucun clic et se retire en fin
+   d'animation. */
+.neon-ignite {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: #000;
+  animation: neon-ignite 0.75s linear forwards;
+}
+
+.neon-ignite::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 35%,
+    color-mix(in srgb, var(--accent) 35%, transparent),
+    transparent 65%
+  );
+  opacity: 0;
+  animation: neon-bloom 0.75s ease-out forwards;
+}
+
+@keyframes neon-ignite {
+  0%, 20% { background-color: rgb(0 0 0 / 1); }
+  22% { background-color: rgb(0 0 0 / 0.15); }
+  28%, 42% { background-color: rgb(0 0 0 / 1); }
+  44% { background-color: rgb(0 0 0 / 0.3); }
+  48% { background-color: rgb(0 0 0 / 0.85); }
+  54% { background-color: rgb(0 0 0 / 0.1); }
+  60% { background-color: rgb(0 0 0 / 0.5); }
+  66%, 100% { background-color: rgb(0 0 0 / 0); }
+}
+
+@keyframes neon-bloom {
+  0%, 55% { opacity: 0; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Au chargement, la page reste dans le noir jusqu'à ce que la séquence
+   d'allumage prenne le relais, une fois React hydraté (attribut posé par
+   le script inline du layout). Si JavaScript n'aboutit pas, le voile
+   s'efface seul. */
+html[data-neon-power]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background: #000;
+  animation: neon-power-fallback 0.3s ease-out 3s forwards;
+}
+
+@keyframes neon-power-fallback {
+  to { opacity: 0; }
+}
+
+/* Démarrage façon machine : après la coupure, chaque bloc visible se
+   rallume à son tour, dans un ordre aléatoire (délai posé en JS dans
+   --boot-delay). Certains blocs démarrent mal : amorces ratées avant de
+   tenir (variante `neon-boot-hard`). */
+.neon-boot {
+  animation: neon-boot 0.45s linear var(--boot-delay, 0ms) both;
+}
+
+.neon-boot.neon-boot-hard {
+  animation-name: neon-boot-hard;
+  animation-duration: 0.8s;
+}
+
+@keyframes neon-boot {
+  0% { opacity: 0; }
+  25% { opacity: 0.8; }
+  35% { opacity: 0.1; }
+  55% { opacity: 1; }
+  70% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes neon-boot-hard {
+  0%, 15% { opacity: 0; }
+  20% { opacity: 0.6; }
+  26%, 48% { opacity: 0; }
+  54% { opacity: 0.9; }
+  60% { opacity: 0.15; }
+  70% { opacity: 1; }
+  80% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-ignite,
+  html[data-neon-power]::after {
+    display: none;
+  }
+
+  .neon-boot {
+    animation: none;
   }
 }
 

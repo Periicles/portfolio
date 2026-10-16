@@ -39,6 +39,8 @@ const fr = {
     },
     theme: {
         toggle: 'Changer de thème',
+        toDark: 'Passer au thème sombre',
+        toLight: 'Passer au thème clair',
     },
     language: {
         target: 'en' as Locale,
@@ -147,6 +149,8 @@ const en: Dictionary = {
     },
     theme: {
         toggle: 'Toggle theme',
+        toDark: 'Switch to dark theme',
+        toLight: 'Switch to light theme',
     },
     language: {
         target: 'fr',

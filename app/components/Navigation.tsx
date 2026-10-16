@@ -75,7 +75,7 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
                         >
                             <LinkedInIcon />
                         </a>
-                        <ThemeToggle label={t.theme.toggle} />
+                        <ThemeToggle t={t.theme} />
                         <LanguageSwitcher t={t.language} />
                     </div>
                 </div>
@@ -141,7 +141,7 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
                 </div>
 
                 <div className="flex gap-2">
-                    <ThemeToggle label={t.theme.toggle} />
+                    <ThemeToggle t={t.theme} />
                     <LanguageSwitcher t={t.language} />
                 </div>
 
