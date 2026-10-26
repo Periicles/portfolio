@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { headers } from 'next/headers'
 import { __resetRateLimit, checkGlobalRateLimit } from '@/lib/rate-limit'
 
 type SendOptions = {
@@ -21,8 +22,10 @@ vi.mock('resend', () => ({
     }),
 }))
 
+const defaultHeaders = async () => ({ get: () => '203.0.113.5' })
+
 vi.mock('next/headers', () => ({
-    headers: vi.fn(async () => ({ get: () => '203.0.113.5' })),
+    headers: vi.fn(),
 }))
 
 import { sendContactMessage, type ContactState } from './contact'
@@ -45,6 +48,9 @@ beforeEach(() => {
     __resetRateLimit()
     send.mockClear()
     process.env.RESEND_API_KEY = 'test-key'
+    vi.mocked(headers).mockImplementation(
+        defaultHeaders as unknown as typeof headers,
+    )
 })
 
 describe('sendContactMessage', () => {
@@ -94,6 +100,15 @@ describe('sendContactMessage', () => {
         expect(res.status).toBe('error')
     })
 
+    it('renvoie une erreur générique si Resend lève une exception', async () => {
+        send.mockRejectedValueOnce(new Error('network down'))
+        const res = await sendContactMessage(idle, fd(validFields))
+        expect(res).toEqual({
+            status: 'error',
+            message: "L'envoi a échoué. Réessayez, ou écrivez-moi directement par email.",
+        })
+    })
+
     it('compose un expéditeur portant le nom du visiteur, sur le domaine vérifié', async () => {
         await sendContactMessage(idle, fd(validFields))
         expect(send.mock.calls[0][0].from).toBe(
@@ -113,5 +128,34 @@ describe('sendContactMessage', () => {
         const res = await sendContactMessage(idle, fd(validFields))
         expect(res.status).toBe('error')
         expect(send).not.toHaveBeenCalled()
+    })
+
+    it('bloque la 4e soumission d’une même IP sans appeler Resend', async () => {
+        for (let i = 0; i < 3; i++) {
+            expect((await sendContactMessage(idle, fd(validFields))).status).toBe('success')
+        }
+        const res = await sendContactMessage(idle, fd(validFields))
+        expect(res).toEqual({
+            status: 'error',
+            message: 'Trop de tentatives. Réessayez dans quelques minutes.',
+        })
+        expect(send).toHaveBeenCalledTimes(3)
+    })
+
+    it('identifie le visiteur par la première IP de x-forwarded-for', async () => {
+        const forwardedFor = (value: string) =>
+            vi.mocked(headers).mockResolvedValue({
+                get: (name: string) => (name === 'x-forwarded-for' ? value : null),
+            } as unknown as Awaited<ReturnType<typeof headers>>)
+
+        // Même client derrière des proxys différents : même compteur.
+        forwardedFor('198.51.100.1, 10.0.0.1')
+        for (let i = 0; i < 3; i++) await sendContactMessage(idle, fd(validFields))
+        forwardedFor('198.51.100.1, 10.0.0.2')
+        expect((await sendContactMessage(idle, fd(validFields))).status).toBe('error')
+
+        // Autre client : compteur distinct.
+        forwardedFor('198.51.100.2, 10.0.0.1')
+        expect((await sendContactMessage(idle, fd(validFields))).status).toBe('success')
     })
 })
