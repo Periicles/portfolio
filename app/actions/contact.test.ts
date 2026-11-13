@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { headers } from 'next/headers'
 import { __resetRateLimit, checkGlobalRateLimit } from '@/lib/rate-limit'
 
@@ -23,6 +23,11 @@ vi.mock('resend', () => ({
 }))
 
 const defaultHeaders = async () => ({ get: () => '203.0.113.5' })
+
+const firewall = vi.hoisted(() => ({
+    checkRateLimit: vi.fn(async () => ({ rateLimited: false })),
+}))
+vi.mock('@vercel/firewall', () => firewall)
 
 vi.mock('next/headers', () => ({
     headers: vi.fn(),
@@ -157,5 +162,37 @@ describe('sendContactMessage', () => {
         // Autre client : compteur distinct.
         forwardedFor('198.51.100.2, 10.0.0.1')
         expect((await sendContactMessage(idle, fd(validFields))).status).toBe('success')
+    })
+
+    describe('sur Vercel', () => {
+        beforeEach(() => {
+            vi.stubEnv('VERCEL', '1')
+            firewall.checkRateLimit.mockClear()
+        })
+        afterEach(() => {
+            vi.unstubAllEnvs()
+        })
+
+        it('bloque l’envoi quand la limite partagée du pare-feu est atteinte', async () => {
+            firewall.checkRateLimit.mockResolvedValueOnce({ rateLimited: true })
+            const res = await sendContactMessage(idle, fd(validFields))
+            expect(res).toEqual({
+                status: 'error',
+                message: 'Trop de tentatives. Réessayez dans quelques minutes.',
+            })
+            expect(send).not.toHaveBeenCalled()
+        })
+
+        it('ne consulte pas le pare-feu pour une saisie invalide', async () => {
+            await sendContactMessage(idle, fd({ ...validFields, email: 'invalide' }))
+            expect(firewall.checkRateLimit).not.toHaveBeenCalled()
+        })
+
+        it('envoie le message quand la limite partagée n’est pas atteinte', async () => {
+            const res = await sendContactMessage(idle, fd(validFields))
+            expect(res.status).toBe('success')
+            expect(firewall.checkRateLimit).toHaveBeenCalledTimes(1)
+            expect(send).toHaveBeenCalledTimes(1)
+        })
     })
 })
