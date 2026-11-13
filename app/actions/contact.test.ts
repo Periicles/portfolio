@@ -195,4 +195,53 @@ describe('sendContactMessage', () => {
             expect(send).toHaveBeenCalledTimes(1)
         })
     })
+
+    describe('journalisation des échecs', () => {
+        let consoleError: ReturnType<typeof vi.spyOn>
+
+        beforeEach(() => {
+            consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+        })
+        afterEach(() => {
+            consoleError.mockRestore()
+        })
+
+        // Aucune donnée saisie par le visiteur ne doit finir dans les logs.
+        function expectNoVisitorData() {
+            const logged = JSON.stringify(consoleError.mock.calls)
+            for (const value of Object.values(validFields)) expect(logged).not.toContain(value)
+        }
+
+        it('journalise le code d’erreur renvoyé par Resend', async () => {
+            send.mockResolvedValueOnce({
+                data: null,
+                error: { message: `Invalid reply_to: ${validFields.email}`, name: 'validation_error', statusCode: 422 } as never,
+            })
+            await sendContactMessage(idle, fd(validFields))
+            expect(consoleError).toHaveBeenCalledWith(expect.any(String), {
+                reason: 'resend_error',
+                code: 'validation_error',
+                status: 422,
+            })
+            expectNoVisitorData()
+        })
+
+        it('journalise une exception sans son message', async () => {
+            send.mockRejectedValueOnce(new TypeError(`fetch failed for ${validFields.email}`))
+            await sendContactMessage(idle, fd(validFields))
+            expect(consoleError).toHaveBeenCalledWith(expect.any(String), { reason: 'exception', type: 'TypeError' })
+            expectNoVisitorData()
+        })
+
+        it('journalise l’absence de clé API', async () => {
+            delete process.env.RESEND_API_KEY
+            await sendContactMessage(idle, fd(validFields))
+            expect(consoleError).toHaveBeenCalledWith(expect.any(String), { reason: 'missing_api_key' })
+        })
+
+        it('ne journalise rien quand l’envoi réussit', async () => {
+            await sendContactMessage(idle, fd(validFields))
+            expect(consoleError).not.toHaveBeenCalled()
+        })
+    })
 })

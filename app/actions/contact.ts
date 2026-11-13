@@ -20,6 +20,14 @@ const FROM_ADDRESS = `contact@${site.domain}`
 function buildFrom(name: string): string {
     return `${sanitizeDisplayName(name)} (via portfolio) <${FROM_ADDRESS}>`
 }
+// Trace serveur d'un envoi qui échoue, pour qu'une panne (clé expirée, quota
+// atteint, domaine non vérifié) apparaisse dans les erreurs de production au
+// lieu de passer inaperçue. Jamais de donnée du visiteur : seulement le code
+// d'erreur Resend et le statut HTTP, ou le type de l'exception.
+function logSendFailure(reason: string, details: Record<string, unknown> = {}): void {
+    console.error('[contact] échec de l’envoi', { reason, ...details })
+}
+
 export type ContactState = {
     status: 'idle' | 'success' | 'error'
     message: string
@@ -79,6 +87,7 @@ export async function sendContactMessage(
 
     const apiKey = process.env.RESEND_API_KEY
     if (!apiKey) {
+        logSendFailure('missing_api_key')
         return { status: 'error', message: t.generic }
     }
 
@@ -93,10 +102,12 @@ export async function sendContactMessage(
             text: `Nom : ${name}\nEmail : ${email}\n\n${message}`,
         })
         if (error) {
+            logSendFailure('resend_error', { code: error.name, status: error.statusCode })
             return { status: 'error', message: t.generic }
         }
         return { status: 'success', message: t.success }
-    } catch {
+    } catch (err) {
+        logSendFailure('exception', { type: err instanceof Error ? err.name : typeof err })
         return { status: 'error', message: t.generic }
     }
 }
