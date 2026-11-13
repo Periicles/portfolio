@@ -10,7 +10,7 @@ import {
     isHoneypotFilled,
     sanitizeDisplayName,
 } from '@/lib/contact-validation'
-import { checkRateLimit, checkGlobalRateLimit } from '@/lib/rate-limit'
+import { checkRateLimit, checkGlobalRateLimit, checkSharedRateLimit } from '@/lib/rate-limit'
 
 const FROM_ADDRESS = `contact@${site.domain}`
 
@@ -57,6 +57,15 @@ export async function sendContactMessage(
             message: t.invalidMessage,
         } as const
         return { status: 'error', message: invalid[result.error] }
+    }
+
+    // Limite par IP partagée entre les instances (pare-feu Vercel). Vérifiée
+    // après la validation : seuls les messages réellement envoyables comptent.
+    if (!(await checkSharedRateLimit(hdrs))) {
+        return {
+            status: 'error',
+            message: t.rateLimit,
+        }
     }
 
     // Plafond global (toutes IP confondues) : borne le coût même si la limite
