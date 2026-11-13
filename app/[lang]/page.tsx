@@ -5,6 +5,7 @@ import Education from '@/components/Education'
 import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
 import { notFound } from 'next/navigation'
+import { site } from '@/content/site'
 import { isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 
@@ -17,27 +18,35 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const t = getDictionary(lang)
 
   return (
-    <div className="flex min-h-screen flex-col md:flex-row bg-paper text-ink">
+    <div className="relative min-h-screen text-ink">
+      {/* Pas de fond sur ce conteneur : il masquerait l'atmosphère, posée sous le contenu. */}
+      <div aria-hidden className="atmosphere" />
+
       <a
         href="#about"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-accent focus:text-ink focus:rounded focus:font-semibold focus:shadow-lg"
       >
         {t.skipLink}
       </a>
-      <Navigation
-        year={year}
-        t={{ role: t.meta.role, nav: t.nav, theme: t.theme, language: t.language, cv: t.cv }}
-      />
-      <main id="main" className="flex-1 md:ml-64">
-        <div className="max-w-4xl mx-auto px-6 md:px-8 pt-12 md:pt-16 pb-24 md:pb-32">
-          <About locale={lang} />
-          <Experience locale={lang} />
-          <Education locale={lang} />
-          <Projects locale={lang} />
-          <Contact locale={lang} />
-          <div aria-hidden className="h-24" />
-        </div>
+
+      <Navigation t={{ role: t.meta.role, nav: t.nav, theme: t.theme, language: t.language, cv: t.cv }} />
+
+      <main id="main" className="mx-auto max-w-5xl px-4 pt-10 pb-16 md:px-8 md:pt-20 md:pb-24">
+        <About locale={lang} />
+        <Experience locale={lang} />
+        <Education locale={lang} />
+        <Projects locale={lang} />
+        <Contact locale={lang} />
       </main>
+
+      <footer className="border-t border-hairline">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-8 md:px-8">
+          <span aria-hidden className="font-display text-2xl font-bold tracking-[-0.06em]">
+            pr<span className="text-accent">.</span>
+          </span>
+          <p className="font-mono text-xs text-muted">© {year} {site.name}</p>
+        </div>
+      </footer>
     </div>
   )
 }

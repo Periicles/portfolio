@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import ThemeToggle from './ThemeToggle'
 import LanguageSwitcher from './LanguageSwitcher'
 import CvDownload from './CvDownload'
@@ -20,113 +19,70 @@ export type NavigationLabels = {
     cv: Dictionary['cv']
 }
 
-export default function Navigation({ year, t }: { year: number; t: NavigationLabels }) {
+function NavLinks({
+    items,
+    activeSection,
+    className,
+}: {
+    items: { href: string; label: string }[]
+    activeSection: string
+    className: string
+}) {
+    return (
+        <ul className={className}>
+            {items.map((item) => {
+                const active = activeSection === item.href.slice(1)
+                return (
+                    <li key={item.href} className="shrink-0">
+                        <a
+                            href={item.href}
+                            aria-current={active ? 'location' : undefined}
+                            className={`inline-block rounded-full px-3.5 py-1.5 text-sm transition-colors ${
+                                active ? 'bg-capsule-bg text-capsule-fg font-semibold' : 'text-muted hover:text-ink'
+                            }`}
+                        >
+                            {item.label}
+                        </a>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+}
+
+export default function Navigation({ t }: { t: NavigationLabels }) {
     const navItems = sectionIds.map((id) => ({ href: `#${id}`, label: t.nav.items[id] }))
     const activeSection = useActiveSection(sectionIds)
-    const itemRefs = useRef<Array<HTMLLIElement | null>>([])
-    const [indicatorOffset, setIndicatorOffset] = useState(0)
-    const [indicatorHeight, setIndicatorHeight] = useState(0)
-
-    useEffect(() => {
-        const index = sectionIds.findIndex((id) => id === activeSection)
-        const activeItem = itemRefs.current[index]
-        if (activeItem) {
-            setIndicatorOffset(activeItem.offsetTop)
-            setIndicatorHeight(activeItem.offsetHeight)
-        }
-    }, [activeSection])
 
     return (
-        <nav
-            aria-label={t.nav.ariaLabel}
-            className="sticky top-0 md:fixed left-0 md:top-0 h-auto md:h-screen w-full md:w-64 p-4 md:p-8 flex flex-col md:justify-between bg-paper border-b md:border-b-0 md:border-r border-hairline z-50"
-        >
-            <div className="flex flex-col gap-6 md:gap-0">
-                <div className="flex items-center justify-between md:block">
-                    <div className="mb-0 md:mb-16">
-                        {/* Le nom accessible commence par le texte visible « pr. » (WCAG 2.5.3) : le complément
-                            n'est lu que par les lecteurs d'écran. */}
-                        <a
-                            href="#about"
-                            className="inline-block text-3xl md:text-4xl font-extrabold tracking-[-0.05em] leading-none text-ink"
-                        >
-                            pr<span className="text-accent">.</span>
-                            <span className="sr-only">{` — ${site.name}, ${t.nav.homeSuffix}`}</span>
-                        </a>
-                        <h1 className="mt-3 text-base md:text-lg font-bold text-ink">{site.name}</h1>
-                        <p className="text-xs md:text-sm text-muted font-mono">{t.role}</p>
-                    </div>
+        <header className="sticky top-0 z-50 border-b border-hairline bg-paper/75 backdrop-blur-md">
+            <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-8">
+                {/* Le nom accessible commence par le texte visible « pr. » (WCAG 2.5.3) : le complément
+                    n'est lu que par les lecteurs d'écran. */}
+                <a href="#about" className="flex items-baseline gap-3 text-ink">
+                    <span className="font-display text-2xl font-bold leading-none tracking-[-0.06em]">
+                        pr<span className="text-accent">.</span>
+                    </span>
+                    <span className="sr-only">{` — ${site.name}, ${t.nav.homeSuffix}`}</span>
+                    <span aria-hidden className="hidden font-mono text-xs text-muted lg:inline">
+                        {t.role}
+                    </span>
+                </a>
 
-                    <div className="flex items-center gap-3 md:hidden">
-                        <CvDownload compact {...t.cv} />
-                        <a
-                            href={site.socials.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-muted hover:text-ink transition-colors"
-                            aria-label="GitHub"
-                        >
-                            <GitHubIcon />
-                        </a>
-                        <a
-                            href={site.socials.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-muted hover:text-ink transition-colors"
-                            aria-label="LinkedIn"
-                        >
-                            <LinkedInIcon />
-                        </a>
-                        <ThemeToggle t={t.theme} />
-                        <LanguageSwitcher t={t.language} />
-                    </div>
-                </div>
-
-                <div className="relative">
-                    <span
-                        aria-hidden
-                        className="absolute left-0 top-0 w-1 rounded-full bg-accent transition-transform duration-300 ease-out hidden md:block"
-                        style={{
-                            height: indicatorHeight ? `${indicatorHeight}px` : undefined,
-                            transform: `translateY(${indicatorOffset}px)`,
-                            opacity: indicatorHeight ? 1 : 0,
-                        }}
+                <nav aria-label={t.nav.ariaLabel} className="hidden md:block">
+                    <NavLinks
+                        items={navItems}
+                        activeSection={activeSection}
+                        className="flex items-center gap-1 rounded-full border border-hairline bg-surface/60 p-1"
                     />
-                    <ul className="flex gap-4 overflow-x-auto md:overflow-visible md:block md:space-y-4 md:pl-3">
-                        {navItems.map((item, index) => (
-                            <li
-                                key={item.href}
-                                ref={(element) => {
-                                    itemRefs.current[index] = element
-                                }}
-                                className="shrink-0"
-                            >
-                                <a
-                                    href={item.href}
-                                    className={`block py-1 md:py-2 text-xs md:text-sm transition-colors ${activeSection === item.href.slice(1)
-                                        ? 'text-ink font-semibold'
-                                        : 'text-muted hover:text-ink'
-                                        }`}
-                                >
-                                    <span className="font-mono text-accent-strong">0{index + 1}.</span> {item.label}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
+                </nav>
 
-            <div className="hidden md:block space-y-4">
-                <CvDownload {...t.cv} />
-
-                {/* Mêmes cases de 40 px que les boutons thème et langue : les icônes
-                    tombent pile au-dessus d'eux. */}
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
                     <a
                         href={site.socials.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 flex items-center justify-center rounded-lg text-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        className="icon-pill hidden sm:inline-flex"
                         aria-label="GitHub"
                     >
                         <GitHubIcon />
@@ -135,20 +91,24 @@ export default function Navigation({ year, t }: { year: number; t: NavigationLab
                         href={site.socials.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 flex items-center justify-center rounded-lg text-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                        className="icon-pill hidden sm:inline-flex"
                         aria-label="LinkedIn"
                     >
                         <LinkedInIcon />
                     </a>
-                </div>
-
-                <div className="flex gap-2">
                     <ThemeToggle t={t.theme} />
                     <LanguageSwitcher t={t.language} />
+                    <CvDownload {...t.cv} />
                 </div>
-
-                <p className="text-xs text-muted font-mono">© {year} {site.name}</p>
             </div>
-        </nav>
+
+            <nav aria-label={t.nav.ariaLabel} className="md:hidden">
+                <NavLinks
+                    items={navItems}
+                    activeSection={activeSection}
+                    className="flex gap-1 overflow-x-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                />
+            </nav>
+        </header>
     )
 }

@@ -14,7 +14,7 @@ export default function LanguageSwitcher({ t }: { t: Dictionary['language'] }) {
             hrefLang={t.target}
             lang={t.target}
             title={t.label}
-            className="w-10 h-10 rounded-lg border border-hairline bg-paper flex items-center justify-center font-mono text-xs font-semibold text-muted dark:text-accent hover:text-ink dark:hover:text-ink hover:bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+            className="icon-pill font-mono text-xs font-semibold dark:text-accent dark:hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
         >
             {t.short}
             <span className="sr-only">{` — ${t.label}`}</span>
