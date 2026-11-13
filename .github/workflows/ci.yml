@@ -42,8 +42,9 @@ jobs:
 
       - run: npm ci
 
-      - name: Tests
-        run: npm test
+      # Échoue si la couverture passe sous 80 % (seuils dans vitest.config.ts).
+      - name: Tests et couverture
+        run: npm run test:coverage
 
       - name: Lint
         run: npx eslint app
