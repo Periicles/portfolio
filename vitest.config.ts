@@ -8,7 +8,22 @@ export default defineConfig({
         },
     },
     test: {
+        // Node par défaut ; les tests de composants passent en jsdom avec
+        // l'en-tête `// @vitest-environment jsdom`.
         environment: 'node',
-        include: ['app/**/*.test.ts'],
+        include: ['app/**/*.test.{ts,tsx}'],
+        setupFiles: ['./vitest.setup.ts'],
+        coverage: {
+            provider: 'v8',
+            include: ['app/**/*.{ts,tsx}'],
+            exclude: ['app/**/*.test.{ts,tsx}'],
+            reporter: ['text', 'html'],
+            thresholds: {
+                statements: 80,
+                branches: 80,
+                functions: 80,
+                lines: 80,
+            },
+        },
     },
 })

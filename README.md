@@ -23,9 +23,9 @@ Portfolio personnel moderne et responsive, présentant mon parcours, mes projets
 - **Styles** : [Tailwind CSS 4](https://tailwindcss.com/)
 - **Thème** : [next-themes](https://www.npmjs.com/package/next-themes/)
 - **Emails** : [Resend](https://resend.com/)
-- **Tests** : [Vitest](https://vitest.dev/)
+- **Tests** : [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) (couverture v8, seuil 80 %) et [Playwright](https://playwright.dev/) pour le bout en bout
 - **Linting** : [ESLint 9](https://eslint.org/) (flat config + `core-web-vitals` + `typescript`)
-- **CI** : GitHub Actions (détection de secrets Gitleaks, tests, lint, build)
+- **CI** : GitHub Actions (détection de secrets Gitleaks, tests avec couverture minimale de 80 %, lint, build, bout en bout)
 - **Déploiement** : [Vercel](https://vercel.com/) (+ Analytics et Speed Insights)
 
 ### Stack présentée dans le portfolio
@@ -119,6 +119,8 @@ npm start
 - `npm start` — Serveur de production
 - `npm test` — Tests Vitest
 - `npm run test:watch` — Tests en mode watch
+- `npm run test:coverage` — Tests avec couverture (échoue sous 80 %, rapport HTML dans `coverage/`)
+- `npm run test:e2e` — Tests de bout en bout Playwright (build de production)
 - `npm run lint` — ESLint
 
 ## 📐 Structure du projet
@@ -145,7 +147,8 @@ npm start
 ├── public/                       # CV en PDF (FR et EN)
 ├── types/                        # Déclarations TypeScript
 ├── next.config.ts                # Config Next.js : rewrites i18n + en-têtes de sécurité
-├── vitest.config.ts              # Config Vitest
+├── vitest.config.ts              # Config Vitest (couverture et seuils)
+├── vitest.setup.ts               # Nettoyage Testing Library + API absentes de jsdom
 ├── tsconfig.json                 # Config TypeScript
 └── eslint.config.mjs             # Config ESLint
 ```
