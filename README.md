@@ -141,6 +141,7 @@ npm start
 │   ├── sitemap.ts                # Génère /sitemap.xml
 │   ├── icon.svg                  # Favicon
 │   └── globals.css               # Styles globaux + Tailwind v4
+├── assets/fonts/                 # Polices de l'image Open Graph (licence OFL jointe)
 ├── public/                       # CV en PDF (FR et EN)
 ├── types/                        # Déclarations TypeScript
 ├── next.config.ts                # Config Next.js : rewrites i18n + en-têtes de sécurité
