@@ -2,28 +2,42 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --paper: #f5f4ef;
-  --surface: #efeee7;
-  --ink: #12140f;
-  --muted: #5f635a;
-  --hairline: #dedcd2;
+  /* Palette crème chaude inspirée d'ardia.dev : fond papier teinté sable,
+     encre presque noire, accent vert conservé comme signature et orange
+     coucher-de-soleil comme secondaire chaud pour les CTA et les survols. */
+  --paper: #f1ece2;
+  --surface: #e8e2d4;
+  --ink: #16130f;
+  --muted: #5a5649;
+  --hairline: #d7d0bf;
   --accent: #0bb98d;
-  --accent-strong: #067a5e;
+  /* Assombris par rapport à l'ancien fond : le crème plus foncé ferait
+     tomber les petits textes sous 4.5:1 (WCAG AA) sur `surface`. */
+  --accent-strong: #055c46;
+  --sunset: #d9712f;
+  --sunset-strong: #a14a14;
+  --capsule-bg: #16130f;
+  --capsule-fg: #f1ece2;
 }
 
 .dark {
-  --paper: #131512;
-  --surface: #1c1f1b;
-  --ink: #f2f1ea;
-  --muted: #a8aba0;
-  --hairline: #2a2e28;
+  --paper: #121110;
+  --surface: #1c1a18;
+  --ink: #f1ece2;
+  --muted: #a9a496;
+  --hairline: #2a2724;
   --accent: #19c79b;
   --accent-strong: #19c79b;
+  --sunset: #ff8c4a;
+  --sunset-strong: #ff8c4a;
+  --capsule-bg: #f1ece2;
+  --capsule-fg: #121110;
 }
 
 @theme inline {
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-display: var(--font-space-grotesk), var(--font-inter), system-ui, sans-serif;
 
   --color-paper: var(--paper);
   --color-surface: var(--surface);
@@ -32,11 +46,13 @@
   --color-hairline: var(--hairline);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
+  --color-sunset: var(--sunset);
+  --color-sunset-strong: var(--sunset-strong);
+  --color-capsule-bg: var(--capsule-bg);
+  --color-capsule-fg: var(--capsule-fg);
 }
 
 @layer base {
-  /* Tailwind 4 laisse le curseur par défaut sur les boutons : on rétablit
-     la main sur tout ce qui est cliquable. */
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   summary,
@@ -51,15 +67,175 @@
   }
 }
 
-/* Pastille de statut façon tube néon : halo à la couleur d'accent et
-   grésillement irrégulier, avec des chutes d'intensité plus ou moins
-   marquées. Le texte reste stable pour la lisibilité ; seuls le tube
-   (bordure + halo) et le point vacillent. Figé si l'utilisateur limite
-   les animations.
-   Le tube allumé (bordure pleine + halo) est dessiné sur un pseudo-élément
-   dont seule l'opacité varie : l'animation reste sur le compositeur, sans
-   repeindre la pastille à chaque image. Éteint, il laisse voir la bordure
-   atténuée de la pastille elle-même. */
+/* Atmosphère chaude façon ardia : halo radial sunset en haut à droite,
+   halo vert en bas à gauche, grain papier très discret. Fixé en fond
+   derrière le contenu, non cliquable, s'adapte au thème. */
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      60% 50% at 85% 10%,
+      color-mix(in srgb, var(--sunset) 28%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 50% at 10% 90%,
+      color-mix(in srgb, var(--accent) 18%, transparent),
+      transparent 70%
+    );
+}
+
+.atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Composants maison rangés dans la couche `components` : les utilitaires
+   Tailwind (couche `utilities`) peuvent ainsi les ajuster au cas par cas. */
+@layer components {
+  /* Capsule pleine façon ardia : CTA fort, inversée en thème sombre. */
+  .capsule {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding: 0 1.25rem;
+    border-radius: 9999px;
+    background-color: var(--capsule-bg);
+    color: var(--capsule-fg);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: -0.01em;
+    transition: transform 0.15s ease, background-color 0.2s ease;
+  }
+
+  .capsule:hover {
+    transform: translateY(-1px);
+    background-color: color-mix(in srgb, var(--capsule-bg) 88%, var(--sunset) 12%);
+  }
+
+  .capsule-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding: 0 1.25rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+    background-color: color-mix(in srgb, var(--paper) 50%, transparent);
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .capsule-outline:hover {
+    border-color: var(--ink);
+    background-color: var(--surface);
+  }
+
+  /* Bouton rond d'icône (réseaux, liens de projet, thème, langue). */
+  .icon-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--hairline);
+    background-color: color-mix(in srgb, var(--paper) 60%, transparent);
+    color: var(--muted);
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .icon-pill:hover {
+    color: var(--ink);
+    background-color: var(--surface);
+    border-color: color-mix(in srgb, var(--ink) 25%, transparent);
+  }
+
+  /* Chip technique : mono majuscule, fond translucide sur l'atmosphère. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background-color: color-mix(in srgb, var(--paper) 55%, transparent);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    border: 1px solid var(--hairline);
+    background-color: color-mix(in srgb, var(--paper) 60%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+  }
+
+  .eyebrow-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background-color: var(--accent);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+
+  /* Carte translucide : laisse passer l'atmosphère, bord papier fin. */
+  .card {
+    border: 1px solid var(--hairline);
+    border-radius: 1.75rem;
+    background-color: color-mix(in srgb, var(--surface) 45%, transparent);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Numéro géant en filigrane derrière une carte de projet. Le chiffre est
+     dessiné en pseudo-élément (`data-number`) : purement décoratif, il
+     reste hors du contenu textuel et des contrôles de contraste. */
+  .project-number::before {
+    content: attr(data-number);
+    position: absolute;
+    top: -2.25rem;
+    right: -0.75rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10rem;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    color: color-mix(in srgb, var(--ink) 7%, transparent);
+    pointer-events: none;
+    user-select: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .group:hover .project-number::before {
+    color: color-mix(in srgb, var(--sunset) 22%, transparent);
+    transform: translateY(0.25rem);
+  }
+}
+
+/* Pastille de statut façon enseigne néon : conservée pour l'identité du
+   site, mais rechargée sur la nouvelle palette crème chaude. */
 .neon-badge {
   --neon: color-mix(in srgb, var(--accent) 55%, transparent);
   --neon-soft: color-mix(in srgb, var(--accent) 25%, transparent);
@@ -86,40 +262,20 @@
 }
 
 @keyframes neon-buzz {
-  0%, 17%, 19.5%, 22%, 61%, 63.5%, 100% {
-    opacity: 1;
-  }
-  18%, 21% {
-    opacity: 0;
-  }
-  20.5% {
-    opacity: 0.3;
-  }
-  62%, 63% {
-    opacity: 0.4;
-  }
+  0%, 17%, 19.5%, 22%, 61%, 63.5%, 100% { opacity: 1; }
+  18%, 21% { opacity: 0; }
+  20.5% { opacity: 0.3; }
+  62%, 63% { opacity: 0.4; }
 }
 
 @keyframes neon-buzz-dot {
-  0%, 17%, 19.5%, 22%, 61%, 63.5%, 85%, 86.5%, 100% {
-    opacity: 1;
-  }
-  18%, 21% {
-    opacity: 0.25;
-  }
-  20.5%, 62% {
-    opacity: 0.6;
-  }
-  85.8% {
-    opacity: 0.75;
-  }
+  0%, 17%, 19.5%, 22%, 61%, 63.5%, 85%, 86.5%, 100% { opacity: 1; }
+  18%, 21% { opacity: 0.25; }
+  20.5%, 62% { opacity: 0.6; }
+  85.8% { opacity: 0.75; }
 }
 
-/* Allumage néon à chaque changement de thème : une brève coupure de
-   courant (voile noir) puis le fond revient par à-coups, comme un tube
-   qui peine à démarrer. Un halo d'accent s'épanouit quand le courant
-   « prend ». Le voile ne capte aucun clic et se retire en fin
-   d'animation. */
+/* Allumage néon au changement de thème (conservé à l'identique). */
 .neon-ignite {
   position: fixed;
   inset: 0;
@@ -127,9 +283,6 @@
   pointer-events: none;
 }
 
-/* Coupure de courant : un fond noir dont seule l'opacité varie, pour
-   rester sur le compositeur. Le halo est un calque frère, et non un
-   enfant, pour ne pas s'éteindre avec le noir. */
 .neon-ignite::before {
   content: "";
   position: absolute;
@@ -168,10 +321,6 @@
   100% { opacity: 0; }
 }
 
-/* Au chargement, la page reste dans le noir jusqu'à ce que la séquence
-   d'allumage prenne le relais, une fois React hydraté (attribut posé par
-   le script inline du layout). Si JavaScript n'aboutit pas, le voile
-   s'efface seul. */
 html[data-neon-power]::after {
   content: "";
   position: fixed;
@@ -186,10 +335,6 @@ html[data-neon-power]::after {
   to { opacity: 0; }
 }
 
-/* Démarrage façon machine : après la coupure, chaque bloc visible se
-   rallume à son tour, dans un ordre aléatoire (délai posé en JS dans
-   --boot-delay). Certains blocs démarrent mal : amorces ratées avant de
-   tenir (variante `neon-boot-hard`). */
 .neon-boot {
   animation: neon-boot 0.45s linear var(--boot-delay, 0ms) both;
 }
@@ -228,11 +373,14 @@ html[data-neon-power]::after {
   .neon-boot {
     animation: none;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
   .neon-badge::before,
   .neon-dot {
     animation: none;
+  }
+
+  .capsule:hover,
+  .group:hover .project-number::before {
+    transform: none;
   }
 }
