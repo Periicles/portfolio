@@ -2,9 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+// Ligne de repère fine placée à 40 % de la hauteur d'écran : la section active
+// est celle qui la traverse. Comparer des ratios d'intersection désavantagerait
+// les sections plus hautes que la fenêtre, dont le ratio reste toujours faible.
+const READING_LINE_MARGIN = '-40% 0px -59% 0px'
+
 export function useActiveSection(sectionIds: readonly string[]): string {
     const [active, setActive] = useState<string>('')
-    const visibility = useRef<Record<string, number>>({})
+    const crossing = useRef<Record<string, boolean>>({})
     const activeRef = useRef<string>('')
 
     useEffect(() => {
@@ -19,31 +24,17 @@ export function useActiveSection(sectionIds: readonly string[]): string {
         const observer = new IntersectionObserver(
             (entries) => {
                 for (const entry of entries) {
-                    visibility.current[entry.target.id] = entry.isIntersecting
-                        ? entry.intersectionRatio
-                        : 0
+                    crossing.current[entry.target.id] = entry.isIntersecting
                 }
 
-                let next = ''
-                let maxRatio = 0
-                for (const el of elements) {
-                    const ratio = visibility.current[el.id] ?? 0
-                    if (ratio > maxRatio) {
-                        maxRatio = ratio
-                        next = el.id
-                    }
-                }
-
+                // Hors de toute section (pied de page), la dernière reste active.
+                const next = elements.find((el) => crossing.current[el.id])?.id
                 if (next && next !== activeRef.current) {
                     activeRef.current = next
                     setActive(next)
                 }
             },
-            {
-                root: null,
-                rootMargin: '-35% 0px -35% 0px',
-                threshold: [0, 0.25, 0.5, 0.75, 1],
-            },
+            { root: null, rootMargin: READING_LINE_MARGIN, threshold: 0 },
         )
 
         elements.forEach((el) => observer.observe(el))
