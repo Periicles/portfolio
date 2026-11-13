@@ -7,26 +7,27 @@ export default function Education({ locale }: { locale: Locale }) {
     const t = getDictionary(locale).education
 
     return (
-        <section id="education" aria-labelledby="education-heading" className="py-16 scroll-mt-24 md:scroll-mt-16 border-t border-hairline">
+        <section id="education" aria-labelledby="education-heading" className="scroll-mt-32 py-20 md:scroll-mt-24 md:py-28">
             <SectionEyebrow index={3}>{t.eyebrow}</SectionEyebrow>
-            <h2 id="education-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
+            <h2 id="education-heading" className="mb-12 font-display text-[clamp(2.5rem,9vw,4.5rem)] font-bold uppercase leading-[0.98] tracking-[-0.04em] text-ink">
                 {t.heading}
             </h2>
 
-            <ol className="space-y-8">
+            <ol className="border-t border-hairline">
                 {education[locale].map((item) => (
-                    <li key={`${item.school}-${item.degree}`} className="flex flex-col md:flex-row md:items-baseline md:space-x-8">
-                        <p className="md:w-48 shrink-0 text-sm text-muted font-mono mb-1 md:mb-0">
-                            {item.period}
-                        </p>
+                    <li
+                        key={`${item.school}-${item.degree}`}
+                        className="grid gap-2 border-b border-hairline py-6 md:grid-cols-[15rem_1fr] md:gap-10 md:py-8"
+                    >
+                        <p className="font-mono text-xs uppercase tracking-[0.1em] text-muted md:pt-1.5">{item.period}</p>
                         <div>
-                            <h3 className="text-lg font-semibold text-ink">
+                            <h3 className="font-display text-xl font-bold leading-tight tracking-[-0.02em] text-ink md:text-2xl">
                                 {item.url ? (
                                     <a
                                         href={item.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="transition-colors hover:text-accent-strong"
+                                        className="underline decoration-hairline decoration-2 underline-offset-4 transition-colors hover:text-sunset-strong hover:decoration-sunset"
                                     >
                                         {item.degree}
                                     </a>
@@ -34,27 +35,20 @@ export default function Education({ locale }: { locale: Locale }) {
                                     item.degree
                                 )}
                             </h3>
-                            <p className="text-accent-strong">{item.school}</p>
-                            {item.detail && (
-                                <p className="text-sm text-muted mt-1">{item.detail}</p>
-                            )}
-                            {item.diploma && (
-                                <p className="text-xs text-muted font-mono mt-1">{item.diploma}</p>
-                            )}
+                            <p className="mt-1 font-medium text-accent-strong">{item.school}</p>
+                            {item.detail && <p className="mt-2 text-sm text-muted">{item.detail}</p>}
+                            {item.diploma && <p className="mt-1 font-mono text-xs text-muted">{item.diploma}</p>}
                         </div>
                     </li>
                 ))}
             </ol>
 
-            <div className="mt-10">
-                <h3 className="text-lg font-semibold text-ink mb-3">{t.certificationsHeading}</h3>
+            <div className="mt-12">
+                <h3 className="mb-4 font-display text-lg font-bold text-ink">{t.certificationsHeading}</h3>
                 <ul className="flex flex-wrap gap-2">
                     {certifications[locale].map((cert) => (
-                        <li
-                            key={cert.name}
-                            className="text-xs text-muted font-mono bg-surface px-3 py-1 rounded"
-                        >
-                            <span className="text-ink font-semibold">{cert.name}</span> · {cert.detail}
+                        <li key={cert.name} className="chip normal-case tracking-normal">
+                            <span className="mr-1 font-semibold text-ink">{cert.name}</span> · {cert.detail}
                         </li>
                     ))}
                 </ul>
