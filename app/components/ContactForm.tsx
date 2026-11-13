@@ -12,7 +12,7 @@ type FormLabels = Dictionary['form']
 const initialState: ContactState = { status: 'idle', message: '' }
 
 const fieldClass =
-    'w-full rounded border border-hairline bg-surface px-4 py-3 text-ink outline-none focus:border-accent focus:ring-1 focus:ring-accent'
+    'w-full rounded-2xl border border-hairline bg-paper/70 px-4 py-3 text-ink outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/30'
 
 function SubmitButton({ t }: { t: FormLabels }) {
     const { pending } = useFormStatus()
@@ -20,7 +20,7 @@ function SubmitButton({ t }: { t: FormLabels }) {
         <button
             type="submit"
             disabled={pending}
-            className="inline-flex items-center gap-2 px-8 py-4 border-2 border-accent text-accent-strong font-semibold rounded hover:bg-accent hover:text-ink transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="capsule h-12 px-7 disabled:cursor-not-allowed disabled:opacity-60"
         >
             {pending ? t.sending : t.submit}
             <Mail className="w-4 h-4" />
@@ -32,7 +32,7 @@ export default function ContactForm({ locale, t }: { locale: Locale; t: FormLabe
     const [state, formAction] = useActionState(sendContactMessage, initialState)
 
     return (
-        <form action={formAction} className="space-y-6 max-w-2xl">
+        <form action={formAction} className="space-y-5">
             <input type="hidden" name="locale" value={locale} />
 
             <div>
@@ -69,7 +69,7 @@ export default function ContactForm({ locale, t }: { locale: Locale; t: FormLabe
                     state.status === 'success'
                         ? 'text-accent-strong'
                         : state.status === 'error'
-                          ? 'text-red-600 dark:text-red-400'
+                          ? 'text-red-700 dark:text-red-400'
                           : 'sr-only'
                 }
             >

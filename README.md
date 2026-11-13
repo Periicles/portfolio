@@ -37,9 +37,9 @@ Portfolio personnel moderne et responsive, présentant mon parcours, mes projets
 
 ## 📋 Composants
 
-- `Navigation.tsx` — Navigation latérale / compacte, scroll-spy, CV, thème et langue
+- `Navigation.tsx` — Barre supérieure collante (pastille de liens), scroll-spy, CV, thème et langue
 - `StatusBadge.tsx` — Pastille de statut à effet néon
-- `About.tsx` — Présentation et stack par catégories
+- `About.tsx` — Hero (nom en titre géant, CTA) puis présentation et stack par catégories
 - `Experience.tsx` — Parcours professionnel
 - `Education.tsx` — Formation et certifications
 - `Projects.tsx` — Projets réalisés
@@ -141,6 +141,7 @@ npm start
 │   ├── sitemap.ts                # Génère /sitemap.xml
 │   ├── icon.svg                  # Favicon
 │   └── globals.css               # Styles globaux + Tailwind v4
+├── assets/fonts/                 # Polices de l'image Open Graph (licence OFL jointe)
 ├── public/                       # CV en PDF (FR et EN)
 ├── types/                        # Déclarations TypeScript
 ├── next.config.ts                # Config Next.js : rewrites i18n + en-têtes de sécurité
@@ -151,7 +152,7 @@ npm start
 
 ## 🎨 Design
 
-Design sobre et lisible : navigation fixe, typographies contrastées (Inter et JetBrains Mono) et version mobile optimisée. Palette « papier » claire ou sombre avec un accent vert (`--accent`), définie par des variables CSS dans `app/globals.css`.
+Direction « affiche chaude » : fond crème sable avec halos radiaux (coucher de soleil, vert) et grain papier, titres géants en majuscules (Space Grotesk), texte en Inter et détails en JetBrains Mono. Navigation en pastille collante en haut de page, CTA en capsules pleines, technologies en chips mono, cartes translucides et numéros de projet en filigrane. Palette claire ou sombre définie par des variables CSS dans `app/globals.css` : accent vert (`--accent`) conservé comme signature, orange (`--sunset`) en secondaire chaud.
 
 ## 📧 Contact
 

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "next-themes";
 import { neonPowerOffScript } from "@/lib/neon-ignition";
@@ -20,6 +20,13 @@ const inter = Inter({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+});
+
+// Police display des titres géants (hero, sections, filigranes de projets).
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["500", "700"],
 });
 
 type LayoutParams = { params: Promise<{ lang: string }> };
@@ -82,8 +89,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f4ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#131512" },
+    { media: "(prefers-color-scheme: light)", color: "#f1ece2" },
+    { media: "(prefers-color-scheme: dark)", color: "#121110" },
   ],
 };
 
@@ -97,7 +104,7 @@ export default async function RootLayout({
   return (
     <html lang={lang} suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <script
           // Allumage néon au chargement : doit précéder le contenu pour le

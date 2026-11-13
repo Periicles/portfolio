@@ -7,53 +7,42 @@ export default function Experience({ locale }: { locale: Locale }) {
     const t = getDictionary(locale).experience
 
     return (
-        <section id="experience" aria-labelledby="experience-heading" className="py-16 scroll-mt-24 md:scroll-mt-16 border-t border-hairline">
+        <section id="experience" aria-labelledby="experience-heading" className="scroll-mt-32 py-20 md:scroll-mt-24 md:py-28">
             <SectionEyebrow index={2}>{t.eyebrow}</SectionEyebrow>
-            <h2 id="experience-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink mb-8">
+            <h2 id="experience-heading" className="mb-12 font-display text-[clamp(2.5rem,9vw,4.5rem)] font-bold uppercase leading-[0.98] tracking-[-0.04em] text-ink">
                 {t.heading}
             </h2>
 
-            <div className="space-y-12">
+            <div className="space-y-4">
                 {experiences[locale].map((exp) => (
-                    <div key={exp.company} className="relative">
-                        <div className="flex flex-col md:flex-row md:items-start md:space-x-8">
-                            <div className="md:w-48 mb-2 md:mb-0">
-                                <h3 className="text-lg font-semibold text-ink">
-                                    {exp.title}
-                                </h3>
-                                <p className="text-accent-strong">
-                                    {exp.company}
-                                </p>
-                                <p className="text-sm text-muted font-mono mt-1">
-                                    {exp.period}
-                                </p>
-                                {exp.contract && (
-                                    <p className="text-xs text-muted mt-1">
-                                        {exp.contract}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="flex-1">
-                                <ul className="list-disc pl-5 text-muted leading-relaxed mb-4 space-y-1">
-                                    {exp.description.map((item) => (
-                                        <li key={item}>{item}</li>
-                                    ))}
-                                </ul>
-                                <div className="flex flex-wrap gap-2">
-                                    {exp.technologies.map((tech) => (
-                                        <span
-                                            key={tech}
-                                            className="text-xs text-muted font-mono bg-surface px-2 py-1 rounded"
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
+                    <article key={exp.company} className="card grid gap-6 p-6 md:grid-cols-[15rem_1fr] md:gap-10 md:p-8">
+                        <div>
+                            <p className="chip mb-4">{exp.period}</p>
+                            <h3 className="font-display text-xl font-bold leading-tight tracking-[-0.02em] text-ink">
+                                {exp.title}
+                            </h3>
+                            <p className="mt-1 font-medium text-accent-strong">{exp.company}</p>
+                            {exp.contract && <p className="mt-1 text-xs text-muted">{exp.contract}</p>}
                         </div>
 
-                    </div>
+                        <div>
+                            <ul className="mb-6 space-y-2 leading-relaxed text-muted">
+                                {exp.description.map((item) => (
+                                    <li key={item} className="relative pl-5">
+                                        <span aria-hidden className="absolute left-0 top-[0.7em] h-1.5 w-1.5 rounded-full bg-sunset" />
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                            <ul className="flex flex-wrap gap-1.5">
+                                {exp.technologies.map((tech) => (
+                                    <li key={tech} className="chip">
+                                        {tech}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </article>
                 ))}
             </div>
         </section>

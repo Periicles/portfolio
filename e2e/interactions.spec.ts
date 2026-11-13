@@ -34,6 +34,20 @@ test('le sélecteur de langue mène à l’autre version et en revient', async (
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr')
 })
 
+test('la navigation signale la section en cours de lecture, même plus haute que l’écran', async ({ page }) => {
+    await page.goto('/')
+    await waitForNeonBoot(page)
+    const navigation = page.getByRole('navigation').first()
+
+    for (const id of ['experience', 'projects', 'about']) {
+        await page
+            .locator(`section#${id}`)
+            .evaluate((section) => window.scrollTo(0, section.getBoundingClientRect().top + window.scrollY + 100))
+        await expect(navigation.locator(`a[href="#${id}"]`)).toHaveAttribute('aria-current', 'location')
+        await expect(navigation.locator('a[aria-current]')).toHaveCount(1)
+    }
+})
+
 test('le CV est téléchargeable', async ({ page, request }) => {
     await page.goto('/')
     const link = page.locator('a[href$=".pdf"]').first()
